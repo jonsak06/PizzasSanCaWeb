@@ -18,16 +18,16 @@
                 if (nombre === null || nombre === "") {
                     alert("Nombre del lugar requerido");
                     return false;
-                } 
+                }
                 else {
-                    var http = new XMLHttpRequest();
+                    let http = new XMLHttpRequest();
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/inputLugar.jsp", true);
                     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                    var params = "nombre=" + nombre + "&direccion=" + direccion;
+                    let params = "nombre=" + nombre + "&direccion=" + direccion;
                     http.send(params);
                     http.onload = function() {
                         alert("Lugar creado");
-                    }
+                    };
                 }
             } 
         </script>
