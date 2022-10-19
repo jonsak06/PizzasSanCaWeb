@@ -65,10 +65,13 @@
         <form name="crearPaquete" onsubmit="event.preventDefault(); procesar();">
             <label for="fecha">Fecha</label>
             <input id="fecha" name="fecha" type="date" required>
+            <br>
             <label for="llevadas">Unidades llevadas</label>
             <input id="llevadas" name="llevadas" type="number" min="0" required>
+            <br>
             <label for="vendidas">Unidades vendidas</label>
             <input id="vendidas" name="vendidas" type="number" min="0" required>
+            <br>
             <label for="lugar">Lugar</label>
             <select id="lugar" name="lugar" required>
                 <option>Seleccione...</option>
@@ -79,6 +82,7 @@
                 }
             %>
             </select>
+            <br>
             <label for="tanda">Tanda</label>
             <select id="tanda" name="tanda" required>
                 <option>Seleccione...</option>
@@ -89,6 +93,7 @@
                 }
             %>
             </select>
+            <br>
             <input type="submit" id="boton" value="Crear paquete">
         </form>
     </body>
