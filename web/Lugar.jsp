@@ -10,12 +10,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Lugar</title>
         <script>
             function procesar(){
-                let nombre = document.forms["crearLugar"]["nombre"].value;
-                let direccion = document.forms["crearLugar"]["direccion"].value;
+                const boton = document.getElementById("boton");
+                const form = document.forms["crearLugar"];
+                const nombre = form["nombre"].value.trim();
+                const direccion = form["direccion"].value.trim();
+                
+                boton.disabled = true;
                 if (nombre === null || nombre === "") {
+                    boton.disabled = false;
                     alert("Nombre del lugar requerido");
                     return false;
                 }
@@ -24,11 +29,16 @@
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/inputLugar.jsp", true);
                     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     let params = "nombre=" + nombre + "&direccion=" + direccion;
-                    http.send(params);
+                    http.send(params); 
+
                     http.onload = function() {
+                        boton.disabled = false;
+                        form.reset();
                         alert("Lugar creado");
                     };
+                   
                 }
+
             } 
         </script>
     </head>
@@ -36,10 +46,10 @@
         <h1>Crear lugar</h1>
         <form name="crearLugar" onsubmit="event.preventDefault(); procesar();">
             <label for="nombre">Nombre</label>
-            <input id="nombre" name="nombre" type="text">
+            <input id="nombre" name="nombre" type="text" required>
             <label for="direccion">Dirección</label>
             <input id="direccion" name="direccion" type="text">
-            <input type="submit" value="Crear lugar">
+            <input type="submit" id="boton" value="Crear lugar">
         </form>
         
     </body>

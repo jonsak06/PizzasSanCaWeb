@@ -7,8 +7,8 @@
 <%@page import="Persistencia.PersistenciaMateriales"%>
 <%@page import="Entidades.Lugar"%>
 <%
-    String nombre = (String)request.getParameter("nombre");
-    String direccion = (String)request.getParameter("direccion");
+    String nombre = request.getParameter("nombre");
+    String direccion = request.getParameter("direccion");
     
     Lugar lugar = new Lugar(nombre, direccion);
     PersistenciaMateriales.getInstance().persist(lugar);
