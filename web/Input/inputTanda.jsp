@@ -22,11 +22,11 @@
     
     List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
     
-    String nombreReceta = (String) request.getParameter("receta");
+    long idReceta = Long.parseLong(request.getParameter("receta"));
     
     Receta receta = null;
     for(Receta r : recetas) {
-        if(r.getNombre().equals(nombreReceta)) {
+        if(r.getId() == idReceta) {
             receta = r;
             break;
         }

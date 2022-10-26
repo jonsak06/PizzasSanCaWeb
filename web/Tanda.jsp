@@ -81,7 +81,7 @@
             <%
                 List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
                 for(Receta receta :recetas) {
-                    out.print("<option value='" + receta + "' >" + receta + "</option>");
+                    out.print("<option value='" + receta.getId() + "' >" + receta + "</option>");
                 }
             %>
             </select>

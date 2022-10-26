@@ -76,7 +76,7 @@
             <%
                 List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
                 for(Comprador comprador :compradores) {
-                    out.print("<option value='" + comprador + "' >" + comprador + "</option>");
+                    out.print("<option value='" + comprador.getId() + "' >" + comprador + "</option>");
                 }
             %>
             </select>

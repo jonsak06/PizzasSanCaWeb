@@ -15,12 +15,12 @@
     List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
     List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
     
-    String nombreComprador = (String) request.getParameter("comprador");
-    long idTanda = Integer.parseInt(request.getParameter("tanda"));
+    long idComprador = Long.parseLong(request.getParameter("comprador"));
+    long idTanda = Long.parseLong(request.getParameter("tanda"));
     
     Comprador comprador = null;
     for(Comprador c : compradores) {
-        if(c.getNombre().equals(nombreComprador)) {
+        if(c.getId() == idComprador) {
             comprador = c;
             break;
         }

@@ -21,17 +21,16 @@
     List<Lugar> lugares = PersistenciaMateriales.getInstance().listaLugares();
     List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
     
-    String nombreLugar = (String) request.getParameter("lugar");
-    long idTanda = Integer.parseInt(request.getParameter("tanda"));
+    long idLugar = Long.parseLong(request.getParameter("lugar"));
+    long idTanda = Long.parseLong(request.getParameter("tanda"));
     
     Lugar lugar = null;
     for(Lugar l : lugares) {
-        if(l.getNombre().equals(nombreLugar)) {
+        if(l.getId() == idLugar) {
             lugar = l;
             break;
         }
     }
-    //Lugar lugar = lugares.stream().filter(l -> nombreLugar.equals(l.getNombre())).findFirst().orElse(null);
     
     Tanda tanda = null;
     for(Tanda t : tandas) {
@@ -40,8 +39,6 @@
             break;
         }
     }
-    //Tanda tanda = tandas.stream().filter(t -> idTanda.equals(t.getId())).findFirst().orElse(null);
-
     
     Paquete paquete = new Paquete(fecha, llevadas, vendidas, lugar, tanda);
     PersistenciaMateriales.getInstance().persist(paquete);
