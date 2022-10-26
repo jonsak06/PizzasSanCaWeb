@@ -67,7 +67,7 @@
             <label for="unidades">Unidades</label>
             <input id="unidades" name="unidades" type="number" min="1" required>
             <br>
-            <label for="descuento">Descuento</label>
+            <label for="descuento">Descuento (%)</label>
             <input id="descuento" name="descuento" type="number" min="0" max="100" required>
             <br>
             <label for="comprador">Comprador</label>

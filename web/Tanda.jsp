@@ -38,6 +38,11 @@
                     alert("Debe seleccionar una receta");
                     return false;
                 }
+                else if(cantConsumida > cantUnidades) {
+                    boton.disabled = false;
+                    alert("La cantidad consumida no puede superar a la cantidad de unidades");
+                    return false;
+                }
                 else {
                     let http = new XMLHttpRequest();
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/inputTanda.jsp", true);

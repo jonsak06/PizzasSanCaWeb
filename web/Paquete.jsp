@@ -44,6 +44,11 @@
                     alert("Debe seleccionar una tanda");
                     return false;
                 }
+                else if(llevadas < vendidas) {
+                    boton.disabled = false;
+                    alert("Las unidades vendidas no pueden superar a las llevadas");
+                    return false;
+                }
                 else {
                     let http = new XMLHttpRequest();
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/inputPaquete.jsp", true);
@@ -67,10 +72,10 @@
             <input id="fecha" name="fecha" type="date" required>
             <br>
             <label for="llevadas">Unidades llevadas</label>
-            <input id="llevadas" name="llevadas" type="number" min="0" required>
+            <input id="llevadas" name="llevadas" type="number" min="1" required>
             <br>
             <label for="vendidas">Unidades vendidas</label>
-            <input id="vendidas" name="vendidas" type="number" min="0" required>
+            <input id="vendidas" name="vendidas" type="number" min="1" required>
             <br>
             <label for="lugar">Lugar</label>
             <select id="lugar" name="lugar" required>
