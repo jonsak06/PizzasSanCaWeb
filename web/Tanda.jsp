@@ -18,7 +18,8 @@
                 const boton = document.getElementById("boton");
                 const form = document.forms["crearTanda"];
                 const fecha = form["fecha"].value;
-                const valoracion = form["valoracion"].value.trim();
+                const cmbValoracion = form["valoracion"];
+                const valoracion = cmbValoracion.options[cmbValoracion.selectedIndex].value;
                 const precioUnitario = form["precioUnitario"].value.trim();
                 const cantUnidades = form["cantUnidades"].value.trim();                
                 const cantConsumida = form["cantConsumida"].value.trim();
@@ -61,7 +62,13 @@
             <input id="fecha" name="fecha" type="date" required>
             <br>
             <label for="valoracion">Valoración</label>
-            <input id="valoracion" name="valoracion" type="number" min="0" max="10" required>
+            <select id="valoracion" name="valoracion" required>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
             <br>
             <label for="precioUnitario">Precio unitario</label>
             <input id="precioUnitario" name="precioUnitario" type="number" min="0" required>
@@ -81,7 +88,7 @@
             <%
                 List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
                 for(Receta receta :recetas) {
-                    out.print("<option value='" + receta.getId() + "' >" + receta + "</option>");
+                    out.print("<option value='" + receta.getId() + "' >" + "[" + receta.getId() + "] " + receta + "</option>");
                 }
             %>
             </select>

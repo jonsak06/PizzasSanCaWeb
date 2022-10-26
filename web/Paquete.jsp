@@ -78,7 +78,7 @@
             <%
                 List<Lugar> lugares = PersistenciaMateriales.getInstance().listaLugares();
                 for(Lugar lugar :lugares) {
-                    out.print("<option value='" + lugar.getId() + "' >" + lugar + "</option>");
+                    out.print("<option value='" + lugar.getId() + "' >"+ "[" + lugar.getId() + "] " + lugar + "</option>");
                 }
             %>
             </select>
