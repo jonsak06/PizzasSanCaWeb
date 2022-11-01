@@ -1,0 +1,99 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 30, 2022, 6:16:07 PM
+    Author     : Manuel
+*/
+body{
+        padding: 2em;
+            background-color: #111111;
+    font-family: "Titillium Web", sans-serif;
+    margin: 0;
+}
+
+h1{
+    font-weight: bold;
+    color: white;
+    padding-top: 0;
+    padding-left: 0;
+    letter-spacing: 0.025em;
+    font-size: 4em;
+    line-height: 1.25;
+    text-align: center;
+}
+
+h2{
+    font-weight: bold;
+    color: white;
+    padding-top: 0;
+    padding-left: 0;
+    letter-spacing: 0.025em;
+    font-size: 3.7em;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.formulario label{
+        font-weight: bold;
+    color: white;
+    padding-top: 0;
+    padding-left: 0;
+    letter-spacing: 0.025em;
+    font-size: 3em;
+    line-height: 1.25;
+    position: relative;
+    z-index: 100;
+    
+}
+
+.formulario form{
+               max-width: 40em;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    
+}
+
+
+.formulario  input {
+    
+           font: inherit;
+    line-height: normal;
+    width: 100%;
+    box-sizing: border-box;
+    background: #222222;
+    color: white;
+    position: relative;
+    margin: 0 0 1.5em 0;
+    font-size: 2em;
+    padding: 0.25em 0.1em;
+}
+
+.formulario  select {
+    
+           font: inherit;
+    line-height: normal;
+    width: 70%;
+    box-sizing: border-box;
+    background: #222222;
+    color: white;
+    position: relative;
+    margin: 0 0 1.5em 0;
+    font-size: 2em;
+    padding: 0.25em 0.1em;
+}
+
+.formulario p{
+        display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    width: 70%;
+}

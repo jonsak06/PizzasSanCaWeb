@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lugar</title>
+         <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <script>
             function procesar(){
                 const boton = document.getElementById("boton");
@@ -44,7 +45,7 @@
     </head>
     <body>
         <h1>Crear lugar</h1>
-        <form name="crearLugar" onsubmit="event.preventDefault(); procesar();">
+        <form class="formulario" name="crearLugar" onsubmit="event.preventDefault(); procesar();">
             <label for="nombre">Nombre</label>
             <input id="nombre" name="nombre" type="text" required>
             <br>

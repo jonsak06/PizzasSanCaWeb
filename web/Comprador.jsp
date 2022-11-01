@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Comprador</title>
+         <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <script>
             function procesar(){
                 const boton = document.getElementById("boton");
@@ -41,7 +42,7 @@
     </head>
     <body>
         <h1>Comprador</h1>
-        <form name="crearComprador" onsubmit="event.preventDefault(); procesar();">
+        <form  class="formulario" name="crearComprador" onsubmit="event.preventDefault(); procesar();">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre" required>
             <br>

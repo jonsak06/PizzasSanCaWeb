@@ -15,6 +15,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" media="" href="css/estilosCelular.css">
+        <script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
           <script>
             function procesar(){
               
@@ -24,26 +29,47 @@
                     alert("Nombre del Receta requerido");
                     return false;
                 }
-                else {
+                else 
+                {
                     let http = new XMLHttpRequest();
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/inputCrearReceta.jsp", true);
                     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     let params = "nombre=" + nombre;
                     http.send(params);
-                    http.onload = function() {
+                    http.onload = function() 
+                    {
                         alert("Receta creada");
+                        $(document).ready(function(){
+                            $('#seccionAniadir').load('http://localhost:8080/PizzasSanCaWeb/Input/seaccionAniadir.jsp');
+                       });
                     };
                 }
-            } 
+            }
+        
+    </script>
+    <script type="text/javascript">
+            
+            
+            $(document).ready(function(){
+                $('#seccionAniadir').load('http://localhost:8080/PizzasSanCaWeb/Input/seaccionAniadir.jsp');
+            });
+            
     </script>
     </head>
     
     <body>
+      <h1>Crear Receta</h1>
       
-        <form name="crearReceta" onsubmit="event.preventDefault(); procesar();">
+        <form class="formulario" name="crearReceta" onsubmit="event.preventDefault(); procesar();">
             <p><label for="cname">Nombre de la Receta</label></p>
          <p><input type="text" id="cname" name="cname"></p>
             <input type="submit" value="Crear Receta">
         </form>
+        
+        
+        
+        <div id="seccionAniadir"></div>
+        <div id="seccionTabla"></div>
+        
     </body>
 </html>

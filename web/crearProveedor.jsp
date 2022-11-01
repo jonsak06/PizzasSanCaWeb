@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        
+         <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <script>
             function procesar(){
               
@@ -37,7 +37,8 @@
     </script>
     </head>
     <body>
-        <form name="crearProveedor" onsubmit="event.preventDefault(); procesar();">
+        <h1>Crear proveedor</h1>
+        <form class="formulario" name="crearProveedor" onsubmit="event.preventDefault(); procesar();">
             <p><label for="nameprov">Nombre del Proveedor</label></p>
             <p><input type="text" id="nameprov" name="nameprov"></p>
             <p><label for="dirprov">Direccion del Proveedor</label></p>

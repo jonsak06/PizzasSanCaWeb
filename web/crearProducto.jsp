@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <script>
             function procesar(){
         
@@ -51,7 +52,9 @@
     </script>
     </head>
     <body>
-        <form name="crearProducto" onsubmit="event.preventDefault(); procesar();">
+        <h1>Crear producto</h1>
+        
+        <form class="formulario" name="crearProducto" onsubmit="event.preventDefault(); procesar();">
             
             <p><label for="comp">Componente</label></p>
             <select name="comp">
@@ -86,19 +89,20 @@
             <p><label for="cantidad">Cantidad</label></p>
             <p><input type="number" id="cantidad" name="cantidad"></p>
             
-            <p><label for="valoracion">Valoracion</label>
+            <p><label for="valoracion">Valoracion</label></p>
             <select name="valoracion">
                 <option value="1" selected>1</option>
                 <option value="2" >2</option>
                 <option value="3">3</option>
                 <option value="4" >4</option>
                 <option value="5">5</option>
-            </select></p>
+            </select>
             
             <p> <label for="myfile">Select a file:</label>
             <input type="file" id="myfile" name="myfile"></p>
             
             <input type="submit" value="Crear Producto">
         </form>
+              
     </body>
 </html>

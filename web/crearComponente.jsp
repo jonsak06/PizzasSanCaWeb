@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" media="" href="css/estilosCelular.css">
           <script>
             function procesar(){
               
@@ -37,8 +38,8 @@
     </head>
     
     <body>
-      
-        <form name="crearComponente" onsubmit="event.preventDefault(); procesar();">
+      <h1>Crear componente</h1>
+        <form class="formulario" name="crearComponente" onsubmit="event.preventDefault(); procesar();">
             <p><label for="cname">Nombre del Componente</label></p>
             <p><input type="text" id="cname" name="cname"></p>
             <p><label for="umed">Unidad de Medida</label></p>
