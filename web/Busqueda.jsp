@@ -72,16 +72,14 @@
                     <th></th>
                     <th></th>
                 </tr>
-                <%
-                    List<Lugar> lugares = PersistenciaMateriales.getInstance().listaLugares();
-                    for (Lugar l : lugares) {
-                        out.print("<tr>" + "<td>" + l + "</td>" + "<td>" + l.getDireccion() + "</td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                    <%
+                        List<Lugar> lugares = PersistenciaMateriales.getInstance().listaLugares();
+                        for (Lugar l : lugares) {
+                            out.print("<tr>" + "<td>" + l + "</td>" + "<td>" + l.getDireccion() + "</td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id='lugar-"+l.getId()+"' onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                        }
 
-                    }
 
-
-                %>
-
+                    %>
             </table>
         </details>
         <details>
@@ -97,7 +95,7 @@
                 <%                    List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
 
                     for (Comprador c : compradores) {
-                        out.print("<tr>" + "<td>" + c + "</td>" + "<td>" + c.getTelefono() + "</td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + c + "</td>" + "<td>" + c.getTelefono() + "</td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"comprador-"+c.getId()+"\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                     }
 
@@ -119,7 +117,7 @@
                 <%                    List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
 
                     for (Tanda t : tandas) {
-                        out.print("<tr>" + "<td>" + t.getFechaElaboracion() + "</td>" + "<td>" + t.getValoracion() + "</td>" + "<td><a id='" + t.getId() + "' onclick='openModalTanda(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + t.getFechaElaboracion() + "</td>" + "<td>" + t.getValoracion() + "</td>" + "<td><a id='" + t.getId() + "' onclick='openModalTanda(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"tanda-"+t.getId()+"\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='tanda" + t.getId() + "' class='modal'>");
                         out.println("");
@@ -168,7 +166,7 @@
                 <%                    List<Pedido> pedidos = PersistenciaMateriales.getInstance().listaPedidos();
 
                     for (Pedido p : pedidos) {
-                        out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getDescuento() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPedido(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getDescuento() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPedido(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"pedido-"+p.getId()+"\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='pedido" + p.getId() + "' class='modal'>");
                         out.println("");
@@ -208,7 +206,7 @@
                 <%                    List<Paquete> paquetes = PersistenciaMateriales.getInstance().listaPaquetes();
 
                     for (Paquete p : paquetes) {
-                        out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getUnidadesLlevadas() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPaquete(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getUnidadesLlevadas() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPaquete(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"paquete-"+p.getId()+"\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='paquete" + p.getId() + "' class='modal'>");
                         out.println("");
@@ -248,7 +246,7 @@
                 <%                    List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
 
                     for (Proveedor p : proveedores) {
-                        out.print("<tr>" + "<td>" + p.getNombre() + "</td>" + "<td>" + p.getTelefono() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProveedor(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + p.getNombre() + "</td>" + "<td>" + p.getTelefono() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProveedor(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"proveedor-"+p.getId()+"\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='proveedor" + p.getId() + "' class='modal'>");
                         out.println("");
@@ -288,7 +286,7 @@
                 <%                    List<Producto> productos = PersistenciaMateriales.getInstance().listaProductos();
 
                     for (Producto p : productos) {
-                        out.print("<tr>" + "<td>" + p.getMarca() + "</td>" + "<td>" + p.getComentarios() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProducto(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + p.getMarca() + "</td>" + "<td>" + p.getComentarios() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProducto(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"producto-"+p.getId()+"\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='producto" + p.getId() + "' class='modal'>");
                         out.println("");
@@ -333,7 +331,7 @@
 
                 <%                    List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
                     for (Receta r : recetas) {
-                        out.print("<tr>" + "<td>" + r.getId() + "</td>" + "<td>" + r.getNombre() + "</td>" + "<td><a id='" + r.getId() + "' onclick='openModalReceta(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + r.getId() + "</td>" + "<td>" + r.getNombre() + "</td>" + "<td><a id='" + r.getId() + "' onclick='openModalReceta(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"receta-"+r.getId()+"\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='receta" + r.getId() + "' class='modal'>");
                         out.println("");
@@ -368,7 +366,7 @@
                 <%                    List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
 
                     for (Componente c : componentes) {
-                        out.print("<tr>" + "<td>" + c.getNombre() + "</td>" + "<td>" + c.getUnidadDeMedida() + "</td>" + "<td><a id='" + c.getId() + "' onclick='openModalComponente(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a href='#'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + c.getNombre() + "</td>" + "<td>" + c.getUnidadDeMedida() + "</td>" + "<td><a id='" + c.getId() + "' onclick='openModalComponente(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"componente-"+c.getId()+"\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='componente" + c.getId() + "' class='modal'>");
                         out.println("");
@@ -396,8 +394,25 @@
         </details>
 
         <script>
+            function eliminar(ent) {
+                let http = new XMLHttpRequest();
+                http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/eliminarEntidad.jsp", true);
+                http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                let param = "eliminar=" + ent;
+                http.send(param);
+
+                http.onload = function () {
+                    alert("Entidad eliminada");
+                    const elem = document.getElementById(ent).parentElement.parentElement;
+                    elem.remove();
+                };
+                
+            }
+
+        </script>
+        <script>
             let modal = null;
-            
+
             function openModalTanda(clicked_id) {
                 modal = document.getElementById("tanda" + clicked_id);
                 modal.style.display = "block";
@@ -412,7 +427,7 @@
                 modal = document.getElementById("paquete" + clicked_id);
                 modal.style.display = "block";
             }
-            
+
             function openModalProducto(clicked_id) {
                 modal = document.getElementById("producto" + clicked_id);
                 modal.style.display = "block";
@@ -434,7 +449,7 @@
             }
 
             function closeModal() {
-                    modal.style.display = "none";
+                modal.style.display = "none";
             }
 
             window.onclick = function (event) {
