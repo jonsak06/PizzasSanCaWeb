@@ -19,7 +19,7 @@
         <script>
             function aniadir(){
                 
-               alert("Aqui funciona");
+           
                 let rec = document.forms["aniadirProducto"]["rec"].value;
                 let comp = document.forms["aniadirProducto"]["comp"].value;
                 let cant = document.forms["aniadirProducto"]["cant"].value;
@@ -39,8 +39,24 @@
             
         
             }
-            
-         
+               
+         const selectElement = document.forms["aniadirProducto"]["rec"];
+
+selectElement.addEventListener('change', (event) => {
+ 
+    let rec = document.forms["aniadirProducto"]["rec"].value;
+         $.post('crearTabla', {
+	long: rec
+	}, function(responseText) {
+                         
+           document.getElementById('resp2').innerHTML = responseText;
+                                      
+        });
+
+
+});
+
+
             
     </script>
     </head>
@@ -77,5 +93,11 @@
           
             <input type="submit" value="aniadir Producto">
         </form>
+             
+             <div id="resp2"></div>
     </body>
+    <script>
+   
+            
+    </script>
 </html>

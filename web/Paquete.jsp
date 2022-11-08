@@ -15,6 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <title>Paquete</title>
         <script>
             function procesar(){
@@ -67,7 +68,7 @@
     </head>
     <body>
         <h1>Crear paquete</h1>
-        <form name="crearPaquete" onsubmit="event.preventDefault(); procesar();">
+        <form name="crearPaquete" class="formulario" onsubmit="event.preventDefault(); procesar();">
             <label for="fecha">Fecha</label>
             <input id="fecha" name="fecha" type="date" required>
             <br>
