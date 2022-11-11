@@ -99,6 +99,7 @@
                     <option>Seleccione...</option>
                     <option value="lugar">Lugar</option>
                     <option value="comprador">Comprador</option>
+                    <option value="tanda">Tanda</option>
                 </select>
                 <input type="submit" id="boton" value="Buscar">
             </form>
@@ -107,7 +108,7 @@
             <%
                 List<Lugar> lugares = (List<Lugar>) session.getAttribute("listaLugares");
                 List<Comprador> compradores = (List<Comprador>) session.getAttribute("listaCompradores");
-                
+                List<Tanda> tandas = (List<Tanda>) session.getAttribute("listaTandas");
                 
                 if(lugares != null && !lugares.isEmpty()) {
                     out.println("<h2>Lugares: </h2>");
@@ -138,30 +139,16 @@
                     }
                     out.println("</table>");
                 }
-                else {
-                    out.println("<h2>No se encontraron resultados</h2>");
-                }
-                
-                session.removeAttribute("listaLugares");
-                session.removeAttribute("listaCompradores");
-                
-            %>
-        </div>
-        
-<!--        
-        <details>
-            <summary>Tandas</summary>
-            <table>
-                <tr>
-                    <th>Fecha elaboración</th>
-                    <th>Valoración</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <%                    List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
-
+                else if(tandas != null && !tandas.isEmpty()){
+                    out.println("<h2>Tandas: </h2>");
+                    out.println("<table>");
+                    out.println("    <tr>");
+                    out.println("        <th>Fecha elaboración</th>");
+                    out.println("        <th>Valoración</th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("    </tr>");
                     for (Tanda t : tandas) {
                         out.print("<tr>" + "<td>" + t.getFechaElaboracion() + "</td>" + "<td>" + t.getValoracion() + "</td>" + "<td><a id='" + t.getId() + "' onclick='openModalTanda(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"tanda-" + t.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
@@ -193,11 +180,21 @@
                         out.println("");
                         out.println("</div>");
                     }
-
-                %>
-
-            </table>
-        </details>
+                    out.println("</table>");
+                }
+                else {
+                    out.println("<h2>No se encontraron resultados</h2>");
+                }
+                
+                session.removeAttribute("listaLugares");
+                session.removeAttribute("listaCompradores");
+                session.removeAttribute("listaTandas");
+                
+            %>
+        </div>
+        
+<!--        
+        
         <details>
             <summary>Pedidos</summary>
             <table>

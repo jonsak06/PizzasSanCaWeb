@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="Entidades.Tanda"%>
 <%@page import="Entidades.Comprador"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entidades.Lugar"%>
@@ -14,8 +15,9 @@
 <%
     
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    if(request.getParameter("fecha") != null && !request.getParameter("fecha").equals("")){
-        Date fecha = format.parse(request.getParameter("fecha"));
+    Date fecha = null;
+    if(!request.getParameter("fecha").equals("")){
+        fecha = format.parse(request.getParameter("fecha"));
     }
     
     
@@ -40,6 +42,33 @@
             }
         }
         session.setAttribute("listaCompradores", resultado);
+    } else if(entidad.equals("tanda")) {
+        List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
+        List<Tanda> resultado = new ArrayList();
+        for(Tanda t :tandas) {
+            if(fecha != null) {
+                if(t.getFechaElaboracion().compareTo(fecha) == 0 && busqueda.equals("")) {
+                    resultado.add(t);
+                } else if((t.getFechaElaboracion().compareTo(fecha) == 0 && !busqueda.equals(""))) {
+                    if(String.valueOf(t.getCantidadConsumida()).contains(busqueda) || String.valueOf(t.getCantidadUnidades()).contains(busqueda)
+                        || String.valueOf(t.getPrecioUnitario()).contains(busqueda) || String.valueOf(t.getValoracion()).contains(busqueda)) 
+                    {
+                        resultado.add(t);
+                    }
+                }
+            } else {
+                if(!busqueda.equals("")) {
+                    if(String.valueOf(t.getCantidadConsumida()).contains(busqueda) || String.valueOf(t.getCantidadUnidades()).contains(busqueda)
+                        || String.valueOf(t.getPrecioUnitario()).contains(busqueda) || String.valueOf(t.getValoracion()).contains(busqueda)) 
+                    {
+                        resultado.add(t);
+                    }
+                }
+            }
+            
+            
+        }
+        session.setAttribute("listaTandas", resultado);
     }
 
 %>
