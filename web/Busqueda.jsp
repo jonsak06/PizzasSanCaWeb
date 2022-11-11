@@ -98,6 +98,7 @@
                 <select name="entidad">
                     <option>Seleccione...</option>
                     <option value="lugar">Lugar</option>
+                    <option value="comprador">Comprador</option>
                 </select>
                 <input type="submit" id="boton" value="Buscar">
             </form>
@@ -105,48 +106,49 @@
         <div id="resultado">
             <%
                 List<Lugar> lugares = (List<Lugar>) session.getAttribute("listaLugares");
-                if(lugares != null){
-                   if(!lugares.isEmpty()) {
-                        out.println("<table>");
-                        out.println("    <tr>");
-                        out.println("        <th>Nombre</th>");
-                        out.println("        <th>Dirección</th>");
-                        out.println("        <th></th>");
-                        out.println("        <th></th>");
-                        out.println("    </tr>");
-                        for (Lugar l : lugares) {
-                            out.print("<tr>" + "<td>" + l + "</td>" + "<td>" + l.getDireccion() + "</td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id='lugar-" + l.getId() + "' onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
-                        }
-                        out.println("</table>");
-                    } 
-                }
-                session.removeAttribute("listaLugares");
+                List<Comprador> compradores = (List<Comprador>) session.getAttribute("listaCompradores");
                 
-            %>
-        </div>
-        
-        
-        <details>
-            <summary>Compradores</summary>
-            <table>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <%                    List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
-
+                
+                if(lugares != null && !lugares.isEmpty()) {
+                    out.println("<h2>Lugares: </h2>");
+                    out.println("<table>");
+                    out.println("    <tr>");
+                    out.println("        <th>Nombre</th>");
+                    out.println("        <th>Dirección</th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("    </tr>");
+                    for (Lugar l : lugares) {
+                        out.print("<tr>" + "<td>" + l + "</td>" + "<td>" + l.getDireccion() + "</td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id='lugar-" + l.getId() + "' onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                    }
+                    out.println("</table>");
+                } 
+                else if(compradores != null && !compradores.isEmpty()) {
+                    out.println("<h2>Compradores: </h2>");
+                    out.println("<table>");
+                    out.println("    <tr>");
+                    out.println("        <th>Nombre</th>");
+                    out.println("        <th>Teléfono</th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("    </tr>");
                     for (Comprador c : compradores) {
                         out.print("<tr>" + "<td>" + c + "</td>" + "<td>" + c.getTelefono() + "</td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"comprador-" + c.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                     }
-
-                %>
-
-            </table>
-        </details>
+                    out.println("</table>");
+                }
+                else {
+                    out.println("<h2>No se encontraron resultados</h2>");
+                }
+                
+                session.removeAttribute("listaLugares");
+                session.removeAttribute("listaCompradores");
+                
+            %>
+        </div>
+        
+<!--        
         <details>
             <summary>Tandas</summary>
             <table>
@@ -435,7 +437,7 @@
                 %>
 
             </table>
-        </details>
+        </details>-->
 
         <script>
             function eliminar(ent) {
