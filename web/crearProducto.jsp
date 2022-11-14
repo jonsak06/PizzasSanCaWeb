@@ -78,16 +78,16 @@
              </select>   
             
             <p><label for="marca">Marca</label></p>
-            <p><input type="text" id="marca" name="marca"></p>
+            <p><input type="text" id="marca" name="marca" required></p>
             
             <p><label for="comentario">Comentario</label></p>
-            <p><input type="text" id="comentario" name="comentario"></p>
+            <p><input type="text" id="comentario" name="comentario" required></p>
             
             <p><label for="Precio">Precio</label></p>
-            <p><input type="number" id="Precio" name="Precio"></p>
+            <p><input type="number" id="Precio" name="Precio" required></p>
             
             <p><label for="cantidad">Cantidad</label></p>
-            <p><input type="number" id="cantidad" name="cantidad"></p>
+            <p><input type="number" id="cantidad" name="cantidad" required></p>
             
             <p><label for="valoracion">Valoracion</label></p>
             <select name="valoracion">

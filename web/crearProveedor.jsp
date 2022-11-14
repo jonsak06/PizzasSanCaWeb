@@ -40,11 +40,11 @@
         <h1>Crear proveedor</h1>
         <form class="formulario" name="crearProveedor" onsubmit="event.preventDefault(); procesar();">
             <p><label for="nameprov">Nombre del Proveedor</label></p>
-            <p><input type="text" id="nameprov" name="nameprov"></p>
+            <p><input type="text" id="nameprov" name="nameprov" required></p>
             <p><label for="dirprov">Direccion del Proveedor</label></p>
-            <p><input type="text" id="dirprov" name="dirprov"></p>
+            <p><input type="text" id="dirprov" name="dirprov" required></p>
             <p><label for="telprov">Telefono del Proveedor</label></p>
-            <p><input type="text" id="telprov" name="telprov"></p>
+            <p><input type="text" id="telprov" name="telprov" required></p>
             
             <input type="submit" value="Crear Proveedor">
         </form>

@@ -21,7 +21,10 @@
   integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
   crossorigin="anonymous"></script>
           <script>
-            function procesar(){
+    
+      
+    
+    function procesar(){
               
                 let nombre = document.forms["crearReceta"]["cname"].value;
                
@@ -54,6 +57,8 @@
                 $('#seccionAniadir').load('http://localhost:8080/PizzasSanCaWeb/Input/seaccionAniadir.jsp');
             });
             
+          
+            
     </script>
     </head>
     
@@ -63,13 +68,13 @@
         <form class="formulario" name="crearReceta" onsubmit="event.preventDefault(); procesar();">
             <p><label for="cname">Nombre de la Receta</label></p>
          <p><input type="text" id="cname" name="cname"></p>
-            <input type="submit" value="Crear Receta">
+            <input type="submit" value="Crear Receta" required>
         </form>
         
         
         
         <div id="seccionAniadir"></div>
-        <div id="seccionTabla"></div>
+        
         
     </body>
 </html>

@@ -41,7 +41,7 @@
       <h1>Crear componente</h1>
         <form class="formulario" name="crearComponente" onsubmit="event.preventDefault(); procesar();">
             <p><label for="cname">Nombre del Componente</label></p>
-            <p><input type="text" id="cname" name="cname"></p>
+            <p><input type="text" id="cname" name="cname" required></p>
             <p><label for="umed">Unidad de Medida</label></p>
             <select name="umed">
                 <option value="Kg" selected>Kg</option>
@@ -53,9 +53,9 @@
                 <option value="dm³">dm³</option>
             </select>
             <p><label for="cantalert">Cantidad de Alerta</label></p>
-            <p><input type="number" id="cantalert" name="cantalert"></p>
+            <p><input type="number" id="cantalert" name="cantalert" required></p>
             
-            <input type="submit" value="Crear Componente">
+            <input type="submit" value="Crear Componente" >
         </form>
     </body>
 </html>

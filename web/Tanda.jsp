@@ -12,6 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <title>Tanda</title>
         <script>
             function procesar(){
@@ -62,7 +63,7 @@
     </head>
     <body>
         <h1>Crear tanda</h1>
-        <form name="crearTanda" onsubmit="event.preventDefault(); procesar();">
+        <form name="crearTanda" class="formulario" onsubmit="event.preventDefault(); procesar();">
             <label for="fecha">Fecha de elaboración</label>
             <input id="fecha" name="fecha" type="date" required>
             <br>

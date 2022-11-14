@@ -12,6 +12,7 @@ body{
             background-color: #111111;
     font-family: "Titillium Web", sans-serif;
     margin: 0;
+     width: 90%;
 }
 
 h1{
@@ -95,5 +96,36 @@ h2{
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    width: 70%;
+    width: 100%;
 }
+
+table {
+   width: 100%;
+   border: 1px solid #000;
+}
+th, td {
+  font-weight: bold;
+    color: white;
+    padding-top: 0;
+    padding-left: 0;
+    letter-spacing: 0.025em;
+    font-size: 3em;
+    line-height: 1.25;
+    position: relative;
+    z-index: 100;
+    text-align: center;
+    
+}
+
+.formimput input{
+    
+    box-sizing: border-box;
+    background: #222222;
+    color: white;
+    font-size: 10em;
+     width: 100%;
+}
+caption {
+   padding: 0.3em;
+}
+
