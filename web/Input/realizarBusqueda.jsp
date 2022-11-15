@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="Entidades.Pedido"%>
 <%@page import="Entidades.Tanda"%>
 <%@page import="Entidades.Comprador"%>
 <%@page import="java.util.ArrayList"%>
@@ -81,10 +82,39 @@
                     } 
                 }
             }
-        }
+        } 
         
         
         session.setAttribute("listaTandas", resultado);
+    } else if(entidad.equals("pedido")) {
+        List<Pedido> pedidos = PersistenciaMateriales.getInstance().listaPedidos();
+        List<Pedido> resultado = new ArrayList();
+        
+        if(fecha == null && busqueda.equals("")){
+            resultado = pedidos;
+        } else {
+            for(Pedido p :pedidos) {
+            
+                if(fecha != null) {
+                    if(p.getFecha().compareTo(fecha) == 0 && busqueda.equals("")) {
+                        resultado.add(p);
+                    } else if((p.getFecha().compareTo(fecha) == 0 && !busqueda.equals(""))) {
+                        if(String.valueOf(p.getDescuento()).contains(busqueda) || String.valueOf(p.getUnidades()).contains(busqueda)) 
+                        {
+                            resultado.add(p);
+                        }
+                    }
+                } else {
+                    if(!busqueda.equals("")) {
+                        if(String.valueOf(p.getDescuento()).contains(busqueda) || String.valueOf(p.getUnidades()).contains(busqueda)) 
+                        {
+                            resultado.add(p);
+                        }
+                    } 
+                }
+            }
+        }
+        session.setAttribute("listaPedidos", resultado);
     }
 
 %>

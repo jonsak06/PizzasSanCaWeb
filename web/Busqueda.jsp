@@ -100,6 +100,7 @@
                     <option value="lugar">Lugar</option>
                     <option value="comprador">Comprador</option>
                     <option value="tanda">Tanda</option>
+                    <option value="pedido">Pedido</option>
                 </select>
                 <input type="submit" id="boton" value="Buscar">
             </form>
@@ -109,6 +110,7 @@
                 List<Lugar> lugares = (List<Lugar>) session.getAttribute("listaLugares");
                 List<Comprador> compradores = (List<Comprador>) session.getAttribute("listaCompradores");
                 List<Tanda> tandas = (List<Tanda>) session.getAttribute("listaTandas");
+                List<Pedido> pedidos = (List<Pedido>) session.getAttribute("listaPedidos");
                 
                 if(lugares != null && !lugares.isEmpty()) {
                     out.println("<h2>Lugares: </h2>");
@@ -181,36 +183,19 @@
                         out.println("</div>");
                     }
                     out.println("</table>");
-                }
-                else {
-                    out.println("<h2>No se encontraron resultados</h2>");
-                }
-                
-                session.removeAttribute("listaLugares");
-                session.removeAttribute("listaCompradores");
-                session.removeAttribute("listaTandas");
-                
-            %>
-        </div>
-        
-<!--        
-        
-        <details>
-            <summary>Pedidos</summary>
-            <table>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Descuento</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <%                    List<Pedido> pedidos = PersistenciaMateriales.getInstance().listaPedidos();
-
-                    for (Pedido p : pedidos) {
-                        out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getDescuento() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPedido(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"pedido-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
-
+                } else if(pedidos != null && !pedidos.isEmpty()) {
+                    out.println("<h2>Pedidos: </h2>");
+                    out.println("<table>");
+                    out.println("    <tr>");
+                    out.println("        <th>Fecha</th>");
+                    out.println("        <th>Descuento</th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("    </tr>");
+                    for(Pedido p :pedidos) {
+                        out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getDescuento() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPedido(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"pedido-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");                    
+                        
                         out.println("<div id='pedido" + p.getId() + "' class='modal'>");
                         out.println("");
                         out.println("    <div class=\"modal-content\">");
@@ -230,11 +215,21 @@
                         out.println("");
                         out.println("</div>");
                     }
-
-                %>
-
-            </table>
-        </details>
+                    out.println("</table>");
+                }
+                else {
+                    out.println("<h2>No se encontraron resultados</h2>");
+                }
+                
+                session.removeAttribute("listaLugares");
+                session.removeAttribute("listaCompradores");
+                session.removeAttribute("listaTandas");
+                session.removeAttribute("listaPedidos");
+                
+            %>
+        </div>
+        
+<!--        
         <details>
             <summary>Paquetes</summary>
             <table>
