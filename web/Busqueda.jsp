@@ -101,6 +101,7 @@
                     <option value="comprador">Comprador</option>
                     <option value="tanda">Tanda</option>
                     <option value="pedido">Pedido</option>
+                    <option value="paquete">Paquete</option>
                 </select>
                 <input type="submit" id="boton" value="Buscar">
             </form>
@@ -111,6 +112,7 @@
                 List<Comprador> compradores = (List<Comprador>) session.getAttribute("listaCompradores");
                 List<Tanda> tandas = (List<Tanda>) session.getAttribute("listaTandas");
                 List<Pedido> pedidos = (List<Pedido>) session.getAttribute("listaPedidos");
+                List<Paquete> paquetes = (List<Paquete>) session.getAttribute("listaPaquetes");
                 
                 if(lugares != null && !lugares.isEmpty()) {
                     out.println("<h2>Lugares: </h2>");
@@ -216,33 +218,16 @@
                         out.println("</div>");
                     }
                     out.println("</table>");
-                }
-                else {
-                    out.println("<h2>No se encontraron resultados</h2>");
-                }
-                
-                session.removeAttribute("listaLugares");
-                session.removeAttribute("listaCompradores");
-                session.removeAttribute("listaTandas");
-                session.removeAttribute("listaPedidos");
-                
-            %>
-        </div>
-        
-<!--        
-        <details>
-            <summary>Paquetes</summary>
-            <table>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Unidades llevadas</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <%                    List<Paquete> paquetes = PersistenciaMateriales.getInstance().listaPaquetes();
-
+                }  else if(paquetes != null && !paquetes.isEmpty()) {
+                    out.println("<h2>Paquetes: </h2>");
+                    out.println("<table>");
+                    out.println("    <tr>");
+                    out.println("        <th>Fecha</th>");
+                    out.println("        <th>Unidades llevadas</th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("    </tr>");
                     for (Paquete p : paquetes) {
                         out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getUnidadesLlevadas() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPaquete(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"paquete-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
@@ -265,11 +250,23 @@
                         out.println("");
                         out.println("</div>");
                     }
+                    out.println("</table>");
+                }
+                else {
+                    out.println("<h2>No se encontraron resultados</h2>");
+                }
+                
+                session.removeAttribute("listaLugares");
+                session.removeAttribute("listaCompradores");
+                session.removeAttribute("listaTandas");
+                session.removeAttribute("listaPedidos");
+                session.removeAttribute("listaPaquetes");
 
-                %>
-
-            </table>
-        </details>
+            %>
+        </div>
+        
+<!--        
+        
         <details>
             <summary>Proveedores</summary>
             <table>

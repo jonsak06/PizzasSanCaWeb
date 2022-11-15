@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="Entidades.Paquete"%>
 <%@page import="Entidades.Pedido"%>
 <%@page import="Entidades.Tanda"%>
 <%@page import="Entidades.Comprador"%>
@@ -115,6 +116,35 @@
             }
         }
         session.setAttribute("listaPedidos", resultado);
+    } else if(entidad.equals("paquete")) {
+        List<Paquete> paquetes = PersistenciaMateriales.getInstance().listaPaquetes();
+        List<Paquete> resultado = new ArrayList();
+        
+        if(fecha == null && busqueda.equals("")){
+            resultado = paquetes;
+        } else {
+            for(Paquete p :paquetes) {
+            
+                if(fecha != null) {
+                    if(p.getFecha().compareTo(fecha) == 0 && busqueda.equals("")) {
+                        resultado.add(p);
+                    } else if((p.getFecha().compareTo(fecha) == 0 && !busqueda.equals(""))) {
+                        if(String.valueOf(p.getUnidadesVendidas()).contains(busqueda) || String.valueOf(p.getUnidadesLlevadas()).contains(busqueda)) 
+                        {
+                            resultado.add(p);
+                        }
+                    }
+                } else {
+                    if(!busqueda.equals("")) {
+                        if(String.valueOf(p.getUnidadesVendidas()).contains(busqueda) || String.valueOf(p.getUnidadesLlevadas()).contains(busqueda)) 
+                        {
+                            resultado.add(p);
+                        }
+                    } 
+                }
+            }
+        }
+        session.setAttribute("listaPaquetes", resultado);
     }
 
 %>
