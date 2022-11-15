@@ -102,6 +102,7 @@
                     <option value="tanda">Tanda</option>
                     <option value="pedido">Pedido</option>
                     <option value="paquete">Paquete</option>
+                    <option value="proveedor">Proveedor</option>
                 </select>
                 <input type="submit" id="boton" value="Buscar">
             </form>
@@ -113,7 +114,8 @@
                 List<Tanda> tandas = (List<Tanda>) session.getAttribute("listaTandas");
                 List<Pedido> pedidos = (List<Pedido>) session.getAttribute("listaPedidos");
                 List<Paquete> paquetes = (List<Paquete>) session.getAttribute("listaPaquetes");
-                
+                List<Proveedor> proveedores = (List<Proveedor>) session.getAttribute("listaProveedores");
+
                 if(lugares != null && !lugares.isEmpty()) {
                     out.println("<h2>Lugares: </h2>");
                     out.println("<table>");
@@ -218,7 +220,7 @@
                         out.println("</div>");
                     }
                     out.println("</table>");
-                }  else if(paquetes != null && !paquetes.isEmpty()) {
+                } else if(paquetes != null && !paquetes.isEmpty()) {
                     out.println("<h2>Paquetes: </h2>");
                     out.println("<table>");
                     out.println("    <tr>");
@@ -251,35 +253,16 @@
                         out.println("</div>");
                     }
                     out.println("</table>");
-                }
-                else {
-                    out.println("<h2>No se encontraron resultados</h2>");
-                }
-                
-                session.removeAttribute("listaLugares");
-                session.removeAttribute("listaCompradores");
-                session.removeAttribute("listaTandas");
-                session.removeAttribute("listaPedidos");
-                session.removeAttribute("listaPaquetes");
-
-            %>
-        </div>
-        
-<!--        
-        
-        <details>
-            <summary>Proveedores</summary>
-            <table>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <%                    List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
-
+                } else if(proveedores != null && !proveedores.isEmpty()) {
+                    out.println("<h2>Proveedores: </h2>");
+                    out.println("<table>");
+                    out.println("    <tr>");
+                    out.println("        <th>Nombre</th>");
+                    out.println("        <th>Teléfono</th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("    </tr>");
                     for (Proveedor p : proveedores) {
                         out.print("<tr>" + "<td>" + p.getNombre() + "</td>" + "<td>" + p.getTelefono() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProveedor(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"proveedor-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
@@ -302,11 +285,25 @@
                         out.println("");
                         out.println("</div>");
                     }
+                    out.println("</table>");
+                }
+                else {
+                    out.println("<h2>No se encontraron resultados</h2>");
+                }
+                
+                session.removeAttribute("listaLugares");
+                session.removeAttribute("listaCompradores");
+                session.removeAttribute("listaTandas");
+                session.removeAttribute("listaPedidos");
+                session.removeAttribute("listaPaquetes");
+                session.removeAttribute("listaProveedores");
 
-                %>
-
-            </table>
-        </details>
+            %>
+        </div>
+        
+<!--        
+        
+        
         <details>
             <summary>Productos</summary>
             <table>

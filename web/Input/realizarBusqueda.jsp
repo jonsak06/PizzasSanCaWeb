@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="Entidades.Proveedor"%>
 <%@page import="Entidades.Paquete"%>
 <%@page import="Entidades.Pedido"%>
 <%@page import="Entidades.Tanda"%>
@@ -145,6 +146,20 @@
             }
         }
         session.setAttribute("listaPaquetes", resultado);
+    } else if(entidad.equals("proveedor")) {
+        List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
+        List<Proveedor> resultado = new ArrayList();
+        
+        if(busqueda.equals("")) {
+            resultado = proveedores;
+        } else {
+            for(Proveedor p :proveedores) {
+                if(p.getNombre().toLowerCase().contains(busqueda) || p.getTelefono().contains(busqueda) || p.getDireccion().contains(busqueda)) {
+                    resultado.add(p);
+                }
+            }
+        }
+        session.setAttribute("listaProveedores", resultado);
     }
 
 %>
