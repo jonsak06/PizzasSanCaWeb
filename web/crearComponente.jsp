@@ -30,6 +30,7 @@
                     let params = "nombre=" + nombre + "&unidadDeMedida=" + unidadDeMedida+ "&cantalert=" + cantalert;
                     http.send(params);
                     http.onload = function() {
+                        document.forms["crearComponente"].reset();
                         alert("Componente creado");
                     };
                 }

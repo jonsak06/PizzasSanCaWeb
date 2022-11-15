@@ -32,7 +32,8 @@
                     http.send(params);
                     http.onload = function() 
                     {
-                        alert("Receta creada");
+                        document.forms["aniadirProducto"].reset();
+                        alert("Producto añadido");
                        
                     };
                 
@@ -61,7 +62,7 @@ selectElement.addEventListener('change', (event) => {
     </script>
     </head>
     <body>
-        <h2>Crear paquete</h2>
+        <h2>Añadir componentes a recetas</h2>
         <form class="formulario" name="aniadirProducto" onsubmit="event.preventDefault(); aniadir();">
             
              <p><label for="rec" >Receta</label></p>
@@ -88,7 +89,7 @@ selectElement.addEventListener('change', (event) => {
             
             
             <p><label for="cant">Cantidad</label></p>
-            <p><input type="number" id="cant" name="cant"></p>
+            <p><input type="number" id="cant" name="cant" required></p>
             
           
             <input type="submit" value="aniadir Producto">

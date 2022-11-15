@@ -45,6 +45,7 @@
                     let params = "cantidad=" + cantidad + "&comp=" + comp+ "&valoracion=" + valoracion+ "&comentario=" + comentario+ "&prov=" + prov+ "&marca=" + marca+ "&Precio=" + Precio+ "&myfile=" + myfile;
                     http.send(params);
                     http.onload = function() {
+                        document.forms["crearProducto"].reset();
                         alert("Producto creado");
                     };
                 }

@@ -30,6 +30,7 @@
                     let params = "nombre=" + nombre + "&direccion=" + dirprov+ "&telefono=" + telprov;
                     http.send(params);
                     http.onload = function() {
+                        document.forms["crearProveedor"].reset();
                         alert("Proveedor Creado");
                     };
                 }

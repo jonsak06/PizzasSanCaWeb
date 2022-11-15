@@ -41,6 +41,7 @@
                     http.send(params);
                     http.onload = function() 
                     {
+                        document.forms["crearReceta"].reset();
                         alert("Receta creada");
                         $(document).ready(function(){
                             $('#seccionAniadir').load('http://localhost:8080/PizzasSanCaWeb/Input/seaccionAniadir.jsp');
