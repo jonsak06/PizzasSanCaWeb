@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="Entidades.Producto"%>
 <%@page import="Entidades.Proveedor"%>
 <%@page import="Entidades.Paquete"%>
 <%@page import="Entidades.Pedido"%>
@@ -154,12 +155,27 @@
             resultado = proveedores;
         } else {
             for(Proveedor p :proveedores) {
-                if(p.getNombre().toLowerCase().contains(busqueda) || p.getTelefono().contains(busqueda) || p.getDireccion().contains(busqueda)) {
+                if(p.getNombre().toLowerCase().contains(busqueda) || p.getTelefono().contains(busqueda) || p.getDireccion().toLowerCase().contains(busqueda)) {
                     resultado.add(p);
                 }
             }
         }
         session.setAttribute("listaProveedores", resultado);
+    } else if(entidad.equals("producto")) {
+        List<Producto> productos = PersistenciaMateriales.getInstance().listaProductos();
+        List<Producto> resultado = new ArrayList();
+        
+        if(busqueda.equals("")) {
+            resultado = productos;
+        } else {
+            for(Producto p :productos) {
+                if(p.getMarca().toLowerCase().contains(busqueda) || p.getComentarios().toLowerCase().contains(busqueda) || String.valueOf(p.getPrecio()).contains(busqueda)
+                        || String.valueOf(p.getValoracion()).contains(busqueda)) {
+                    resultado.add(p);
+                }
+            }
+        }
+        session.setAttribute("listaProductos", resultado);
     }
 
 %>
