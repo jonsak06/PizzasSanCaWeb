@@ -104,6 +104,8 @@
                     <option value="paquete">Paquete</option>
                     <option value="proveedor">Proveedor</option>
                     <option value="producto">Producto</option>
+                    <option value="receta">Receta</option>
+                    <option value="componente">Componente</option>
                 </select>
                 <input type="submit" id="boton" value="Buscar">
             </form>
@@ -117,10 +119,13 @@
                 List<Paquete> paquetes = (List<Paquete>) session.getAttribute("listaPaquetes");
                 List<Proveedor> proveedores = (List<Proveedor>) session.getAttribute("listaProveedores");
                 List<Producto> productos = (List<Producto>) session.getAttribute("listaProductos");
+                List<Receta> recetas = (List<Receta>) session.getAttribute("listaRecetas");
+                List<Componente> componentes = (List<Componente>) session.getAttribute("listaComponentes");
+
 
                 if(lugares != null && lugares.isEmpty() || compradores != null && compradores.isEmpty() || tandas != null && tandas.isEmpty() || 
                         pedidos != null && pedidos.isEmpty() || paquetes != null && paquetes.isEmpty() || proveedores != null && proveedores.isEmpty() 
-                        || productos != null && productos.isEmpty()) {
+                        || productos != null && productos.isEmpty() || recetas != null && recetas.isEmpty() || componentes != null && componentes.isEmpty()) {
                     out.println("<h2>No se encontraron resultados</h2>");
 
                 }else if(lugares != null) {
@@ -332,32 +337,16 @@
                         out.println("</div>");
                     }
                     out.println("</table>");
-                }
-                
-                session.removeAttribute("listaLugares");
-                session.removeAttribute("listaCompradores");
-                session.removeAttribute("listaTandas");
-                session.removeAttribute("listaPedidos");
-                session.removeAttribute("listaPaquetes");
-                session.removeAttribute("listaProveedores");
-                session.removeAttribute("listaProductos");
-
-            %>
-        </div>
-        
-<!--      
-        <details>
-            <summary>Recetas</summary>
-            <table>
-                <tr>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <%                    List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
+                } else if(recetas != null) {
+                    out.println("<h2>Recetas: </h2>");
+                    out.println("<table>");
+                    out.println("    <tr>");
+                    out.println("        <th>Código</th>");
+                    out.println("        <th>Nombre</th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("    </tr>");
                     for (Receta r : recetas) {
                         out.print("<tr>" + "<td>" + r.getId() + "</td>" + "<td>" + r.getNombre() + "</td>" + "<td><a id='" + r.getId() + "' onclick='openModalReceta(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"receta-" + r.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
@@ -375,24 +364,17 @@
                         out.println("");
                         out.println("</div>");
                     }
-
-                %>
-
-            </table>
-        </details>
-        <details>
-            <summary>Componentes</summary>
-            <table>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Unidad de medida</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
-                <%                    List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
-
+                    out.println("</table>");
+                } else if(componentes != null) {
+                    out.println("<h2>Componentes: </h2>");
+                    out.println("<table>");
+                    out.println("    <tr>");
+                    out.println("        <th>Nombre</th>");
+                    out.println("        <th>Unidad de medida</th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("        <th></th>");
+                    out.println("    </tr>");
                     for (Componente c : componentes) {
                         out.print("<tr>" + "<td>" + c.getNombre() + "</td>" + "<td>" + c.getUnidadDeMedida() + "</td>" + "<td><a id='" + c.getId() + "' onclick='openModalComponente(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"componente-" + c.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
@@ -415,11 +397,23 @@
                         out.println("");
                         out.println("</div>");
                     }
+                    out.println("</table>");
+                }
+                
+                session.removeAttribute("listaLugares");
+                session.removeAttribute("listaCompradores");
+                session.removeAttribute("listaTandas");
+                session.removeAttribute("listaPedidos");
+                session.removeAttribute("listaPaquetes");
+                session.removeAttribute("listaProveedores");
+                session.removeAttribute("listaProductos");
+                session.removeAttribute("listaRecetas");
+                session.removeAttribute("listaComponentes");
 
-                %>
 
-            </table>
-        </details>-->
+
+            %>
+        </div>
 
         <script>
             function eliminar(ent) {

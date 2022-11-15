@@ -4,6 +4,8 @@
     Author     : Usuario
 --%>
 
+<%@page import="Entidades.Componente"%>
+<%@page import="Entidades.Receta"%>
 <%@page import="Entidades.Producto"%>
 <%@page import="Entidades.Proveedor"%>
 <%@page import="Entidades.Paquete"%>
@@ -176,6 +178,35 @@
             }
         }
         session.setAttribute("listaProductos", resultado);
+    } else if(entidad.equals("receta")) {
+        List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
+        List<Receta> resultado = new ArrayList();
+        
+        if(busqueda.equals("")) {
+            resultado = recetas;
+        } else {
+            for(Receta p :recetas) {
+                if(p.getNombre().toLowerCase().contains(busqueda)) {
+                    resultado.add(p);
+                }
+            }
+        }
+        session.setAttribute("listaRecetas", resultado);
+    } else if(entidad.equals("componente")) {
+        List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
+        List<Componente> resultado = new ArrayList();
+        
+        if(busqueda.equals("")) {
+            resultado = componentes;
+        } else {
+            for(Componente c :componentes) {
+                if(c.getNombre().toLowerCase().contains(busqueda) || c.getUnidadDeMedida().toLowerCase().contains(busqueda) 
+                        || String.valueOf(c.getCantidadDeAlerta()).contains(busqueda)) {
+                    resultado.add(c);
+                }
+            }
+        }
+        session.setAttribute("listaComponentes", resultado);
     }
 
 %>
