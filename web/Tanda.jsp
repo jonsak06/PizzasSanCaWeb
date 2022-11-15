@@ -38,6 +38,10 @@
                     boton.disabled = false;
                     alert("Debe seleccionar una receta");
                     return false;
+                } else if(valoracion === "Seleccione...") {
+                    boton.disabled = false;
+                    alert("Debe seleccionar una valoración");
+                    return false;
                 }
                 else if(cantConsumida > cantUnidades) {
                     boton.disabled = false;
@@ -69,7 +73,8 @@
             <br>
             <label for="valoracion">Valoración</label>
             <select id="valoracion" name="valoracion" required>
-                <option value="1" selected>1</option>
+                <option selected>Seleccione...</option>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>

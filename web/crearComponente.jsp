@@ -22,6 +22,9 @@
                 if (nombre === null || nombre === "") {
                     alert("Nombre del Componente requerido");
                     return false;
+                } else if(unidadDeMedida === "Seleccione...") {
+                    alert("Debe seleccionar una unidad de medida");
+                    return false;
                 }
                 else {
                     let http = new XMLHttpRequest();
@@ -45,7 +48,8 @@
             <p><input type="text" id="cname" name="cname" required></p>
             <p><label for="umed">Unidad de Medida</label></p>
             <select name="umed">
-                <option value="Kg" selected>Kg</option>
+                <option selected>Seleccione...</option>
+                <option value="Kg">Kg</option>
                 <option value="mL" >mL</option>
                 <option value="g">g</option>
                 <option value="L" >L</option>

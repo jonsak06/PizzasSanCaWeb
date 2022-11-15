@@ -80,7 +80,7 @@
             <br>
             <label for="lugar">Lugar</label>
             <select id="lugar" name="lugar" required>
-                <option>Seleccione...</option>
+                <option selected>Seleccione...</option>
             <%
                 List<Lugar> lugares = PersistenciaMateriales.getInstance().listaLugares();
                 for(Lugar lugar :lugares) {
@@ -91,7 +91,7 @@
             <br>
             <label for="tanda">Tanda</label>
             <select id="tanda" name="tanda" required>
-                <option>Seleccione...</option>
+                <option selected>Seleccione...</option>
             <%
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {

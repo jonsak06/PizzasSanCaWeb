@@ -37,6 +37,15 @@
                 if (marca === null || marca === "") {
                     alert("marca del Producto requerida");
                     return false;
+                } else if(comp === "Seleccione...") {
+                    alert("Debe seleccionar un componente");
+                    return false;
+                } else if(prov === "Seleccione...") {
+                    alert("Debe seleccionar un proveedor");
+                    return false;
+                } else if(valoracion === "Seleccione...") {
+                    alert("Debe seleccionar una valoración");
+                    return false;
                 }
                 else {
                     let http = new XMLHttpRequest();
@@ -59,6 +68,7 @@
             
             <p><label for="comp">Componente</label></p>
             <select name="comp">
+                <option selected>Seleccione...</option>
             <% 
                 List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
                 for(int i=0; i<componentes.size(); i++){
@@ -69,6 +79,7 @@
         
             <p><label for="prov">Proveedor</label></p>
             <select name="prov">
+                <option selected>Seleccione...</option>
             <%
 
                 List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
@@ -92,7 +103,8 @@
             
             <p><label for="valoracion">Valoracion</label></p>
             <select name="valoracion">
-                <option value="1" selected>1</option>
+                <option selected>Seleccione...</option>
+                <option value="1">1</option>
                 <option value="2" >2</option>
                 <option value="3">3</option>
                 <option value="4" >4</option>

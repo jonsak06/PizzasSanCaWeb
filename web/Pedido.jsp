@@ -73,7 +73,7 @@
             <br>
             <label for="comprador">Comprador</label>
             <select id="comprador" name="comprador" required>
-                <option>Seleccione...</option>
+                <option selected>Seleccione...</option>
             <%
                 List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
                 for(Comprador comprador :compradores) {
@@ -84,7 +84,7 @@
             <br>
             <label for="tanda">Tanda</label>
             <select id="tanda" name="tanda" required>
-                <option>Seleccione...</option>
+                <option selected>Seleccione...</option>
             <%
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {

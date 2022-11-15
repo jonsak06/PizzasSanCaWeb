@@ -96,7 +96,7 @@
                 <input type="text" name="busqueda" id="busqueda">
                 <input type="date" id="fecha" name="fecha">
                 <select name="entidad">
-                    <option>Seleccione...</option>
+                    <option selected>Seleccione...</option>
                     <option value="lugar">Lugar</option>
                     <option value="comprador">Comprador</option>
                     <option value="tanda">Tanda</option>

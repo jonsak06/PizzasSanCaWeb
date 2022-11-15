@@ -24,7 +24,13 @@
                 let comp = document.forms["aniadirProducto"]["comp"].value;
                 let cant = document.forms["aniadirProducto"]["cant"].value;
                
-                
+                if(rec === "Seleccione...") {
+                    alert("Debe de seleccionar una receta");
+                    return false;
+                } else if(comp === "Seleccione...") {
+                    alert("Debe de seleccionar un componente");
+                    return false;
+                } else {
                     let http = new XMLHttpRequest();
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/inputAnidirComponenteAReceta.jsp", true);
                     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -33,12 +39,10 @@
                     http.onload = function() 
                     {
                         document.forms["aniadirProducto"].reset();
-                        alert("Producto añadido");
+                        alert("Componente añadido");
                        
                     };
-                
-            
-        
+                }
             }
                
          const selectElement = document.forms["aniadirProducto"]["rec"];
@@ -56,17 +60,16 @@ selectElement.addEventListener('change', (event) => {
 
 
 });
-
-
             
     </script>
     </head>
     <body>
-        <h2>Añadir componentes a recetas</h2>
+        <h2>Añadir componente a receta</h2>
         <form class="formulario" name="aniadirProducto" onsubmit="event.preventDefault(); aniadir();">
             
              <p><label for="rec" >Receta</label></p>
             <select class="rec" name="rec" >
+                <option selected>Seleccione...</option>
             <%
 
                 List<Receta> Recetas = PersistenciaMateriales.getInstance().listaRecetas();
@@ -78,6 +81,7 @@ selectElement.addEventListener('change', (event) => {
             
             <p><label for="comp" >Componente</label></p>
             <select name="comp">
+                <option selected>Seleccione...</option>
             <% 
                 List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
                 for(int i=0; i<componentes.size(); i++){
@@ -92,7 +96,7 @@ selectElement.addEventListener('change', (event) => {
             <p><input type="number" id="cant" name="cant" required></p>
             
           
-            <input type="submit" value="aniadir Producto">
+            <input type="submit" value="Añadir componente">
         </form>
              
              <div id="resp2"></div>

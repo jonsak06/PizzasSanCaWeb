@@ -31,6 +31,7 @@
     
     Cantidad cantidad = new Cantidad(Float.parseFloat(cant));
     cantidad.setComponente(componente);
+    cantidad.setActivo(true);
     cantidad.setReceta(Receta);
     PersistenciaMateriales.getInstance().persist(cantidad);
 
