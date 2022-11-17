@@ -3,6 +3,7 @@
     Created on : Oct 12, 2022, 11:04:23 AM
     Author     : Manuel
 --%>
+<%@page import="Entidades.Producto"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Base64"%>
 <%@page import="Entidades.Proveedor"%>
@@ -62,60 +63,119 @@
     </script>
     </head>
     <body>
-        <h1>Crear producto</h1>
         
-        <form class="formulario" name="crearProducto" onsubmit="event.preventDefault(); procesar();">
-            
-            <p><label for="comp">Componente</label></p>
-            <select name="comp">
-                <option selected>Seleccione...</option>
-            <% 
+        <%
+            String id = "1";
+            if(id==null){
+                out.print("<h1>Crear producto</h1>");
+                out.print("<form class='formulario' name='crearProducto' onsubmit='event.preventDefault(); procesar();'>");
+                out.print("<p><label for='comp'>Componente</label></p>");
+                out.print("<select name='comp'>");
+                out.print("<option selected>Seleccione...</option>");
                 List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
-                for(int i=0; i<componentes.size(); i++){
-                out.print("<option value="+ componentes.get(i).getId() +">"+ componentes.get(i).getNombre() +"</option>");
+                    for(int i=0; i<componentes.size(); i++){
+                    out.print("<option value="+ componentes.get(i).getId() +">"+ componentes.get(i).getNombre() +"</option>");
+                    }
+                out.print("</select>");
+                out.print("<p><label for='prov'>Proveedor</label></p>");
+                out.print("<select name='prov'>");
+                out.print("<option selected>Seleccione...</option>");
+                 List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
+                    for(int i=0; i<proveedores.size(); i++){
+                    out.print("<option value="+ proveedores.get(i).getId() +">"+ proveedores.get(i).getNombre() +"</option>");
+                    }
+                out.print("</select> ");
+                out.print("<p><label for='marca'>Marca</label></p>");
+                out.print("<p><input type='text' id='marca' name='marca' required></p>");
+                out.print("<p><label for='comentario'>Comentario</label></p>");
+                out.print("<p><input type='text' id='comentario' name='comentario' required></p>");
+                out.print("<p><label for='Precio'>Precio</label></p>");
+                out.print("<p><input type='number' id='Precio' name='Precio' required></p>");
+                out.print("<p><label for='cantidad'>Cantidad</label></p>");
+                out.print("<p><input type='number' id='cantidad' name='cantidad' required></p>");
+                out.print("<p><label for='valoracion'>Valoracion</label></p>");
+                out.print("<select name='valoracion'>");
+                out.print("<option selected>Seleccione...</option>");
+                out.print("<option value='1'>1</option>");
+                out.print("<option value='2' >2</option>");
+                out.print("<option value='3'>3</option>");
+                out.print("<option value='4' >4</option>");
+                out.print("<option value='5'>5</option>");
+                out.print(" </select>");
+                out.print("<p> <label for='myfile'>Select a file:</label>");
+                out.print("<input type='file' id='myfile' name='myfile'></p>");
+                out.print("<input type='submit' value='Crear Producto'>"); 
+                out.print("</form>");
+            }else{
+                out.print("<h1>Modificar producto</h1>");
+                 Producto pro = null;
+                 List<Producto> productos = PersistenciaMateriales.getInstance().listaProductos();
+                for(int i=0; i<productos.size(); i++){
+                    if(productos.get(i).getId()==Long.parseLong(id))
+                    {
+                        pro=productos.get(i);
+                    }
                 }
-            %>
-             </select>    
+            
+//                
+                
+                out.print("<form class='formulario' name='crearProducto' onsubmit='event.preventDefault(); procesar();'>");
+                out.print("<p><label for='comp'>Componente</label></p>");
+                out.print("<select name='comp'>");
+                
+                List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
+                    for(int i=0; i<componentes.size(); i++){
+                        if(pro.getComponente().getId()==componentes.get(i).getId()){
+                    out.print("<option value="+ componentes.get(i).getId() +" selected>"+ componentes.get(i).getNombre() +"</option>");
+                        }else{
+                             out.print("<option value="+ componentes.get(i).getId() +">"+ componentes.get(i).getNombre() +"</option>");
+                        }
+                    }
+                out.print("</select>");
+                
+                
+                
+                out.print("<p><label for='prov'>Proveedor</label></p>");
+                out.print("<select name='prov'>");
+                out.print("<option selected>Seleccione...</option>");
+                 List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
+                    for(int i=0; i<proveedores.size(); i++){
+                        if(pro.getProveedor().getId()==proveedores.get(i).getId()){
+                            out.print("<option value="+ proveedores.get(i).getId() +" selected>"+ proveedores.get(i).getNombre() +"</option>");
+                        }else{
+                            out.print("<option value="+ proveedores.get(i).getId() +">"+ proveedores.get(i).getNombre() +"</option>");
+                        }
+                    }
+                out.print("</select> ");
+                out.print("<p><label for='marca'>Marca</label></p>");
+                out.print("<p><input type='text' id='marca'  value='"+pro.getMarca()+"' name='marca' required></p>");
+                out.print("<p><label for='comentario'>Comentario</label></p>");
+                out.print("<p><input type='text' id='comentario'value='"+pro.getComentarios()+"' name='comentario' required></p>");
+                out.print("<p><label for='Precio'>Precio</label></p>");
+                out.print("<p><input type='number' id='Precio' value='"+pro.getPrecio()+"' name='Precio' required></p>");
+                out.print("<p><label for='cantidad'>Cantidad</label></p>");
+                out.print("<p><input type='number' id='cantidad' value='"+pro.getCantidad()+"' name='cantidad' required></p>");
+                out.print("<p><label for='valoracion'>Valoracion</label></p>");
+                out.print("<select name='valoracion'>");
+                for(int i=1; i<6 ; i++){
+                    if(i==pro.getValoracion())
+                    {
+                        out.print("<option value='"+i+"' selected>"+i+"</option>");
+                    }else{
+                         out.print("<option value='"+i+"'>"+i+"</option>");
+                    }
+                }
+                out.print(" </select>");
+                out.print("<p> <label for='myfile'>Select a file:</label>");
+                out.print("<input type='file' id='myfile' name='myfile'></p>");
+                out.print("<input type='submit' value='Crear Producto'>"); 
+                out.print("</form>");
+            }
+            
+            
+            
+            
         
-            <p><label for="prov">Proveedor</label></p>
-            <select name="prov">
-                <option selected>Seleccione...</option>
-            <%
-
-                List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
-                for(int i=0; i<proveedores.size(); i++){
-                out.print("<option value="+ proveedores.get(i).getId() +">"+ proveedores.get(i).getNombre() +"</option>");
-                }
-            %>
-             </select>   
-            
-            <p><label for="marca">Marca</label></p>
-            <p><input type="text" id="marca" name="marca" required></p>
-            
-            <p><label for="comentario">Comentario</label></p>
-            <p><input type="text" id="comentario" name="comentario" required></p>
-            
-            <p><label for="Precio">Precio</label></p>
-            <p><input type="number" id="Precio" name="Precio" required></p>
-            
-            <p><label for="cantidad">Cantidad</label></p>
-            <p><input type="number" id="cantidad" name="cantidad" required></p>
-            
-            <p><label for="valoracion">Valoracion</label></p>
-            <select name="valoracion">
-                <option selected>Seleccione...</option>
-                <option value="1">1</option>
-                <option value="2" >2</option>
-                <option value="3">3</option>
-                <option value="4" >4</option>
-                <option value="5">5</option>
-            </select>
-            
-            <p> <label for="myfile">Select a file:</label>
-            <input type="file" id="myfile" name="myfile"></p>
-            
-            <input type="submit" value="Crear Producto">
-        </form>
-              
+ %>
     </body>
 </html>

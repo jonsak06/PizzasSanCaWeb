@@ -4,6 +4,9 @@
     Author     : Manuel
 --%>
 
+<%@page import="Entidades.Proveedor"%>
+<%@page import="Persistencia.PersistenciaMateriales"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,16 +41,41 @@
     </script>
     </head>
     <body>
-        <h1>Crear proveedor</h1>
-        <form class="formulario" name="crearProveedor" onsubmit="event.preventDefault(); procesar();">
-            <p><label for="nameprov">Nombre del Proveedor</label></p>
-            <p><input type="text" id="nameprov" name="nameprov" required></p>
-            <p><label for="dirprov">Direccion del Proveedor</label></p>
-            <p><input type="text" id="dirprov" name="dirprov" required></p>
-            <p><label for="telprov">Telefono del Proveedor</label></p>
-            <p><input type="text" id="telprov" name="telprov" required></p>
-            
-            <input type="submit" value="Crear Proveedor">
-        </form>
+        <%
+            String id = "2";
+            if(id == null){
+                out.println("<h1>Crear proveedor</h1>");
+                out.println("<form class=\"formulario\" name=\"crearProveedor\" onsubmit=\"event.preventDefault(); procesar();\">");
+                out.println("<p><label for=\"nameprov\">Nombre del Proveedor</label></p>");
+                out.println("<p><input type=\"text\" id=\"nameprov\" name=\"nameprov\" required></p>");
+                out.println("<p><label for=\"dirprov\">Direccion del Proveedor</label></p>");
+                out.println("<p><input type=\"text\" id=\"dirprov\" name=\"dirprov\" required></p>");
+                out.println("<p><label for=\"telprov\">Telefono del Proveedor</label></p>");
+                out.println("<p><input type=\"text\" id=\"telprov\" name=\"telprov\" required></p>");
+                out.println("<input type=\"submit\" value=\"Crear Proveedor\">");
+                out.println("</form>");
+            }
+            else{
+                
+                Proveedor pro = null;
+                List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
+                for(int i=0; i<proveedores.size(); i++){
+                    if(Long.parseLong(id)==proveedores.get(i).getId()){
+                        pro=proveedores.get(i);
+                    }
+                }
+                
+                out.println("<h1>Modificar proveedor</h1>");
+                out.println("<form class=\"formulario\" name=\"crearProveedor\" onsubmit=\"event.preventDefault(); procesar();\">");
+                out.println("<p><label for=\"nameprov\">Nombre del Proveedor</label></p>");
+                out.println("<p><input type=\"text\" id=\"nameprov\" value=\""+pro.getNombre()+"\" name=\"nameprov\" required></p>");
+                out.println("<p><label for=\"dirprov\">Direccion del Proveedor</label></p>");
+                out.println("<p><input type=\"text\" id=\"dirprov\" value=\""+pro.getDireccion()+"\" name=\"dirprov\" required></p>");
+                out.println("<p><label for=\"telprov\">Telefono del Proveedor</label></p>");
+                out.println("<p><input type=\"text\" id=\"telprov\" value=\""+pro.getTelefono()+"\" name=\"telprov\" required></p>");
+                out.println("<input type=\"submit\" value=\"Crear Proveedor\">");
+                out.println("</form>");
+            }
+        %>  
     </body>
 </html>
