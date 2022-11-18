@@ -138,7 +138,7 @@
                     out.println("        <th></th>");
                     out.println("    </tr>");
                     for (Lugar l : lugares) {
-                        out.print("<tr>" + "<td>" + l + "</td>" + "<td>" + l.getDireccion() + "</td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id='lugar-" + l.getId() + "' onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + l + "</td>" + "<td>" + l.getDireccion() + "</td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?id="+l.getId()+"'>Editar</a></td>" + "<td><a id='lugar-" + l.getId() + "' onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
                     }
                     out.println("</table>");
                 } 
@@ -416,17 +416,29 @@
         </div>
 
         <script>
+            function modificar(ent) {
+                let http = new XMLHttpRequest();
+                http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp", true);
+                http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                let param = "modificar=" + ent;
+                http.send(param);
+//                http.onload = function () {
+//                };
+            }
+
+        </script>
+        <script>
             function eliminar(ent) {
-            let http = new XMLHttpRequest();
-            http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/eliminarEntidad.jsp", true);
-            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            let param = "eliminar=" + ent;
-            http.send(param);
-            http.onload = function () {
-            alert("Entidad eliminada");
-            const elem = document.getElementById(ent).parentElement.parentElement;
-            elem.remove();
-            };
+                let http = new XMLHttpRequest();
+                http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/eliminarEntidad.jsp", true);
+                http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                let param = "eliminar=" + ent;
+                http.send(param);
+                http.onload = function () {
+                alert("Entidad eliminada");
+                const elem = document.getElementById(ent).parentElement.parentElement;
+                elem.remove();
+                };
             }
 
         </script>

@@ -39,7 +39,7 @@
                         alert("Componente creado");
                     };
                 }
-            } 
+            }
             
             function modificar(){
               
