@@ -60,13 +60,61 @@
                     };
                 }
             } 
+            
+            
+            function editar(){
+        
+                let cantidad = document.forms["crearProducto"]["cantidad"].value;
+              
+                let comp = document.forms["crearProducto"]["comp"].value;
+          
+                let prov = document.forms["crearProducto"]["prov"].value;
+           
+                let marca = document.forms["crearProducto"]["marca"].value;
+             
+                let Precio = document.forms["crearProducto"]["Precio"].value;
+           
+                let comentario = document.forms["crearProducto"]["comentario"].value;
+                
+                let myfile = document.forms["crearProducto"]["myfile"].value;
+                
+                let valoracion = document.forms["crearProducto"]["valoracion"].value;
+                
+                let id = document.forms["crearProducto"]["id"].value;
+          
+                if (marca === null || marca === "") {
+                    alert("marca del Producto requerida");
+                    return false;
+                } else if(comp === "Seleccione...") {
+                    alert("Debe seleccionar un componente");
+                    return false;
+                } else if(prov === "Seleccione...") {
+                    alert("Debe seleccionar un proveedor");
+                    return false;
+                } else if(valoracion === "Seleccione...") {
+                    alert("Debe seleccionar una valoración");
+                    return false;
+                }
+                else {
+                    let http = new XMLHttpRequest();
+                    http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/ModificarProducto.jsp", true);
+                    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    let params = "cantidad=" + cantidad + "&comp=" + comp+ "&valoracion=" + valoracion+ "&comentario=" + comentario+ "&prov=" + prov+ "&marca=" + marca+ "&Precio=" + Precio+ "&myfile=" + myfile + "&id=" + id;
+                    http.send(params);
+                    http.onload = function() {
+                        document.forms["crearProducto"].reset();
+                        alert("Producto modificado");
+                    };
+                }
+            } 
     </script>
     </head>
     <body>
         
         <%
-            String id = "1";
-            if(id==null){
+            
+             Producto pro = (Producto) session.getAttribute("producto");
+            if(pro==null){
                 out.print("<h1>Crear producto</h1>");
                 out.print("<form class='formulario' name='crearProducto' onsubmit='event.preventDefault(); procesar();'>");
                 out.print("<p><label for='comp'>Componente</label></p>");
@@ -108,18 +156,8 @@
                 out.print("</form>");
             }else{
                 out.print("<h1>Modificar producto</h1>");
-                 Producto pro = null;
-                 List<Producto> productos = PersistenciaMateriales.getInstance().listaProductos();
-                for(int i=0; i<productos.size(); i++){
-                    if(productos.get(i).getId()==Long.parseLong(id))
-                    {
-                        pro=productos.get(i);
-                    }
-                }
-            
-//                
-                
-                out.print("<form class='formulario' name='crearProducto' onsubmit='event.preventDefault(); procesar();'>");
+              
+                out.print("<form class='formulario' name='crearProducto' onsubmit='event.preventDefault(); editar();'>");
                 out.print("<p><label for='comp'>Componente</label></p>");
                 out.print("<select name='comp'>");
                 
@@ -168,7 +206,9 @@
                 out.print(" </select>");
                 out.print("<p> <label for='myfile'>Select a file:</label>");
                 out.print("<input type='file' id='myfile' name='myfile'></p>");
-                out.print("<input type='submit' value='Crear Producto'>"); 
+                out.println("<input id='id' name='id' type='hidden' value='"+pro.getId()+"'>");
+                out.print("<input type='submit' value='Modificar Producto'>"); 
+                
                 out.print("</form>");
             }
             

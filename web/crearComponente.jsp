@@ -75,9 +75,9 @@
       <%
           
           
-          
-          String id = "3";
-          if(id == null){
+          Componente comp = (Componente) session.getAttribute("componente");
+         
+          if(comp == null){
           out.println("<h1>Crear componente</h1>");
           out.println("<form class='formulario' name='crearComponente' onsubmit='event.preventDefault(); procesar();'>");
           out.println("<p><label for='cname'>Nombre del Componente</label></p>");
@@ -99,13 +99,7 @@
           out.println("</form>");
           }else{
               
-              Componente comp = null;
-              List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
-                for(int i=0; i<componentes.size(); i++){
-                    if(componentes.get(i).getId()== Long.parseLong(id) ){
-                        comp=componentes.get(i);
-                    }
-                }
+             
               out.println("<h1>Modificar componente</h1>");
           out.println("<form class='formulario' name='crearComponente' onsubmit='event.preventDefault(); modificar();'>");
           out.println("<p><label for='cname' >Nombre del Componente</label></p>");
