@@ -64,7 +64,8 @@
 
                     http.onload = function() {
                         boton.disabled = false;
-                        form.reset();
+                        form["nombre"].value = nombre;
+                        form["direccion"].value = direccion;
                         alert("Lugar modificado");
                     };
                    
@@ -100,6 +101,8 @@
                 out.println("<input id='id' type='hidden' value='"+lugar.getId()+"'>");
                 out.println("    <input type=\"submit\" id=\"boton\" value=\"Modificar lugar\">");
                 out.println("</form>");
+                
+                session.removeAttribute("lugar");
             }
             
         %>
