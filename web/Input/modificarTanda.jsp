@@ -19,7 +19,7 @@
     int precioUnitario = Integer.parseInt(request.getParameter("precioUnitario"));
     int cantUnidades = Integer.parseInt(request.getParameter("cantUnidades"));
     int cantConsumida = Integer.parseInt(request.getParameter("cantConsumida"));
-//    imagen
+    String imagen = request.getParameter("imagen");
     
     List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
     
@@ -47,6 +47,7 @@
     tanda.setPrecioUnitario(precioUnitario);
     tanda.setCantidadUnidades(cantUnidades);
     tanda.setCantidadConsumida(cantConsumida);
+    tanda.setImagen(imagen);
     tanda.setReceta(receta);
     
     PersistenciaMateriales.getInstance().merge(tanda);

@@ -73,7 +73,13 @@
             .table-heading {
                 font-size: 16px;
             }
-            
+            img {
+                width: 80%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
@@ -215,9 +221,11 @@
                         out.println("        <p>");
                         out.println("Cantidad consumida: " + t.getCantidadConsumida());
                         out.println("        </p>");
-//                        out.println("        <p>");
-//                        out.println("Imagen: " + t.getImagen());
-//                        out.println("        </p>");
+                        if(t.getImagen() != null && !t.getImagen().equals("")) {
+//                           out.println("        <p>");
+                            out.println("<img alt='imagen de tanda "+t.getId()+"' src='"+t.getImagen()+"'>");
+//                            out.println("        </p>"); 
+                        }
                         out.println("    </div>");
                         out.println("");
                         out.println("</div>");

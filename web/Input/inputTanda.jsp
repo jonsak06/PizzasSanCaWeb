@@ -18,7 +18,7 @@
     int precioUnitario = Integer.parseInt(request.getParameter("precioUnitario"));
     int cantUnidades = Integer.parseInt(request.getParameter("cantUnidades"));
     int cantConsumida = Integer.parseInt(request.getParameter("cantConsumida"));
-//    imagen
+    String imagen = request.getParameter("imagen");
     
     List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
     
@@ -32,7 +32,7 @@
         }
     }
     
-    Tanda tanda = new Tanda(fecha, valoracion, precioUnitario, cantUnidades, cantConsumida, null, receta);
+    Tanda tanda = new Tanda(fecha, valoracion, precioUnitario, cantUnidades, cantConsumida, imagen, receta);
     PersistenciaMateriales.getInstance().persist(tanda);
 
 %>
