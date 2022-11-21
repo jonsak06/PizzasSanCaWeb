@@ -21,6 +21,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>Búsqueda</title>
         <style>
             .modal {
@@ -90,13 +91,17 @@
         </script>
     </head>
     <body>
+        <jsp:include page="Input/barraNavegacion.jsp" />
+        <link rel="stylesheet" href="css/mdb.dark.min.css" />
         <h1>Búsqueda</h1>
 
         <div>
             <form name="buscarEntidad" onsubmit="event.preventDefault(); buscar();">
-                <input type="text" name="busqueda" id="busqueda">
-                <input type="date" id="fecha" name="fecha">
-                <select name="entidad">
+                <input class="form-control" type="text" name="busqueda" id="busqueda">
+                <br>
+                <input class="form-control" type="date" id="fecha" name="fecha">
+                <br>
+                <select class="form-select" name="entidad">
                     <option selected>Seleccione...</option>
                     <option value="lugar">Lugar</option>
                     <option value="comprador">Comprador</option>
@@ -108,7 +113,8 @@
                     <option value="receta">Receta</option>
                     <option value="componente">Componente</option>
                 </select>
-                <input type="submit" id="boton" value="Buscar">
+                <br>
+                <input class="form-control" type="submit" id="boton" value="Buscar">
             </form>
         </div>
         <div id="resultado">
@@ -133,7 +139,7 @@
 
                 }else if(lugares != null) {
                     out.println("<h2>Lugares: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Nombre</th>");
                     out.println("        <th>Dirección</th>");
@@ -147,7 +153,7 @@
                 } 
                 else if(compradores != null) {
                     out.println("<h2>Compradores: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Nombre</th>");
                     out.println("        <th>Teléfono</th>");
@@ -162,7 +168,7 @@
                 }
                 else if(tandas != null){
                     out.println("<h2>Tandas: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Fecha elaboración</th>");
                     out.println("        <th>Valoración</th>");
@@ -204,7 +210,7 @@
                     out.println("</table>");
                 } else if(pedidos != null) {
                     out.println("<h2>Pedidos: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Fecha</th>");
                     out.println("        <th>Descuento</th>");
@@ -237,7 +243,7 @@
                     out.println("</table>");
                 } else if(paquetes != null) {
                     out.println("<h2>Paquetes: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Fecha</th>");
                     out.println("        <th>Unidades llevadas</th>");
@@ -270,7 +276,7 @@
                     out.println("</table>");
                 } else if(proveedores != null) {
                     out.println("<h2>Proveedores: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Nombre</th>");
                     out.println("        <th>Teléfono</th>");
@@ -303,7 +309,7 @@
                     out.println("</table>");
                 } else if(productos != null) {
                     out.println("<h2>Productos: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Marca</th>");
                     out.println("        <th>Información</th>");
@@ -342,7 +348,7 @@
                     out.println("</table>");
                 } else if(recetas != null) {
                     out.println("<h2>Recetas: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Código</th>");
                     out.println("        <th>Nombre</th>");
@@ -370,7 +376,7 @@
                     out.println("</table>");
                 } else if(componentes != null) {
                     out.println("<h2>Componentes: </h2>");
-                    out.println("<table>");
+                    out.println("<table class='table'>");
                     out.println("    <tr>");
                     out.println("        <th>Nombre</th>");
                     out.println("        <th>Unidad de medida</th>");
