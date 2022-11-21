@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="Entidades.Pedido"%>
 <%@page import="Entidades.Tanda"%>
 <%@page import="Persistencia.PersistenciaMateriales"%>
 <%@page import="Entidades.Comprador"%>
@@ -57,43 +58,124 @@
                     };
                 }
             }
+            
+            function modificar(){
+                const boton = document.getElementById("boton");
+                const form = document.forms["modificarPedido"];
+                const id = form["id"].value;
+                const fecha = form["fecha"].value;
+                const unidades = form["unidades"].value.trim();
+                const descuento = form["descuento"].value.trim();
+                const cmbComprador = form["comprador"];
+                const cmbTanda = form["tanda"];
+                const comprador = cmbComprador.options[cmbComprador.selectedIndex].value;
+                const tanda = cmbTanda.options[cmbTanda.selectedIndex].value;
+                
+                boton.disabled = true;
+                if (fecha === null || fecha === "") {
+                    boton.disabled = false;
+                    alert("Fecha requerida");
+                    return false;
+                }
+                else {
+                    let http = new XMLHttpRequest();
+                    http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/modificarPedido.jsp", true);
+                    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    let params = "fecha=" + fecha + "&unidades=" + unidades + "&descuento=" + descuento + "&comprador=" + comprador + "&tanda=" + tanda + "&id=" + id;
+                    http.send(params); 
+
+                    http.onload = function() {
+                        boton.disabled = false;
+                        alert("Pedido modificado");
+                    };
+                }
+            }
         </script>
     </head>
     <body>
-        <h1>Crear pedido</h1>
-        <form name="crearPedido" class="formulario" onsubmit="event.preventDefault(); procesar();">
-            <label for="fecha">Fecha</label>
-            <input id="fecha" name="fecha" type="date" required>
-            <br>
-            <label for="unidades">Unidades</label>
-            <input id="unidades" name="unidades" type="number" min="1" required>
-            <br>
-            <label for="descuento">Descuento (%)</label>
-            <input id="descuento" name="descuento" type="number" min="0" max="100" required>
-            <br>
-            <label for="comprador">Comprador</label>
-            <select id="comprador" name="comprador" required>
-                <option selected>Seleccione...</option>
-            <%
+        
+        <%
+            Pedido pedido = (Pedido) session.getAttribute("pedido");
+            
+            if(pedido == null) {
+                out.println("<h1>Crear pedido</h1>");
+                out.println("<form name=\"crearPedido\" class=\"formulario\" onsubmit=\"event.preventDefault(); procesar();\">");
+                out.println("    <label for=\"fecha\">Fecha</label>");
+                out.println("    <input id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <br>");
+                out.println("    <label for=\"unidades\">Unidades</label>");
+                out.println("    <input id=\"unidades\" name=\"unidades\" type=\"number\" min=\"1\" required>");
+                out.println("    <br>");
+                out.println("    <label for=\"descuento\">Descuento (%)</label>");
+                out.println("    <input id=\"descuento\" name=\"descuento\" type=\"number\" min=\"0\" max=\"100\" required>");
+                out.println("    <br>");
+                out.println("    <label for=\"comprador\">Comprador</label>");
+                out.println("    <select id=\"comprador\" name=\"comprador\" required>");
+                out.println("        <option selected>Seleccione...</option>");
                 List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
                 for(Comprador comprador :compradores) {
                     out.print("<option value='" + comprador.getId() + "' >" + "[" + comprador.getId() + "] " + comprador + "</option>");
                 }
-            %>
-            </select>
-            <br>
-            <label for="tanda">Tanda</label>
-            <select id="tanda" name="tanda" required>
-                <option selected>Seleccione...</option>
-            <%
+                out.println("    </select>");
+                out.println("    <br>");
+                out.println("    <label for=\"tanda\">Tanda</label>");
+                out.println("    <select id=\"tanda\" name=\"tanda\" required>");
+                out.println("        <option selected>Seleccione...</option>");
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {
                     out.print("<option  value='" + tanda + "'>[" + tanda + "]   " + tanda.getFechaElaboracion() + "</option>");
                 }
-            %>
-            </select>
-            <br>
-            <input type="submit" id="boton" value="Crear pedido">
-        </form>
+                out.println("    </select>");
+                out.println("    <br>");
+                out.println("    <input type=\"submit\" id=\"boton\" value=\"Crear pedido\">");
+                out.println("</form>");
+            } else {
+                out.println("<h1>Modificar pedido</h1>");
+                out.println("<form name=\"modificarPedido\" class=\"formulario\" onsubmit=\"event.preventDefault(); modificar();\">");
+                out.println("    <label for=\"fecha\">Fecha</label>");
+                out.println("    <input value='"+pedido.getFecha()+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <br>");
+                out.println("    <label for=\"unidades\">Unidades</label>");
+                out.println("    <input value='"+pedido.getUnidades()+"' id=\"unidades\" name=\"unidades\" type=\"number\" min=\"1\" required>");
+                out.println("    <br>");
+                out.println("    <label for=\"descuento\">Descuento (%)</label>");
+                out.println("    <input value='"+pedido.getDescuento()+"' id=\"descuento\" name=\"descuento\" type=\"number\" min=\"0\" max=\"100\" required>");
+                out.println("    <br>");
+                out.println("    <label for=\"comprador\">Comprador</label>");
+                out.println("    <select id=\"comprador\" name=\"comprador\" required>");
+                List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
+                for(Comprador comprador :compradores) {
+                    if(pedido.getComprador().getId() != comprador.getId()) {
+                        out.print("<option value='" + comprador.getId() + "' >" + "[" + comprador.getId() + "] " + comprador + "</option>");
+                    } else {
+                        out.print("<option value='" + comprador.getId() + "' selected>" + "[" + comprador.getId() + "] " + comprador + "</option>");
+                    }
+                    
+                }
+                out.println("    </select>");
+                out.println("    <br>");
+                out.println("    <label for=\"tanda\">Tanda</label>");
+                out.println("    <select id=\"tanda\" name=\"tanda\" required>");
+                List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
+                for(Tanda tanda :tandas) {
+                    if(pedido.getTanda().getId() != tanda.getId()) {
+                        out.print("<option  value='" + tanda + "'>[" + tanda + "]   " + tanda.getFechaElaboracion() + "</option>");
+                    } else {
+                        out.print("<option  value='" + tanda + "' selected>[" + tanda + "]   " + tanda.getFechaElaboracion() + "</option>");
+                    }
+                }
+                out.println("    </select>");
+                out.println("    <br>");
+                out.println("<input id='id' type='hidden' value='"+pedido.getId()+"'>");
+                out.println("    <input type=\"submit\" id=\"boton\" value=\"Modificar pedido\">");
+                out.println("</form>");
+                
+                session.removeAttribute("pedido");
+            }
+            
+        %>
+        
+        
+        
     </body>
 </html>

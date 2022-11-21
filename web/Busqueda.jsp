@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="Entidades.Componente"%>
 <%@page import="Entidades.Receta"%>
 <%@page import="Entidades.Producto"%>
@@ -121,6 +122,8 @@
                 List<Producto> productos = (List<Producto>) session.getAttribute("listaProductos");
                 List<Receta> recetas = (List<Receta>) session.getAttribute("listaRecetas");
                 List<Componente> componentes = (List<Componente>) session.getAttribute("listaComponentes");
+                
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 
                 if(lugares != null && lugares.isEmpty() || compradores != null && compradores.isEmpty() || tandas != null && tandas.isEmpty() || 
@@ -168,7 +171,7 @@
                     out.println("        <th></th>");
                     out.println("    </tr>");
                     for (Tanda t : tandas) {
-                        out.print("<tr>" + "<td>" + t.getFechaElaboracion() + "</td>" + "<td>" + t.getValoracion() + "</td>" + "<td><a id='" + t.getId() + "' onclick='openModalTanda(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=tanda-"+t.getId()+"'>Editar</a></td>" + "<td><a id=\"tanda-" + t.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + formato.format(t.getFechaElaboracion()) + "</td>" + "<td>" + t.getValoracion() + "</td>" + "<td><a id='" + t.getId() + "' onclick='openModalTanda(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=tanda-"+t.getId()+"'>Editar</a></td>" + "<td><a id=\"tanda-" + t.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='tanda" + t.getId() + "' class='modal'>");
                         out.println("");
@@ -177,7 +180,7 @@
                         out.println("        <h2>Tanda</h2>");
                         out.println("");
                         out.println("        <p>");
-                        out.println("Fecha elaboración: " + t.getFechaElaboracion());
+                        out.println("Fecha elaboración: " + formato.format(t.getFechaElaboracion()));
                         out.println("        </p>");
                         out.println("        <p>");
                         out.println("Valoración: " + t.getValoracion());
@@ -210,7 +213,7 @@
                     out.println("        <th></th>");
                     out.println("    </tr>");
                     for(Pedido p :pedidos) {
-                        out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getDescuento() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPedido(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"pedido-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");                    
+                        out.print("<tr>" + "<td>" + formato.format(p.getFecha()) + "</td>" + "<td>" + p.getDescuento() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPedido(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=pedido-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"pedido-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");                    
                         
                         out.println("<div id='pedido" + p.getId() + "' class='modal'>");
                         out.println("");
@@ -219,7 +222,7 @@
                         out.println("        <h2>Pedido</h2>");
                         out.println("");
                         out.println("        <p>");
-                        out.println("Fecha: " + p.getFecha());
+                        out.println("Fecha: " + formato.format(p.getFecha()));
                         out.println("        </p>");
                         out.println("        <p>");
                         out.println("Descuento: " + p.getDescuento());
@@ -243,7 +246,7 @@
                     out.println("        <th></th>");
                     out.println("    </tr>");
                     for (Paquete p : paquetes) {
-                        out.print("<tr>" + "<td>" + p.getFecha() + "</td>" + "<td>" + p.getUnidadesLlevadas() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPaquete(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"paquete-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + formato.format(p.getFecha()) + "</td>" + "<td>" + p.getUnidadesLlevadas() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPaquete(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"paquete-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='paquete" + p.getId() + "' class='modal'>");
                         out.println("");
@@ -252,7 +255,7 @@
                         out.println("        <h2>Paquete</h2>");
                         out.println("");
                         out.println("        <p>");
-                        out.println("Fecha: " + p.getFecha());
+                        out.println("Fecha: " + formato.format(p.getFecha()));
                         out.println("        </p>");
                         out.println("        <p>");
                         out.println("Unidades llevadas: " + p.getUnidadesLlevadas());
