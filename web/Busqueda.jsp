@@ -51,6 +51,7 @@
                 float: right;
                 font-size: 28px;
                 font-weight: bold;
+                text-align: right;
             }
 
             .close:hover,
@@ -59,6 +60,13 @@
                 text-decoration: none;
                 cursor: pointer;
             }
+            h1, h2, form {
+                text-align: center;
+            }
+            #resultado {
+                margin-top: 20px;
+            }
+            
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
@@ -114,7 +122,7 @@
                     <option value="componente">Componente</option>
                 </select>
                 <br>
-                <input class="form-control" type="submit" id="boton" value="Buscar">
+                <input class="btn btn-primary" type="submit" id="boton" value="Buscar">
             </form>
         </div>
         <div id="resultado">
