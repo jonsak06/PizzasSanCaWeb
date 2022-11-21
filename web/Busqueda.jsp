@@ -63,8 +63,15 @@
             h1, h2, form {
                 text-align: center;
             }
+            form, .modal {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
             #resultado {
                 margin-top: 20px;
+            }
+            .table-heading {
+                font-size: 16px;
             }
             
         </style>
@@ -100,7 +107,7 @@
     </head>
     <body>
         <jsp:include page="Input/barraNavegacion.jsp" />
-        <link rel="stylesheet" href="css/mdb.dark.min.css" />
+        
         <h1>Búsqueda</h1>
 
         <div>
@@ -147,12 +154,12 @@
 
                 }else if(lugares != null) {
                     out.println("<h2>Lugares: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Nombre</th>");
-                    out.println("        <th>Dirección</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Nombre</th>");
+                    out.println("        <th class='table-heading'>Dirección</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Lugar l : lugares) {
                         out.print("<tr>" + "<td>" + l + "</td>" + "<td>" + l.getDireccion() + "</td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=lugar-"+l.getId()+"'>Editar</a></td>" + "<td><a id='lugar-" + l.getId() + "' onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
@@ -161,12 +168,12 @@
                 } 
                 else if(compradores != null) {
                     out.println("<h2>Compradores: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Nombre</th>");
-                    out.println("        <th>Teléfono</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Nombre</th>");
+                    out.println("        <th class='table-heading'>Teléfono</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Comprador c : compradores) {
                         out.print("<tr>" + "<td>" + c + "</td>" + "<td>" + c.getTelefono() + "</td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=comprador-"+c.getId()+"'>Editar</a></td>" + "<td><a id=\"comprador-" + c.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
@@ -176,13 +183,13 @@
                 }
                 else if(tandas != null){
                     out.println("<h2>Tandas: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Fecha elaboración</th>");
-                    out.println("        <th>Valoración</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Fecha elaboración</th>");
+                    out.println("        <th class='table-heading'>Valoración</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Tanda t : tandas) {
                         out.print("<tr>" + "<td>" + formato.format(t.getFechaElaboracion()) + "</td>" + "<td>" + t.getValoracion() + "</td>" + "<td><a id='" + t.getId() + "' onclick='openModalTanda(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=tanda-"+t.getId()+"'>Editar</a></td>" + "<td><a id=\"tanda-" + t.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
@@ -218,13 +225,13 @@
                     out.println("</table>");
                 } else if(pedidos != null) {
                     out.println("<h2>Pedidos: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Fecha</th>");
-                    out.println("        <th>Descuento</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Fecha</th>");
+                    out.println("        <th class='table-heading'>Descuento</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for(Pedido p :pedidos) {
                         out.print("<tr>" + "<td>" + formato.format(p.getFecha()) + "</td>" + "<td>" + p.getDescuento() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPedido(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=pedido-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"pedido-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");                    
@@ -251,13 +258,13 @@
                     out.println("</table>");
                 } else if(paquetes != null) {
                     out.println("<h2>Paquetes: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Fecha</th>");
-                    out.println("        <th>Unidades llevadas</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Fecha</th>");
+                    out.println("        <th class='table-heading'>Unidades llevadas</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Paquete p : paquetes) {
                         out.print("<tr>" + "<td>" + formato.format(p.getFecha()) + "</td>" + "<td>" + p.getUnidadesLlevadas() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPaquete(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=paquete-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"paquete-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
@@ -284,13 +291,13 @@
                     out.println("</table>");
                 } else if(proveedores != null) {
                     out.println("<h2>Proveedores: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Nombre</th>");
-                    out.println("        <th>Teléfono</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Nombre</th>");
+                    out.println("        <th class='table-heading'>Teléfono</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Proveedor p : proveedores) {
                         out.print("<tr>" + "<td>" + p.getNombre() + "</td>" + "<td>" + p.getTelefono() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProveedor(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"proveedor-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
@@ -317,13 +324,13 @@
                     out.println("</table>");
                 } else if(productos != null) {
                     out.println("<h2>Productos: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Marca</th>");
-                    out.println("        <th>Información</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Marca</th>");
+                    out.println("        <th class='table-heading'>Información</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Producto p : productos) {
                         out.print("<tr>" + "<td>" + p.getMarca() + "</td>" + "<td>" + p.getComentarios() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProducto(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"producto-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
@@ -356,13 +363,13 @@
                     out.println("</table>");
                 } else if(recetas != null) {
                     out.println("<h2>Recetas: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Código</th>");
-                    out.println("        <th>Nombre</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Código</th>");
+                    out.println("        <th class='table-heading'>Nombre</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Receta r : recetas) {
                         out.print("<tr>" + "<td>" + r.getId() + "</td>" + "<td>" + r.getNombre() + "</td>" + "<td><a id='" + r.getId() + "' onclick='openModalReceta(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"receta-" + r.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
@@ -384,13 +391,13 @@
                     out.println("</table>");
                 } else if(componentes != null) {
                     out.println("<h2>Componentes: </h2>");
-                    out.println("<table class='table'>");
+                    out.println("<table class='table table-dark table-striped'>");
                     out.println("    <tr>");
-                    out.println("        <th>Nombre</th>");
-                    out.println("        <th>Unidad de medida</th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
-                    out.println("        <th></th>");
+                    out.println("        <th class='table-heading'>Nombre</th>");
+                    out.println("        <th class='table-heading'>Unidad de medida</th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
+                    out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Componente c : componentes) {
                         out.print("<tr>" + "<td>" + c.getNombre() + "</td>" + "<td>" + c.getUnidadDeMedida() + "</td>" + "<td><a id='" + c.getId() + "' onclick='openModalComponente(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"componente-" + c.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
