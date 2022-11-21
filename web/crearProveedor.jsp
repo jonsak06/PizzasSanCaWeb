@@ -60,7 +60,6 @@
                     let params = "nombre=" + nombre + "&direccion=" + dirprov+ "&telefono=" + telprov+ "&id=" + id;
                     http.send(params);
                     http.onload = function() {
-                        document.forms["crearProveedor"].reset();
                         alert("Proveedor Modificado");
                     };
                 }
@@ -98,6 +97,8 @@
                 
                 out.println("<input type=\"submit\" value=\"Modificar Proveedor\">");
                 out.println("</form>");
+                
+                session.removeAttribute("proveedor");
             }
         %>  
     </body>

@@ -62,7 +62,6 @@
                     let params = "nombre=" + nombre + "&unidadDeMedida=" + unidadDeMedida+ "&cantalert=" + cantalert + "&id=" + id;
                     http.send(params);
                     http.onload = function() {
-                        document.forms["crearComponente"].reset();
                         alert("Componente Modificado");
                     };
                 }
@@ -108,32 +107,32 @@
           out.println("<p><label for='umed'>Unidad de Medida</label></p>");
           out.println("<select name='umed'>");
           
-          if(comp.getUnidadDeMedida()=="Kg"){
+          if(comp.getUnidadDeMedida().equals("Kg")){
           out.println("<option value='Kg' selected>Kg</option>");
           }else{out.println("<option value='Kg'>Kg</option>");}
           
-          if(comp.getUnidadDeMedida()=="mL"){
+          if(comp.getUnidadDeMedida().equals("mL")){
           out.println("<option value='mL' selected>mL</option>");
           }else{out.println("<option value='mL' >mL</option>");}
           
-          if(comp.getUnidadDeMedida()=="g"){
+          if(comp.getUnidadDeMedida().equals("g")){
           out.println("<option value='g' selected>g</option>");
           }else{out.println("<option value='g'>g</option>");}
                 
-          if(comp.getUnidadDeMedida()=="L"){
+          if(comp.getUnidadDeMedida().equals("L")){
           out.println("<option value='L'selected >L</option>");
           }else{out.println("<option value='L' >L</option>");}
           
-          if(comp.getUnidadDeMedida()=="Undividual"){
+          if(comp.getUnidadDeMedida().equals("Undividual")){
           out.println("<option value='Undividual' selected>Undividual</option>");
           }else{out.println("<option value='Undividual'>Undividual</option>");}
           
-          if(comp.getUnidadDeMedida()=="cmÂ³"){
+          if(comp.getUnidadDeMedida().equals("cmÂ³")){
           out.println("<option value='cm³' selected>cm³</option>");
           }else{out.println("<option value='cm³'>cm³</option>");}
           
           
-          if(comp.getUnidadDeMedida()=="dmÂ³"){
+          if(comp.getUnidadDeMedida().equals("dmÂ³")){
           out.println("<option value='dm³' selected>dm³</option>");
           }else{out.println("<option value='dm³'>dm³</option>");}
           
@@ -144,9 +143,10 @@
           out.println("<p><input type='number' id='cantalert' name='cantalert' value='"+comp.getCantidadDeAlerta()+"' required></p>");
           out.println("<input type='submit' value='Modificar Componente' >");
           out.println("</form>");
+          
+          session.removeAttribute("componente");
           }
-           
 
-                    %>
+        %>
     </body>
 </html>

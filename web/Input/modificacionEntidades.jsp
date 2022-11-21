@@ -3,6 +3,10 @@
     Created on : 17/11/2022, 08:37:28 PM
     Author     : Usuario
 --%>
+<%@page import="Entidades.Componente"%>
+<%@page import="Entidades.Receta"%>
+<%@page import="Entidades.Producto"%>
+<%@page import="Entidades.Proveedor"%>
 <%@page import="Entidades.Paquete"%>
 <%@page import="Entidades.Pedido"%>
 <%@page import="Entidades.Tanda"%>
@@ -79,6 +83,54 @@
         }
         session.setAttribute("paquete", paquete);
         response.sendRedirect("http://localhost:8080/PizzasSanCaWeb/Paquete.jsp");
+    } else if(tipo.equals("proveedor")) {
+        List<Proveedor> proveedores = PersistenciaMateriales.getInstance().listaProveedores();
+    
+        Proveedor proveedor = null;
+        for(Proveedor p : proveedores) {
+            if(p.getId() == id) {
+                proveedor = p;
+                break;
+            }
+        }
+        session.setAttribute("proveedor", proveedor);
+        response.sendRedirect("http://localhost:8080/PizzasSanCaWeb/crearProveedor.jsp");
+    } else if(tipo.equals("producto")) {
+        List<Producto> productos = PersistenciaMateriales.getInstance().listaProductos();
+    
+        Producto producto = null;
+        for(Producto p : productos) {
+            if(p.getId() == id) {
+                producto = p;
+                break;
+            }
+        }
+        session.setAttribute("producto", producto);
+        response.sendRedirect("http://localhost:8080/PizzasSanCaWeb/crearProducto.jsp");
+    } else if(tipo.equals("receta")) {
+        List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
+    
+        Receta receta = null;
+        for(Receta r : recetas) {
+            if(r.getId() == id) {
+                receta = r;
+                break;
+            }
+        }
+        session.setAttribute("receta", receta);
+        response.sendRedirect("http://localhost:8080/PizzasSanCaWeb/crearReceta.jsp");
+    } else if(tipo.equals("componente")) {
+        List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
+    
+        Componente componente = null;
+        for(Componente c : componentes) {
+            if(c.getId() == id) {
+                componente = c;
+                break;
+            }
+        }
+        session.setAttribute("componente", componente);
+        response.sendRedirect("http://localhost:8080/PizzasSanCaWeb/crearComponente.jsp");
     }
     
     

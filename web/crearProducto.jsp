@@ -208,6 +208,7 @@
                 }
                 out.print(" </select>");
                 out.println("    <br>");
+                out.println("<label for=\"imagen\">URL de imagen</label>");
                 if(pro.getImagen2() != null) {
                     out.println("<input value='"+pro.getImagen2()+"' type=\"text\" name=\"imagen\" id=\"imagen\">");
                 } else {
@@ -218,6 +219,8 @@
                 out.print("<input type='submit' value='Modificar Producto'>"); 
                 
                 out.print("</form>");
+                
+                session.removeAttribute("producto");
             }
             
             
