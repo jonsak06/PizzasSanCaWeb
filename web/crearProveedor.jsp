@@ -66,8 +66,10 @@
                 }
             } 
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
+        <jsp:include page="Input/barraNavegacion.jsp" />
         <%
             Proveedor pro = (Proveedor) session.getAttribute("proveedor");
             if(pro == null){
