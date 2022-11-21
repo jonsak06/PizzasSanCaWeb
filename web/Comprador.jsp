@@ -62,8 +62,6 @@
 
                     http.onload = function() {
                         boton.disabled = false;
-                        form["nombre"].value = nombre;
-                        form["telefono"].value = telefono;
                         alert("Comprador modificado");
                     };
                    

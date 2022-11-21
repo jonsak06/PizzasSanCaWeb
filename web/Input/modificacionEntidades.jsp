@@ -3,6 +3,7 @@
     Created on : 17/11/2022, 08:37:28 PM
     Author     : Usuario
 --%>
+<%@page import="Entidades.Tanda"%>
 <%@page import="Entidades.Comprador"%>
 <%@page import="Persistencia.PersistenciaMateriales"%>
 <%@page import="java.util.List"%>
@@ -26,6 +27,7 @@
         }
         session.setAttribute("lugar", lugar);
         response.sendRedirect("http://localhost:8080/PizzasSanCaWeb/Lugar.jsp");
+        
     } else if(tipo.equals("comprador")) {
         List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
     
@@ -38,6 +40,19 @@
         }
         session.setAttribute("comprador", comprador);
         response.sendRedirect("http://localhost:8080/PizzasSanCaWeb/Comprador.jsp");
+        
+    } else if(tipo.equals("tanda")) {
+        List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
+    
+        Tanda tanda = null;
+        for(Tanda t : tandas) {
+            if(t.getId() == id) {
+                tanda = t;
+                break;
+            }
+        }
+        session.setAttribute("tanda", tanda);
+        response.sendRedirect("http://localhost:8080/PizzasSanCaWeb/Tanda.jsp");
     }
     
     

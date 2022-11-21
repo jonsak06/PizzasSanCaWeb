@@ -64,8 +64,6 @@
 
                     http.onload = function() {
                         boton.disabled = false;
-                        form["nombre"].value = nombre;
-                        form["direccion"].value = direccion;
                         alert("Lugar modificado");
                     };
                    
