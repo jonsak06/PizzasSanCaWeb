@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="Entidades.Pedido"%>
 <%@page import="Entidades.Tanda"%>
 <%@page import="Persistencia.PersistenciaMateriales"%>
@@ -96,6 +97,7 @@
         
         <%
             Pedido pedido = (Pedido) session.getAttribute("pedido");
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             
             if(pedido == null) {
                 out.println("<h1>Crear pedido</h1>");
@@ -123,17 +125,19 @@
                 out.println("        <option selected>Seleccione...</option>");
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {
-                    out.print("<option  value='" + tanda + "'>[" + tanda + "]   " + tanda.getFechaElaboracion() + "</option>");
+                    out.print("<option  value='" + tanda + "'>[" + tanda + "]   " + formato.format(tanda.getFechaElaboracion()) + "</option>");
                 }
                 out.println("    </select>");
                 out.println("    <br>");
                 out.println("    <input type=\"submit\" id=\"boton\" value=\"Crear pedido\">");
                 out.println("</form>");
             } else {
+                SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+                
                 out.println("<h1>Modificar pedido</h1>");
                 out.println("<form name=\"modificarPedido\" class=\"formulario\" onsubmit=\"event.preventDefault(); modificar();\">");
                 out.println("    <label for=\"fecha\">Fecha</label>");
-                out.println("    <input value='"+pedido.getFecha()+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <input value='"+ft.format(pedido.getFecha())+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
                 out.println("    <br>");
                 out.println("    <label for=\"unidades\">Unidades</label>");
                 out.println("    <input value='"+pedido.getUnidades()+"' id=\"unidades\" name=\"unidades\" type=\"number\" min=\"1\" required>");
@@ -159,9 +163,9 @@
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {
                     if(pedido.getTanda().getId() != tanda.getId()) {
-                        out.print("<option  value='" + tanda + "'>[" + tanda + "]   " + tanda.getFechaElaboracion() + "</option>");
+                        out.print("<option  value='" + tanda + "'>[" + tanda + "]   " + formato.format(tanda.getFechaElaboracion()) + "</option>");
                     } else {
-                        out.print("<option  value='" + tanda + "' selected>[" + tanda + "]   " + tanda.getFechaElaboracion() + "</option>");
+                        out.print("<option  value='" + tanda + "' selected>[" + tanda + "]   " + formato.format(tanda.getFechaElaboracion()) + "</option>");
                     }
                 }
                 out.println("    </select>");
