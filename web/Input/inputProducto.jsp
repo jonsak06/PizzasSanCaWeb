@@ -14,10 +14,10 @@
     String prov = (String)request.getParameter("prov");
     String marca = (String)request.getParameter("marca");
     String Precio = (String)request.getParameter("Precio");
-    String myfile = (String)request.getParameter("myfile");   
+    String imagen = (String)request.getParameter("imagen");   
     String comentario = (String)request.getParameter("comentario");
     String valoracion = (String)request.getParameter("valoracion");  
-    byte[] aux = new byte[1];
+//    byte[] aux = new byte[1];
     
     Componente componente = null;
     List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
@@ -34,9 +34,10 @@
         }
     }
     
-    Producto producto = new Producto(aux, marca, comentario, Integer.parseInt(Precio), Integer.parseInt(valoracion), Float.parseFloat(cantidad));
+    Producto producto = new Producto(null, marca, comentario, Integer.parseInt(Precio), Integer.parseInt(valoracion), Float.parseFloat(cantidad));
     producto.setComponente(componente);
     producto.setProveedor(proveedor);
+    producto.setImagen2(imagen);
     PersistenciaMateriales.getInstance().persist(producto);
     
 

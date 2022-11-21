@@ -31,7 +31,7 @@
            
                 let comentario = document.forms["crearProducto"]["comentario"].value;
                 
-                let myfile = document.forms["crearProducto"]["myfile"].value;
+                let imagen = document.forms["crearProducto"]["imagen"].value;
                 
                 let valoracion = document.forms["crearProducto"]["valoracion"].value;
           
@@ -52,7 +52,7 @@
                     let http = new XMLHttpRequest();
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/inputProducto.jsp", true);
                     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                    let params = "cantidad=" + cantidad + "&comp=" + comp+ "&valoracion=" + valoracion+ "&comentario=" + comentario+ "&prov=" + prov+ "&marca=" + marca+ "&Precio=" + Precio+ "&myfile=" + myfile;
+                    let params = "cantidad=" + cantidad + "&comp=" + comp+ "&valoracion=" + valoracion+ "&comentario=" + comentario+ "&prov=" + prov+ "&marca=" + marca+ "&Precio=" + Precio+ "&imagen=" + imagen;
                     http.send(params);
                     http.onload = function() {
                         document.forms["crearProducto"].reset();
@@ -76,7 +76,7 @@
            
                 let comentario = document.forms["crearProducto"]["comentario"].value;
                 
-                let myfile = document.forms["crearProducto"]["myfile"].value;
+                let imagen = document.forms["crearProducto"]["imagen"].value;
                 
                 let valoracion = document.forms["crearProducto"]["valoracion"].value;
                 
@@ -99,10 +99,9 @@
                     let http = new XMLHttpRequest();
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/ModificarProducto.jsp", true);
                     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-                    let params = "cantidad=" + cantidad + "&comp=" + comp+ "&valoracion=" + valoracion+ "&comentario=" + comentario+ "&prov=" + prov+ "&marca=" + marca+ "&Precio=" + Precio+ "&myfile=" + myfile + "&id=" + id;
+                    let params = "cantidad=" + cantidad + "&comp=" + comp+ "&valoracion=" + valoracion+ "&comentario=" + comentario+ "&prov=" + prov+ "&marca=" + marca+ "&Precio=" + Precio+ "&imagen=" + imagen + "&id=" + id;
                     http.send(params);
                     http.onload = function() {
-                        document.forms["crearProducto"].reset();
                         alert("Producto modificado");
                     };
                 }
@@ -113,7 +112,6 @@
     <body>
         <jsp:include page="Input/barraNavegacion.jsp" />
         <%
-            
             
             
              Producto pro = (Producto) session.getAttribute("producto");
@@ -153,8 +151,10 @@
                 out.print("<option value='4' >4</option>");
                 out.print("<option value='5'>5</option>");
                 out.print(" </select>");
-                out.print("<p> <label for='myfile'>Select a file:</label>");
-                out.print("<input type='file' id='myfile' name='myfile'></p>");
+                out.println("    <br>");
+                out.println("<label for=\"imagen\">URL de imagen</label>");
+                out.println("<input type=\"text\" name=\"imagen\" id=\"imagen\">");
+                out.println("    <br>");
                 out.print("<input type='submit' value='Crear Producto'>"); 
                 out.print("</form>");
             }else{
@@ -207,9 +207,14 @@
                     }
                 }
                 out.print(" </select>");
-                out.print("<p> <label for='myfile'>Select a file:</label>");
-                out.print("<input type='file' id='myfile' name='myfile'></p>");
-                out.println("<input id='id' name='id' type='hidden' value='"+pro.getId()+"'>");
+                out.println("    <br>");
+                if(pro.getImagen2() != null) {
+                    out.println("<input value='"+pro.getImagen2()+"' type=\"text\" name=\"imagen\" id=\"imagen\">");
+                } else {
+                    out.println("<input type=\"text\" name=\"imagen\" id=\"imagen\">");
+                }
+                out.println("    <br>");
+                out.println("<input id='id' type='hidden' value='"+pro.getId()+"'>");
                 out.print("<input type='submit' value='Modificar Producto'>"); 
                 
                 out.print("</form>");

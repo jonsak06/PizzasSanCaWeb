@@ -222,9 +222,7 @@
                         out.println("Cantidad consumida: " + t.getCantidadConsumida());
                         out.println("        </p>");
                         if(t.getImagen() != null && !t.getImagen().equals("")) {
-//                           out.println("        <p>");
-                            out.println("<img alt='imagen de tanda "+t.getId()+"' src='"+t.getImagen()+"'>");
-//                            out.println("        </p>"); 
+                            out.println("<img alt='imagen de la tanda "+t.getId()+"' src='"+t.getImagen()+"'>");
                         }
                         out.println("    </div>");
                         out.println("");
@@ -361,9 +359,9 @@
                         out.println("        <p>");
                         out.println("Valoración: " + p.getValoracion());
                         out.println("        </p>");
-//                        out.println("        <p>");
-//                        out.println("Imagen: " + p.getImagen());
-//                        out.println("        </p>");
+                        if(p.getImagen2() != null && !p.getImagen2().equals("")) {
+                            out.println("<img alt='imagen del producto "+p.getId()+"' src='"+p.getImagen2()+"'>");
+                        }
                         out.println("    </div>");
                         out.println("");
                         out.println("</div>");
