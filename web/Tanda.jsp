@@ -23,12 +23,13 @@
                 const fecha = form["fecha"].value;
                 const cmbValoracion = form["valoracion"];
                 const valoracion = cmbValoracion.options[cmbValoracion.selectedIndex].value;
-                const precioUnitario = form["precioUnitario"].value.trim();
-                const cantUnidades = form["cantUnidades"].value.trim();                
-                const cantConsumida = form["cantConsumida"].value.trim();
+                const precioUnitario = form["precioUnitario"].value;
+                const cantUnidades = form["cantUnidades"].value;                
+                const cantConsumida = form["cantConsumida"].value;
                 const imagen = form["imagen"].value;
                 const cmbReceta = form["receta"];
                 const receta = cmbReceta.options[cmbReceta.selectedIndex].value;
+                
                 
                 boton.disabled = true;
                 if (fecha === null || fecha === "") {
@@ -45,7 +46,7 @@
                     alert("Debe seleccionar una valoración");
                     return false;
                 }
-                else if(cantConsumida > cantUnidades) {
+                else if(parseInt(cantConsumida) > parseInt(cantUnidades)) {
                     boton.disabled = false;
                     alert("La cantidad consumida no puede superar a la cantidad de unidades");
                     return false;
@@ -73,9 +74,9 @@
                 const fecha = form["fecha"].value;
                 const cmbValoracion = form["valoracion"];
                 const valoracion = cmbValoracion.options[cmbValoracion.selectedIndex].value;
-                const precioUnitario = form["precioUnitario"].value.trim();
-                const cantUnidades = form["cantUnidades"].value.trim();                
-                const cantConsumida = form["cantConsumida"].value.trim();
+                const precioUnitario = form["precioUnitario"].value;
+                const cantUnidades = form["cantUnidades"].value;                
+                const cantConsumida = form["cantConsumida"].value;
                 const imagen = form["imagen"].value;
                 const cmbReceta = form["receta"];
                 const receta = cmbReceta.options[cmbReceta.selectedIndex].value;
@@ -91,7 +92,7 @@
                     alert("Debe seleccionar una valoración");
                     return false;
                 }
-                else if(cantConsumida > cantUnidades) {
+                else if(parseInt(cantConsumida) > parseInt(cantUnidades)) {
                     boton.disabled = false;
                     alert("La cantidad consumida no puede superar a la cantidad de unidades");
                     return false;
