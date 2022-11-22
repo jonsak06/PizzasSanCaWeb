@@ -37,6 +37,27 @@ h2{
     text-align: center;
 }
 
+.index h2{
+    font-weight: bold;
+    color: white;
+    padding-top: 0;
+    padding-left: 0;
+    letter-spacing: 0.025em;
+    font-size: 4em;
+    line-height: 1.25;
+    text-align: center;
+}
+.division hr{
+    height: 2px;
+  width: 40%;
+  background-color: white;
+}
+
+.divisionGrande{
+     height: 4px;
+  width: 80%;
+  background-color: white;
+}
 .formulario label{
         font-weight: bold;
     color: white;
@@ -91,12 +112,27 @@ h2{
 }
 
 .formulario p{
-        display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    width: 100%;
+       font-weight: bold;
+    color: white;
+    padding-top: 0;
+    padding-left: 0;
+    letter-spacing: 0.025em;
+    font-size: 3em;
+    line-height: 1.25;
+    position: relative;
+    z-index: 100;
+}
+
+.index p{
+       font-weight: bold;
+    color: white;
+    padding-top: 0;
+    padding-left: 0;
+    letter-spacing: 0.025em;
+    font-size: 3em;
+    line-height: 1.25;
+    position: relative;
+    z-index: 100;
 }
 
 table {
