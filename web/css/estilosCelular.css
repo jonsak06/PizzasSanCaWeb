@@ -26,6 +26,17 @@ h1{
     text-align: center;
 }
 
+.crear h1{
+    font-weight: bold;
+    color: white;
+    padding-top: 0;
+    padding-left: 0;
+    letter-spacing: 0.025em;
+    font-size: 4em;
+    line-height: 1.25;
+    text-align: center;
+}
+
 h2{
     font-weight: bold;
     color: white;
@@ -97,6 +108,21 @@ h2{
     padding: 0.25em 0.1em;
 }
 
+
+.tabla  input {
+    
+           font: inherit;
+    line-height: normal;
+    width: 10%;
+    box-sizing: border-box;
+    background: #222222;
+    color: white;
+    position: relative;
+    margin: 0 0 1.5em 0;
+    font-size: 3em;
+    padding: 0.25em 0.1em;
+}
+
 .formulario  select {
     
            font: inherit;
@@ -111,17 +137,7 @@ h2{
     padding: 0.25em 0.1em;
 }
 
-.formulario p{
-       font-weight: bold;
-    color: white;
-    padding-top: 0;
-    padding-left: 0;
-    letter-spacing: 0.025em;
-    font-size: 3em;
-    line-height: 1.25;
-    position: relative;
-    z-index: 100;
-}
+
 
 .index p{
        font-weight: bold;
@@ -143,9 +159,10 @@ th, td {
   font-weight: bold;
     color: white;
     padding-top: 0;
-    padding-left: 0;
+    padding-left: 1em;
+    margin: 0.3em;
     letter-spacing: 0.025em;
-    font-size: 3em;
+    font-size: 2.5em;
     line-height: 1.25;
     position: relative;
     z-index: 100;

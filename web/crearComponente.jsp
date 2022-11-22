@@ -78,7 +78,7 @@
           Componente comp = (Componente) session.getAttribute("componente");
          
           if(comp == null){
-          out.println("<h1>Crear componente</h1>");
+          out.println("<h1 class='crear'>Crear componente</h1>");
           out.println("<form class='formulario' name='crearComponente' onsubmit='event.preventDefault(); procesar();'>");
           out.println("<p><label for='cname'>Nombre del Componente</label></p>");
           out.println("<p><input type='text' id='cname' name='cname' required></p>");

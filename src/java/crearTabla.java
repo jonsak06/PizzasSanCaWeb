@@ -41,11 +41,14 @@ out.println("<table>");
             out.println("<tr>");
             out.println("<th>Componente</th>");
             out.println("<th>Cantidad</th>");
+            out.println("<th></th>");
+            out.println("<th></th>");
             out.println(" </tr>   ");
  
               String rec = request.getParameter("long");
             Receta Receta = null;
-            List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
+          
+            List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();//Llamo a la base de datos
             
             for(int i=0; i<recetas.size(); i++){
                 if(recetas.get(i).getId()== Long.parseLong(rec) ){
@@ -54,11 +57,13 @@ out.println("<table>");
             }
             List<Cantidad> cant = Receta.getCantidades();
 
-            for(int i=1; i<cant.size(); i++){
+            for(int i=0; i<cant.size(); i++){
                 out.print("<tr>");
                 out.print("<td>"+cant.get(i).getComponente().getNombre() +"</td>");
-                out.print("<td>"+cant.get(i).getPorReceta() +"</td>");
-                out.print("</tr>");
+                out.print("<td><input style=' width: 80%; background: #222222; color: white;  font-size: 1.6em;' type='number' id='"+cant.get(i).getId()+"' value='"+cant.get(i).getPorReceta() +"'</td>");
+                out.print("<td><a id='\"tanda " + cant.get(i).getId() + "\"' onclick='editarUso(\""+cant.get(i).getId()+"\", \""+ Receta.getId() +"\");'>Editar</a></td></td>");
+              out.print("<td><a id='\"tanda " + cant.get(i).getId() + "\"' onclick='eliminarUso(\""+cant.get(i).getId()+"\", \""+ Receta.getId() +"\");'>Eliminar</a></td></td>");
+               out.print("</tr>");
             }
             out.println("</table>");
         }
