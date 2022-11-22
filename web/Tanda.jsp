@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="Entidades.Tanda"%>
 <%@page import="Persistencia.PersistenciaMateriales"%>
 <%@page import="Entidades.Receta"%>
@@ -25,7 +26,7 @@
                 const precioUnitario = form["precioUnitario"].value.trim();
                 const cantUnidades = form["cantUnidades"].value.trim();                
                 const cantConsumida = form["cantConsumida"].value.trim();
-//                const imagen = form["imagen"].value;
+                const imagen = form["imagen"].value;
                 const cmbReceta = form["receta"];
                 const receta = cmbReceta.options[cmbReceta.selectedIndex].value;
                 
@@ -54,7 +55,7 @@
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/inputTanda.jsp", true);
                     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     let params = "fecha=" + fecha + "&valoracion=" + valoracion + "&precioUnitario=" + precioUnitario + "&cantUnidades=" 
-                                + cantUnidades + "&cantConsumida=" + cantConsumida /*+ "&imagen=" + imagen */+ "&receta=" + receta;
+                                + cantUnidades + "&cantConsumida=" + cantConsumida + "&imagen=" + imagen + "&receta=" + receta;
                     http.send(params); 
 
                     http.onload = function() {
@@ -75,7 +76,7 @@
                 const precioUnitario = form["precioUnitario"].value.trim();
                 const cantUnidades = form["cantUnidades"].value.trim();                
                 const cantConsumida = form["cantConsumida"].value.trim();
-//                const imagen = form["imagen"].value;
+                const imagen = form["imagen"].value;
                 const cmbReceta = form["receta"];
                 const receta = cmbReceta.options[cmbReceta.selectedIndex].value;
                 
@@ -100,7 +101,7 @@
                     http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/modificarTanda.jsp", true);
                     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                     let params = "fecha=" + fecha + "&valoracion=" + valoracion + "&precioUnitario=" + precioUnitario + "&cantUnidades=" 
-                                + cantUnidades + "&cantConsumida=" + cantConsumida /*+ "&imagen=" + imagen */+ "&receta=" + receta
+                                + cantUnidades + "&cantConsumida=" + cantConsumida + "&imagen=" + imagen + "&receta=" + receta
                                 + "&id=" + id;
                     http.send(params); 
 
@@ -141,9 +142,9 @@
                 out.println("    <label for=\"cantConsumida\">Cantidad consumida</label>");
                 out.println("    <input id=\"cantConsumida\" name=\"cantConsumida\" type=\"number\" min=\"0\" required>");
                 out.println("    <br>");
-                out.println("    ");
-                out.println("    <!--imagen-->");
-                out.println("    ");
+                out.println("<label for=\"imagen\">URL de imagen</label>");
+                out.println("<input type=\"text\" name=\"imagen\" id=\"imagen\">");
+                out.println("    <br>");
                 out.println("    <label for=\"receta\">Receta</label>");
                 out.println("    <select id=\"receta\" name=\"receta\" required>");
                 out.println("        <option>Seleccione...</option>");
@@ -156,10 +157,12 @@
                 out.println("    <input type=\"submit\" id=\"boton\" value=\"Crear tanda\">");
                 out.println("</form>");
             } else {
+                SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+                
                 out.println("<h1>Modificar tanda</h1>");
                 out.println("<form name=\"modificarTanda\" class=\"formulario\" onsubmit=\"event.preventDefault(); modificar();\">");
                 out.println("    <label for=\"fecha\">Fecha de elaboración</label>");
-                out.println("    <input value='"+tanda.getFechaElaboracion()+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <input value='"+ft.format(tanda.getFechaElaboracion())+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
                 out.println("    <br>");
                 out.println("    <label for=\"valoracion\">Valoración</label>");
                 out.println("    <select value=4 id=\"valoracion\" name=\"valoracion\" required>");
@@ -199,9 +202,13 @@
                 out.println("    <label for=\"cantConsumida\">Cantidad consumida</label>");
                 out.println("    <input value='"+tanda.getCantidadConsumida()+"' id=\"cantConsumida\" name=\"cantConsumida\" type=\"number\" min=\"0\" required>");
                 out.println("    <br>");
-                out.println("    ");
-                out.println("    <!--imagen-->");
-                out.println("    ");
+                out.println("<label for=\"imagen\">URL de imagen</label>");
+                if(tanda.getImagen() != null) {
+                    out.println("<input value='"+tanda.getImagen()+"' type=\"text\" name=\"imagen\" id=\"imagen\">");
+                } else {
+                    out.println("<input type=\"text\" name=\"imagen\" id=\"imagen\">");
+                }
+                out.println("    <br>");
                 out.println("    <label for=\"receta\">Receta</label>");
                 out.println("    <select id=\"receta\" name=\"receta\" required>");
                 List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
@@ -220,5 +227,6 @@
             }
             
         %>
+        
     </body>
 </html>

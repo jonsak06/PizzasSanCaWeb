@@ -73,7 +73,13 @@
             .table-heading {
                 font-size: 16px;
             }
-            
+            img {
+                width: 80%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
@@ -215,9 +221,9 @@
                         out.println("        <p>");
                         out.println("Cantidad consumida: " + t.getCantidadConsumida());
                         out.println("        </p>");
-//                        out.println("        <p>");
-//                        out.println("Imagen: " + t.getImagen());
-//                        out.println("        </p>");
+                        if(t.getImagen() != null && !t.getImagen().equals("")) {
+                            out.println("<img alt='imagen de la tanda "+t.getId()+"' src='"+t.getImagen()+"'>");
+                        }
                         out.println("    </div>");
                         out.println("");
                         out.println("</div>");
@@ -300,7 +306,7 @@
                     out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Proveedor p : proveedores) {
-                        out.print("<tr>" + "<td>" + p.getNombre() + "</td>" + "<td>" + p.getTelefono() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProveedor(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"proveedor-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + p.getNombre() + "</td>" + "<td>" + p.getTelefono() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProveedor(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=proveedor-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"proveedor-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='proveedor" + p.getId() + "' class='modal'>");
                         out.println("");
@@ -333,7 +339,7 @@
                     out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Producto p : productos) {
-                        out.print("<tr>" + "<td>" + p.getMarca() + "</td>" + "<td>" + p.getComentarios() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProducto(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"producto-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + p.getMarca() + "</td>" + "<td>" + p.getComentarios() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProducto(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=producto-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"producto-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='producto" + p.getId() + "' class='modal'>");
                         out.println("");
@@ -353,9 +359,9 @@
                         out.println("        <p>");
                         out.println("Valoración: " + p.getValoracion());
                         out.println("        </p>");
-//                        out.println("        <p>");
-//                        out.println("Imagen: " + p.getImagen());
-//                        out.println("        </p>");
+                        if(p.getImagen2() != null && !p.getImagen2().equals("")) {
+                            out.println("<img alt='imagen del producto "+p.getId()+"' src='"+p.getImagen2()+"'>");
+                        }
                         out.println("    </div>");
                         out.println("");
                         out.println("</div>");
@@ -372,7 +378,7 @@
                     out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Receta r : recetas) {
-                        out.print("<tr>" + "<td>" + r.getId() + "</td>" + "<td>" + r.getNombre() + "</td>" + "<td><a id='" + r.getId() + "' onclick='openModalReceta(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"receta-" + r.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                        out.print("<tr>" + "<td>" + r.getId() + "</td>" + "<td>" + r.getNombre() + "</td>" + "<td><a id='" + r.getId() + "' onclick='openModalReceta(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=receta-"+r.getId()+"'>Editar</a></td>" + "<td><a id=\"receta-" + r.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='receta" + r.getId() + "' class='modal'>");
                         out.println("");
@@ -400,7 +406,16 @@
                     out.println("        <th class='table-heading'></th>");
                     out.println("    </tr>");
                     for (Componente c : componentes) {
-                        out.print("<tr>" + "<td>" + c.getNombre() + "</td>" + "<td>" + c.getUnidadDeMedida() + "</td>" + "<td><a id='" + c.getId() + "' onclick='openModalComponente(this.id);'>Detalles</a></td>" + "<td><a href='#'>Editar</a></td>" + "<td><a id=\"componente-" + c.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
+                        String unMedida = "";
+                        if(c.getUnidadDeMedida().equals("cmÂ³")) {
+                            unMedida = "cm³";
+                        } else if(c.getUnidadDeMedida().equals("dmÂ³")) {
+                            unMedida = "dm³";
+                        } else {
+                            unMedida = c.getUnidadDeMedida();
+                        }
+                        
+                        out.print("<tr>" + "<td>" + c.getNombre() + "</td>" + "<td>" + unMedida + "</td>" + "<td><a id='" + c.getId() + "' onclick='openModalComponente(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=componente-"+c.getId()+"'>Editar</a></td>" + "<td><a id=\"componente-" + c.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
                         out.println("<div id='componente" + c.getId() + "' class='modal'>");
                         out.println("");
@@ -412,7 +427,7 @@
                         out.println("Nombre: " + c.getNombre());
                         out.println("        </p>");
                         out.println("        <p>");
-                        out.println("Unidad de medida: " + c.getUnidadDeMedida());
+                        out.println("Unidad de medida: " + unMedida);
                         out.println("        </p>");
                         out.println("        <p>");
                         out.println("Cantidad de alerta: " + c.getCantidadDeAlerta());

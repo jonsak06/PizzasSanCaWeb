@@ -17,11 +17,11 @@
     String prov = (String)request.getParameter("prov");
     String marca = (String)request.getParameter("marca");
     String Precio = (String)request.getParameter("Precio");
-    String myfile = (String)request.getParameter("myfile");   
+    String imagen = (String)request.getParameter("imagen");   
     String comentario = (String)request.getParameter("comentario");
     String valoracion = (String)request.getParameter("valoracion");  
-    String id = (String)request.getParameter("id");  
-    byte[] aux = new byte[1];
+    String id = (String)request.getParameter("id"); 
+//    byte[] aux = new byte[1];
     
     Producto pro = null; 
      List<Producto> productos = PersistenciaMateriales.getInstance().listaProductos();
@@ -48,7 +48,7 @@
         }
     }
     
-     pro.setImagen(aux);
+     pro.setImagen2(imagen);
      pro.setMarca(marca);
      pro.setPrecio(Integer.parseInt(Precio));
      pro.setCantidad(Float.parseFloat(cantidad));

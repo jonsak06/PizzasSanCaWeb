@@ -32,16 +32,32 @@
                             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Búsqueda</a>
+                            <a class="nav-link" href="http://localhost:8080/PizzasSanCaWeb/Busqueda.jsp">Búsqueda</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Estadísticas</a>
                         </li>
-                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Insertar
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/Comprador.jsp">Comprador</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/Lugar.jsp">Lugar</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/Paquete.jsp">Paquete</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/Pedido.jsp">Pedido</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/Tanda.jsp">Tanda</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/crearComponente.jsp">Componente</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/crearProducto.jsp">Producto</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/crearProveedor.jsp">Proveedor</a></li>
+                                <li><a class="dropdown-item" href="http://localhost:8080/PizzasSanCaWeb/crearReceta.jsp">Receta</a></li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
-        
+
     </body>
 </html>
