@@ -91,7 +91,7 @@
           out.println("<p><label class=\"form-label\" for='cname'>Nombre del Componente</label></p>");
           out.println("<p><input class=\"form-control\" type='text' id='cname' name='cname' required></p>");
           out.println("<p><label class=\"form-label\" for='umed'>Unidad de Medida</label></p>");
-          out.println("<select class=\"form-select\" name='umed'>");
+          out.println("<p><select class=\"form-select\" name='umed'>");
           out.println("<option selected>Seleccione...</option>");
           out.println("<option value='Kg'>Kg</option>");
           out.println("<option value='mL' >mL</option>");
@@ -100,7 +100,7 @@
           out.println("<option value='Undividual'>Undividual</option>");
           out.println("<option value='cm³'>cm³</option>");
           out.println("<option value='dm³'>dm³</option>");
-          out.println("</select>");
+          out.println("</select></p>");
           out.println("<p><label class=\"form-label\" for='cantalert'>Cantidad de Alerta</label></p>");
           out.println("<p><input class=\"form-control\" type='number' id='cantalert' name='cantalert' required></p>");
           out.println("<input class=\"btn btn-primary\" type='submit' value='Crear Componente' >");
@@ -113,7 +113,7 @@
           out.println("<p><label class=\"form-label\" for='cname' >Nombre del Componente</label></p>");
           out.println("<p><input class=\"form-control\" type='text' id='cname' name='cname' value='"+comp.getNombre()+"' required></p>");
           out.println("<p><label class=\"form-label\" for='umed'>Unidad de Medida</label></p>");
-          out.println("<select class=\"form-select\" name='umed'>");
+          out.println("<p><select class=\"form-select\" name='umed'>");
           
           if(comp.getUnidadDeMedida().equals("Kg")){
           out.println("<option value='Kg' selected>Kg</option>");
@@ -144,7 +144,7 @@
           out.println("<option value='dm³' selected>dm³</option>");
           }else{out.println("<option value='dm³'>dm³</option>");}
           
-          out.println("</select>");
+          out.println("</select></p>");
           
           out.println("<input id='id' name='id' type='hidden' value='"+comp.getId()+"'>");
           out.println("<p><label class=\"form-label\" for='cantalert' >Cantidad de Alerta</label></p>");

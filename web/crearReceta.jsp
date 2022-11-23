@@ -123,6 +123,8 @@
             out.println("            <input class=\"btn btn-primary\" type=\"submit\" value=\"Modificar Receta\" required>");
             
             out.println("        </form>");
+            
+            session.removeAttribute("receta");
             }
             
             

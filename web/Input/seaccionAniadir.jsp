@@ -98,7 +98,7 @@ function eliminarUso(idUso, idReceta){
         <form class="formulario" name="aniadirProducto" onsubmit="event.preventDefault(); aniadir();">
             
              <p><label class="form-label" for="rec" >Receta</label></p>
-            <select class="rec form-select" name="rec" >
+            <p><select class="rec form-select" name="rec" >
                 <option selected>Seleccione...</option>
             <%
 
@@ -107,10 +107,10 @@ function eliminarUso(idUso, idReceta){
                 out.print("<option value="+ Recetas.get(i).getId() +">"+ Recetas.get(i).getNombre() +"</option>");
                 }
             %>
-             </select>  
+             </select></p>  
             
             <p><label class="form-label" for="comp" >Componente</label></p>
-            <select class="form-select" name="comp">
+            <p><select class="form-select" name="comp">
                 <option selected>Seleccione...</option>
             <% 
                 List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
@@ -118,7 +118,7 @@ function eliminarUso(idUso, idReceta){
                 out.print("<option value="+ componentes.get(i).getId() +">"+ componentes.get(i).getNombre() +"</option>");
                 }
             %>
-             </select>    
+                </select></p> 
         
             
             
