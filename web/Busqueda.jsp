@@ -4,6 +4,9 @@
     Author     : Usuario
 --%>
 
+<%@page import="Entidades.Cantidad"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.IOException"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="Entidades.Componente"%>
 <%@page import="Entidades.Receta"%>
@@ -138,6 +141,236 @@
                 <input class="btn btn-primary" type="submit" id="boton" value="Buscar">
             </form>
         </div>
+
+        <%!
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            
+            //funciones para generar modals
+            public void generarModalTanda(Tanda t, JspWriter out) 
+                throws IOException
+            {
+                generarModalReceta(t.getReceta(), out);
+
+                out.println("<div id='tanda" + t.getId() + "' class='modal'>");
+                out.println("");
+                out.println("    <div class=\"modal-content\">");
+                out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
+                out.println("        <h2>Tanda</h2>");
+                out.println("");
+                out.println("        <p>");
+                out.println("Fecha elaboración: " + formato.format(t.getFechaElaboracion()));
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Valoración: " + t.getValoracion());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Precio unitario: " + t.getPrecioUnitario());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Cantidad unidades: " + t.getCantidadUnidades());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Cantidad consumida: " + t.getCantidadConsumida());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Receta: <a id='"+t.getReceta().getId()+"' onclick='closeModal(); openModalReceta(this.id);'>"+t.getReceta().getNombre()+"</a>");
+                out.println("        </p>");
+                if(t.getImagen() != null && !t.getImagen().equals("")) {
+                    out.println("<img alt='imagen de la tanda "+t.getId()+"' src='"+t.getImagen()+"'>");
+                }
+                out.println("    </div>");
+                out.println("");
+                out.println("</div>");
+            }
+            public void generarModalPedido(Pedido p, JspWriter out) 
+                throws IOException 
+            {
+                generarModalTanda(p.getTanda(), out);
+
+                out.println("<div id='pedido" + p.getId() + "' class='modal'>");
+                out.println("");
+                out.println("    <div class=\"modal-content\">");
+                out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
+                out.println("        <h2>Pedido</h2>");
+                out.println("");
+                out.println("        <p>");
+                out.println("Fecha: " + formato.format(p.getFecha()));
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Descuento: " + p.getDescuento());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Unidades: " + p.getUnidades());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Tanda: <a id='"+p.getTanda().getId()+"' onclick='closeModal(); openModalTanda(this.id);'>["+p.getTanda().getId()+"] "+formato.format(p.getTanda().getFechaElaboracion())+"</a>");
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Comprador: "+p.getComprador().getNombre());
+                out.println("        </p>");
+                out.println("    </div>");
+                out.println("");
+                out.println("</div>");
+            }
+            public void generarModalPaquete(Paquete p, JspWriter out) 
+                throws IOException 
+            {
+                generarModalTanda(p.getTanda(), out);
+                
+                out.println("<div id='paquete" + p.getId() + "' class='modal'>");
+                out.println("");
+                out.println("    <div class=\"modal-content\">");
+                out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
+                out.println("        <h2>Paquete</h2>");
+                out.println("");
+                out.println("        <p>");
+                out.println("Fecha: " + formato.format(p.getFecha()));
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Unidades llevadas: " + p.getUnidadesLlevadas());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Unidades vendidas: " + p.getUnidadesVendidas());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Tanda: <a id='"+p.getTanda().getId()+"' onclick='closeModal(); openModalTanda(this.id);'>["+p.getTanda().getId()+"] "+formato.format(p.getTanda().getFechaElaboracion())+"</a>");
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Lugar: "+p.getLugar().getNombre());
+                out.println("        </p>");
+                out.println("    </div>");
+                out.println("");
+                out.println("</div>");
+            }
+            public void generarModalProducto(Producto p, JspWriter out) 
+                throws IOException 
+            {
+                generarModalProveedor(p.getProveedor(), out);
+                generarModalComponente(p.getComponente(), out);
+
+                out.println("<div id='producto" + p.getId() + "' class='modal'>");
+                out.println("");
+                out.println("    <div class=\"modal-content\">");
+                out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
+                out.println("        <h2>Producto</h2>");
+                out.println("");
+                out.println("        <p>");
+                out.println("Marca: " + p.getMarca());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Información: " + p.getComentarios());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Precio: " + p.getPrecio());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Valoración: " + p.getValoracion());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Proveedor: <a id='"+p.getProveedor().getId()+"' onclick='closeModal(); openModalProveedor(this.id);'>"+p.getProveedor().getNombre()+"</a>");
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Componente: <a id='"+p.getComponente().getId()+"' onclick='closeModal(); openModalComponente(this.id);'>"+p.getComponente().getNombre()+"</a>");
+                out.println("        </p>");
+                if(p.getImagen2() != null && !p.getImagen2().equals("")) {
+                    out.println("<img alt='imagen del producto "+p.getId()+"' src='"+p.getImagen2()+"'>");
+                }
+                out.println("    </div>");
+                out.println("");
+                out.println("</div>");
+            }
+            public void generarModalProveedor(Proveedor p, JspWriter out) 
+                throws IOException 
+            {
+                out.println("<div id='proveedor" + p.getId() + "' class='modal'>");
+                out.println("");
+                out.println("    <div class=\"modal-content\">");
+                out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
+                out.println("        <h2>Proveedor</h2>");
+                out.println("");
+                out.println("        <p>");
+                out.println("Nombre: " + p.getNombre());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Teléfono: " + p.getTelefono());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Dirección: " + p.getDireccion());
+                out.println("        </p>");
+                out.println("    </div>");
+                out.println("");
+                out.println("</div>");
+            }
+            public void generarModalReceta(Receta r, JspWriter out) 
+                throws IOException 
+            {
+                String unidadMedida = "";
+                List<Cantidad> cantidades = PersistenciaMateriales.getInstance().listaCantidades(r.getId());
+
+                out.println("<div id='receta" + r.getId() + "' class='modal'>");
+                out.println("");
+                out.println("    <div class=\"modal-content\">");
+                out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
+                out.println("        <h2>Receta</h2>");
+                out.println("");
+                out.println("        <p>");
+                out.println("Nombre: " + r.getNombre());
+                out.println("        </p>");
+                out.println("<br>");
+                out.println("<h3>Ingredientes:</h3>");
+                for(Cantidad c :cantidades) {
+                    generarModalComponente(c.getComponente(), out);
+                    if(c.getComponente().getUnidadDeMedida().equals("cmÂ³")) {
+                        unidadMedida = "cm³";
+                    } else if(c.getComponente().getUnidadDeMedida().equals("dmÂ³")) {
+                        unidadMedida = "dm³";
+                    } else {
+                        unidadMedida = c.getComponente().getUnidadDeMedida();
+                    }
+
+                    out.println("        <p>");
+                    out.println(c.getComponente().getNombre()+" : "+c.getPorReceta()+ unidadMedida);
+                    out.println("        </p>");
+                }
+                out.println("    </div>");
+                out.println("");
+                out.println("</div>");
+            }
+        
+            public void generarModalComponente(Componente c, JspWriter out) 
+                throws IOException 
+            {
+                String unidadMedida = "";
+                if(c.getUnidadDeMedida().equals("cmÂ³")) {
+                    unidadMedida = "cm³";
+                } else if(c.getUnidadDeMedida().equals("dmÂ³")) {
+                    unidadMedida = "dm³";
+                } else {
+                    unidadMedida = c.getUnidadDeMedida();
+                }
+
+                out.println("<div id='componente" + c.getId() + "' class='modal'>");
+                out.println("");
+                out.println("    <div class=\"modal-content\">");
+                out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
+                out.println("        <h2>Componente</h2>");
+                out.println("");
+                out.println("        <p>");
+                out.println("Nombre: " + c.getNombre());
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Unidad de medida: " + unidadMedida);
+                out.println("        </p>");
+                out.println("        <p>");
+                out.println("Cantidad de alerta: " + c.getCantidadDeAlerta());
+                out.println("        </p>");
+                out.println("    </div>");
+                out.println("");
+                out.println("</div>");
+            }
+        
+        
+        %>
         <div id="resultado">
             <%
                 List<Lugar> lugares = (List<Lugar>) session.getAttribute("listaLugares");
@@ -149,8 +382,6 @@
                 List<Producto> productos = (List<Producto>) session.getAttribute("listaProductos");
                 List<Receta> recetas = (List<Receta>) session.getAttribute("listaRecetas");
                 List<Componente> componentes = (List<Componente>) session.getAttribute("listaComponentes");
-                
-                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 
                 if(lugares != null && lugares.isEmpty() || compradores != null && compradores.isEmpty() || tandas != null && tandas.isEmpty() || 
@@ -200,33 +431,7 @@
                     for (Tanda t : tandas) {
                         out.print("<tr>" + "<td>" + formato.format(t.getFechaElaboracion()) + "</td>" + "<td>" + t.getValoracion() + "</td>" + "<td><a id='" + t.getId() + "' onclick='openModalTanda(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=tanda-"+t.getId()+"'>Editar</a></td>" + "<td><a id=\"tanda-" + t.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
-                        out.println("<div id='tanda" + t.getId() + "' class='modal'>");
-                        out.println("");
-                        out.println("    <div class=\"modal-content\">");
-                        out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
-                        out.println("        <h2>Tanda</h2>");
-                        out.println("");
-                        out.println("        <p>");
-                        out.println("Fecha elaboración: " + formato.format(t.getFechaElaboracion()));
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Valoración: " + t.getValoracion());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Precio unitario: " + t.getPrecioUnitario());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Cantidad unidades: " + t.getCantidadUnidades());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Cantidad consumida: " + t.getCantidadConsumida());
-                        out.println("        </p>");
-                        if(t.getImagen() != null && !t.getImagen().equals("")) {
-                            out.println("<img alt='imagen de la tanda "+t.getId()+"' src='"+t.getImagen()+"'>");
-                        }
-                        out.println("    </div>");
-                        out.println("");
-                        out.println("</div>");
+                        generarModalTanda(t, out);
                     }
                     out.println("</table>");
                 } else if(pedidos != null) {
@@ -242,24 +447,7 @@
                     for(Pedido p :pedidos) {
                         out.print("<tr>" + "<td>" + formato.format(p.getFecha()) + "</td>" + "<td>" + p.getDescuento() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPedido(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=pedido-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"pedido-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");                    
                         
-                        out.println("<div id='pedido" + p.getId() + "' class='modal'>");
-                        out.println("");
-                        out.println("    <div class=\"modal-content\">");
-                        out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
-                        out.println("        <h2>Pedido</h2>");
-                        out.println("");
-                        out.println("        <p>");
-                        out.println("Fecha: " + formato.format(p.getFecha()));
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Descuento: " + p.getDescuento());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Unidades: " + p.getUnidades());
-                        out.println("        </p>");
-                        out.println("    </div>");
-                        out.println("");
-                        out.println("</div>");
+                        generarModalPedido(p, out);
                     }
                     out.println("</table>");
                 } else if(paquetes != null) {
@@ -275,24 +463,7 @@
                     for (Paquete p : paquetes) {
                         out.print("<tr>" + "<td>" + formato.format(p.getFecha()) + "</td>" + "<td>" + p.getUnidadesLlevadas() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalPaquete(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=paquete-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"paquete-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
-                        out.println("<div id='paquete" + p.getId() + "' class='modal'>");
-                        out.println("");
-                        out.println("    <div class=\"modal-content\">");
-                        out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
-                        out.println("        <h2>Paquete</h2>");
-                        out.println("");
-                        out.println("        <p>");
-                        out.println("Fecha: " + formato.format(p.getFecha()));
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Unidades llevadas: " + p.getUnidadesLlevadas());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Unidades vendidas: " + p.getUnidadesVendidas());
-                        out.println("        </p>");
-                        out.println("    </div>");
-                        out.println("");
-                        out.println("</div>");
+                        generarModalPaquete(p, out);
                     }
                     out.println("</table>");
                 } else if(proveedores != null) {
@@ -308,24 +479,7 @@
                     for (Proveedor p : proveedores) {
                         out.print("<tr>" + "<td>" + p.getNombre() + "</td>" + "<td>" + p.getTelefono() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProveedor(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=proveedor-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"proveedor-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
-                        out.println("<div id='proveedor" + p.getId() + "' class='modal'>");
-                        out.println("");
-                        out.println("    <div class=\"modal-content\">");
-                        out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
-                        out.println("        <h2>Proveedor</h2>");
-                        out.println("");
-                        out.println("        <p>");
-                        out.println("Nombre: " + p.getNombre());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Teléfono: " + p.getTelefono());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Dirección: " + p.getDireccion());
-                        out.println("        </p>");
-                        out.println("    </div>");
-                        out.println("");
-                        out.println("</div>");
+                        generarModalProveedor(p, out);
                     }
                     out.println("</table>");
                 } else if(productos != null) {
@@ -341,30 +495,7 @@
                     for (Producto p : productos) {
                         out.print("<tr>" + "<td>" + p.getMarca() + "</td>" + "<td>" + p.getComentarios() + "</td>" + "<td><a id='" + p.getId() + "' onclick='openModalProducto(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=producto-"+p.getId()+"'>Editar</a></td>" + "<td><a id=\"producto-" + p.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
-                        out.println("<div id='producto" + p.getId() + "' class='modal'>");
-                        out.println("");
-                        out.println("    <div class=\"modal-content\">");
-                        out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
-                        out.println("        <h2>Producto</h2>");
-                        out.println("");
-                        out.println("        <p>");
-                        out.println("Marca: " + p.getMarca());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Información: " + p.getComentarios());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Precio: " + p.getPrecio());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Valoración: " + p.getValoracion());
-                        out.println("        </p>");
-                        if(p.getImagen2() != null && !p.getImagen2().equals("")) {
-                            out.println("<img alt='imagen del producto "+p.getId()+"' src='"+p.getImagen2()+"'>");
-                        }
-                        out.println("    </div>");
-                        out.println("");
-                        out.println("</div>");
+                        generarModalProducto(p, out);
                     }
                     out.println("</table>");
                 } else if(recetas != null) {
@@ -380,19 +511,7 @@
                     for (Receta r : recetas) {
                         out.print("<tr>" + "<td>" + r.getId() + "</td>" + "<td>" + r.getNombre() + "</td>" + "<td><a id='" + r.getId() + "' onclick='openModalReceta(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=receta-"+r.getId()+"'>Editar</a></td>" + "<td><a id=\"receta-" + r.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
-                        out.println("<div id='receta" + r.getId() + "' class='modal'>");
-                        out.println("");
-                        out.println("    <div class=\"modal-content\">");
-                        out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
-                        out.println("        <h2>Receta</h2>");
-                        out.println("");
-                        out.println("        <p>");
-                        out.println("Nombre: " + r.getNombre());
-                        out.println("        </p>");
-                        // componentes y cantidades?
-                        out.println("    </div>");
-                        out.println("");
-                        out.println("</div>");
+                        generarModalReceta(r, out);
                     }
                     out.println("</table>");
                 } else if(componentes != null) {
@@ -417,24 +536,7 @@
                         
                         out.print("<tr>" + "<td>" + c.getNombre() + "</td>" + "<td>" + unMedida + "</td>" + "<td><a id='" + c.getId() + "' onclick='openModalComponente(this.id);'>Detalles</a></td>" + "<td><a href='http://localhost:8080/PizzasSanCaWeb/Input/modificacionEntidades.jsp?entidad=componente-"+c.getId()+"'>Editar</a></td>" + "<td><a id=\"componente-" + c.getId() + "\" onclick='eliminar(this.id);'>Eliminar</a></td>" + "</tr>");
 
-                        out.println("<div id='componente" + c.getId() + "' class='modal'>");
-                        out.println("");
-                        out.println("    <div class=\"modal-content\">");
-                        out.println("        <span onclick='closeModal();' class=\"close\">&times;</span>");
-                        out.println("        <h2>Componente</h2>");
-                        out.println("");
-                        out.println("        <p>");
-                        out.println("Nombre: " + c.getNombre());
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Unidad de medida: " + unMedida);
-                        out.println("        </p>");
-                        out.println("        <p>");
-                        out.println("Cantidad de alerta: " + c.getCantidadDeAlerta());
-                        out.println("        </p>");
-                        out.println("    </div>");
-                        out.println("");
-                        out.println("</div>");
+                        generarModalComponente(c, out);
                     }
                     out.println("</table>");
                 }
@@ -454,6 +556,71 @@
             %>
         </div>
 
+        <style>
+            .modal {
+                display: none; 
+/*                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%; 
+                height: 100%; 
+                overflow: auto; 
+                background-color: rgb(0,0,0); 
+                background-color: rgba(0,0,0,0.4); */
+                text-align:  center;
+            }
+
+            .modal-content {
+                /*background-color: #fefefe;*/
+                margin: 5% auto; 
+/*                padding: 20px;
+                border: 1px solid #888;
+                width: 80%; */
+            }
+
+            .close {
+                /*color: #aaa;*/
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                text-align: right;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            a {
+                cursor: pointer;
+            }
+            h1, h2, form {
+                text-align: center;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            form, .modal {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            #resultado {
+                margin-top: 20px;
+            }
+            .table-heading {
+                font-size: 16px;
+            }
+            img {
+                width: 80%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
+        </style>
+        
         <script>
             function eliminar(ent) {
                 let http = new XMLHttpRequest();
