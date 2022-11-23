@@ -49,13 +49,10 @@
 selectElement.addEventListener('change', (event) => {
  
     let rec = document.forms["aniadirProducto"]["rec"].value;
-         $.post('crearTabla', {
-	long: rec
-	}, function(responseText) {
-                         
-           document.getElementById('resp2').innerHTML = responseText;
-                                      
-        });
+         
+         $(document).ready(function(){
+                $('#resp2').load('http://localhost:8080/PizzasSanCaWeb/Input/crearTabla.jsp?long='+rec);
+            });
 
     
 
@@ -79,14 +76,11 @@ function eliminarUso(idUso, idReceta){
         let params = "idUso=" + idUso + "&idReceta=" + idReceta;
         
         http.send(params);
-        let rec = document.forms["aniadirProducto"]["rec"].value;
-         $.post('crearTabla', {
-	long: rec
-	}, function(responseText) {
-                         
-           document.getElementById('resp2').innerHTML = responseText;
-                                      
-        });
+          let rec = document.forms["aniadirProducto"]["rec"].value;
+         
+         $(document).ready(function(){
+                $('#resp2').load('http://localhost:8080/PizzasSanCaWeb/Input/crearTabla.jsp?long='+rec);
+            });
         alert("Componente eliminado de la receta");        
     }
             
@@ -136,3 +130,4 @@ function eliminarUso(idUso, idReceta){
             
     </script>
 </html>
+
