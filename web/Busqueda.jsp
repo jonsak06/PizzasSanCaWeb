@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="Entidades.Cantidad"%>
-<%@page import="java.io.OutputStream"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="Entidades.Componente"%>
@@ -33,7 +32,7 @@
                 z-index: 1;
                 left: 0;
                 top: 0;
-                width: 100%; 
+                width: 80%; 
                 height: 100%; 
                 overflow: auto; 
                 background-color: rgb(0,0,0); 
@@ -43,26 +42,12 @@
 
             .modal-content {
                 background-color: #fefefe;
-                margin: 15% auto; 
+                margin: 2% auto; 
                 padding: 20px;
                 border: 1px solid #888;
                 width: 80%; 
             }
 
-            .close {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-                text-align: right;
-            }
-
-            .close:hover,
-            .close:focus {
-                color: black;
-                text-decoration: none;
-                cursor: pointer;
-            }
             h1, h2, form {
                 text-align: center;
             }
@@ -73,16 +58,7 @@
             #resultado {
                 margin-top: 20px;
             }
-            .table-heading {
-                font-size: 16px;
-            }
-            img {
-                width: 80%;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 50%;
-            }
+            
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
@@ -558,30 +534,13 @@
 
         <style>
             .modal {
-                display: none; 
-/*                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
-                width: 100%; 
-                height: 100%; 
                 overflow: auto; 
-                background-color: rgb(0,0,0); 
-                background-color: rgba(0,0,0,0.4); */
-                text-align:  center;
             }
-
             .modal-content {
-                /*background-color: #fefefe;*/
-                margin: 5% auto; 
-/*                padding: 20px;
-                border: 1px solid #888;
-                width: 80%; */
+                width: 80%; 
             }
 
             .close {
-                /*color: #aaa;*/
-                float: right;
                 font-size: 28px;
                 font-weight: bold;
                 text-align: right;
@@ -610,14 +569,21 @@
                 margin-top: 20px;
             }
             .table-heading {
-                font-size: 16px;
+                font-size: 1.1em;
             }
             img {
-                width: 80%;
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
-                width: 50%;
+                width: 60%;
+            }
+            @media (max-width: 768px) {
+                img {
+                    width: 80%;
+                }
+                .modal-content {
+                    margin: 10% auto;
+                }
             }
         </style>
         

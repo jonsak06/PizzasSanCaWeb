@@ -15,7 +15,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <title>Pedido</title>
         <script>
             function procesar(){
@@ -94,7 +93,16 @@
         </script>
     </head>
     <body>
-        
+        <jsp:include page="Input/barraNavegacion.jsp" />
+        <style>
+            body {
+                text-align: center;
+            }
+            form {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+        </style>
         <%
             Pedido pedido = (Pedido) session.getAttribute("pedido");
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -102,17 +110,17 @@
             if(pedido == null) {
                 out.println("<h1>Crear pedido</h1>");
                 out.println("<form name=\"crearPedido\" class=\"formulario\" onsubmit=\"event.preventDefault(); procesar();\">");
-                out.println("    <label for=\"fecha\">Fecha</label>");
-                out.println("    <input id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <label class=\"form-label\" for=\"fecha\">Fecha</label>");
+                out.println("    <input class=\"form-control\" id=\"fecha\" name=\"fecha\" type=\"date\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"unidades\">Unidades</label>");
-                out.println("    <input id=\"unidades\" name=\"unidades\" type=\"number\" min=\"1\" required>");
+                out.println("    <label class=\"form-label\" for=\"unidades\">Unidades</label>");
+                out.println("    <input class=\"form-control\" id=\"unidades\" name=\"unidades\" type=\"number\" min=\"1\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"descuento\">Descuento (%)</label>");
-                out.println("    <input id=\"descuento\" name=\"descuento\" type=\"number\" min=\"0\" max=\"100\" required>");
+                out.println("    <label class=\"form-label\" for=\"descuento\">Descuento (%)</label>");
+                out.println("    <input class=\"form-control\" id=\"descuento\" name=\"descuento\" type=\"number\" min=\"0\" max=\"100\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"comprador\">Comprador</label>");
-                out.println("    <select id=\"comprador\" name=\"comprador\" required>");
+                out.println("    <label class=\"form-label\" for=\"comprador\">Comprador</label>");
+                out.println("    <select class=\"form-select\" id=\"comprador\" name=\"comprador\" required>");
                 out.println("        <option selected>Seleccione...</option>");
                 List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
                 for(Comprador comprador :compradores) {
@@ -120,8 +128,8 @@
                 }
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <label for=\"tanda\">Tanda</label>");
-                out.println("    <select id=\"tanda\" name=\"tanda\" required>");
+                out.println("    <label class=\"form-label\" for=\"tanda\">Tanda</label>");
+                out.println("    <select class=\"form-select\" id=\"tanda\" name=\"tanda\" required>");
                 out.println("        <option selected>Seleccione...</option>");
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {
@@ -129,24 +137,24 @@
                 }
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <input type=\"submit\" id=\"boton\" value=\"Crear pedido\">");
+                out.println("    <input class=\"btn btn-primary\" type=\"submit\" id=\"boton\" value=\"Crear pedido\">");
                 out.println("</form>");
             } else {
                 SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
                 
                 out.println("<h1>Modificar pedido</h1>");
                 out.println("<form name=\"modificarPedido\" class=\"formulario\" onsubmit=\"event.preventDefault(); modificar();\">");
-                out.println("    <label for=\"fecha\">Fecha</label>");
-                out.println("    <input value='"+ft.format(pedido.getFecha())+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <label class=\"form-label\" for=\"fecha\">Fecha</label>");
+                out.println("    <input class=\"form-control\" value='"+ft.format(pedido.getFecha())+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"unidades\">Unidades</label>");
-                out.println("    <input value='"+pedido.getUnidades()+"' id=\"unidades\" name=\"unidades\" type=\"number\" min=\"1\" required>");
+                out.println("    <label class=\"form-label\" for=\"unidades\">Unidades</label>");
+                out.println("    <input class=\"form-control\" value='"+pedido.getUnidades()+"' id=\"unidades\" name=\"unidades\" type=\"number\" min=\"1\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"descuento\">Descuento (%)</label>");
-                out.println("    <input value='"+pedido.getDescuento()+"' id=\"descuento\" name=\"descuento\" type=\"number\" min=\"0\" max=\"100\" required>");
+                out.println("    <label class=\"form-label\" for=\"descuento\">Descuento (%)</label>");
+                out.println("    <input class=\"form-control\" value='"+pedido.getDescuento()+"' id=\"descuento\" name=\"descuento\" type=\"number\" min=\"0\" max=\"100\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"comprador\">Comprador</label>");
-                out.println("    <select id=\"comprador\" name=\"comprador\" required>");
+                out.println("    <label class=\"form-label\" for=\"comprador\">Comprador</label>");
+                out.println("    <select class=\"form-select\" id=\"comprador\" name=\"comprador\" required>");
                 List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
                 for(Comprador comprador :compradores) {
                     if(pedido.getComprador().getId() != comprador.getId()) {
@@ -158,8 +166,8 @@
                 }
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <label for=\"tanda\">Tanda</label>");
-                out.println("    <select id=\"tanda\" name=\"tanda\" required>");
+                out.println("    <label class=\"form-label\" for=\"tanda\">Tanda</label>");
+                out.println("    <select class=\"form-select\" id=\"tanda\" name=\"tanda\" required>");
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {
                     if(pedido.getTanda().getId() != tanda.getId()) {
@@ -171,7 +179,7 @@
                 out.println("    </select>");
                 out.println("    <br>");
                 out.println("<input id='id' type='hidden' value='"+pedido.getId()+"'>");
-                out.println("    <input type=\"submit\" id=\"boton\" value=\"Modificar pedido\">");
+                out.println("    <input class=\"btn btn-primary\" type=\"submit\" id=\"boton\" value=\"Modificar pedido\">");
                 out.println("</form>");
                 
                 session.removeAttribute("pedido");

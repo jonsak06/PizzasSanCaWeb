@@ -11,7 +11,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lugar</title>
-         <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <script>
             function procesar(){
                 const boton = document.getElementById("boton");
@@ -73,31 +72,41 @@
         </script>
     </head>
     <body>
+        <jsp:include page="Input/barraNavegacion.jsp" />
+        <style>
+            body {
+                text-align: center;
+            }
+            form {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+        </style>
         <%
             Lugar lugar = (Lugar) session.getAttribute("lugar");
             
             if(lugar == null) {
                 out.println("<h1>Crear lugar</h1>");
                 out.println("<form class=\"formulario\" name=\"crearLugar\" onsubmit=\"event.preventDefault(); procesar();\">");
-                out.println("    <label for=\"nombre\">Nombre</label>");
-                out.println("    <input id=\"nombre\" name=\"nombre\" type=\"text\" required>");
+                out.println("    <label class=\"form-label\" for=\"nombre\">Nombre</label>");
+                out.println("    <input class=\"form-control\" id=\"nombre\" name=\"nombre\" type=\"text\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"direccion\">Dirección</label>");
-                out.println("    <input id=\"direccion\" name=\"direccion\" type=\"text\">");
+                out.println("    <label class=\"form-label\" for=\"direccion\">Dirección</label>");
+                out.println("    <input class=\"form-control\" id=\"direccion\" name=\"direccion\" type=\"text\">");
                 out.println("    <br>");
-                out.println("    <input type=\"submit\" id=\"boton\" value=\"Crear lugar\">");
+                out.println("    <input class=\"btn btn-primary\" type=\"submit\" id=\"boton\" value=\"Crear lugar\">");
                 out.println("</form>");
             } else {
                 out.println("<h1>Modificar lugar</h1>");
                 out.println("<form class=\"formulario\" name=\"modificarLugar\" onsubmit=\"event.preventDefault(); modificar();\">");
-                out.println("    <label for=\"nombre\">Nombre</label>");
-                out.println("    <input value="+lugar.getNombre()+" id=\"nombre\" name=\"nombre\" type=\"text\" required>");
+                out.println("    <label class=\"form-label\" for=\"nombre\">Nombre</label>");
+                out.println("    <input class=\"form-control\" value="+lugar.getNombre()+" id=\"nombre\" name=\"nombre\" type=\"text\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"direccion\">Dirección</label>");
-                out.println("    <input value="+lugar.getDireccion()+" id=\"direccion\" name=\"direccion\" type=\"text\">");
+                out.println("    <label class=\"form-label\" for=\"direccion\">Dirección</label>");
+                out.println("    <input class=\"form-control\" value="+lugar.getDireccion()+" id=\"direccion\" name=\"direccion\" type=\"text\">");
                 out.println("    <br>");
                 out.println("<input id='id' type='hidden' value='"+lugar.getId()+"'>");
-                out.println("    <input type=\"submit\" id=\"boton\" value=\"Modificar lugar\">");
+                out.println("    <input class=\"btn btn-primary\" type=\"submit\" id=\"boton\" value=\"Modificar lugar\">");
                 out.println("</form>");
                 
                 session.removeAttribute("lugar");

@@ -16,8 +16,12 @@
             nav {
                 margin-bottom: 20px;
             }
+            @media (max-width: 768px) {
+                html {
+                    font-size: 18px;
+                }
+            }
         </style>
-        <title>JSP Page</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark">

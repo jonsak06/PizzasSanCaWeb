@@ -17,7 +17,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <title>Paquete</title>
         <script>
             function procesar(){
@@ -106,6 +105,16 @@
         </script>
     </head>
     <body>
+        <jsp:include page="Input/barraNavegacion.jsp" />
+        <style>
+            body {
+                text-align: center;
+            }
+            form {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+        </style>
         <%
             Paquete paquete = (Paquete) session.getAttribute("paquete");
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -113,17 +122,17 @@
             if(paquete == null) {
                 out.println("<h1>Crear paquete</h1>");
                 out.println("<form name=\"crearPaquete\" class=\"formulario\" onsubmit=\"event.preventDefault(); procesar();\">");
-                out.println("    <label for=\"fecha\">Fecha</label>");
-                out.println("    <input id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <label class=\"form-label\" for=\"fecha\">Fecha</label>");
+                out.println("    <input class=\"form-control\" id=\"fecha\" name=\"fecha\" type=\"date\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"llevadas\">Unidades llevadas</label>");
-                out.println("    <input id=\"llevadas\" name=\"llevadas\" type=\"number\" min=\"1\" required>");
+                out.println("    <label class=\"form-label\" for=\"llevadas\">Unidades llevadas</label>");
+                out.println("    <input class=\"form-control\" id=\"llevadas\" name=\"llevadas\" type=\"number\" min=\"1\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"vendidas\">Unidades vendidas</label>");
-                out.println("    <input id=\"vendidas\" name=\"vendidas\" type=\"number\" min=\"1\" required>");
+                out.println("    <label class=\"form-label\" for=\"vendidas\">Unidades vendidas</label>");
+                out.println("    <input class=\"form-control\" id=\"vendidas\" name=\"vendidas\" type=\"number\" min=\"1\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"lugar\">Lugar</label>");
-                out.println("    <select id=\"lugar\" name=\"lugar\" required>");
+                out.println("    <label class=\"form-label\" for=\"lugar\">Lugar</label>");
+                out.println("    <select class=\"form-select\" id=\"lugar\" name=\"lugar\" required>");
                 out.println("        <option selected>Seleccione...</option>");
                 List<Lugar> lugares = PersistenciaMateriales.getInstance().listaLugares();
                 for(Lugar lugar :lugares) {
@@ -131,8 +140,8 @@
                 }
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <label for=\"tanda\">Tanda</label>");
-                out.println("    <select id=\"tanda\" name=\"tanda\" required>");
+                out.println("    <label class=\"form-label\" for=\"tanda\">Tanda</label>");
+                out.println("    <select class=\"form-select\" id=\"tanda\" name=\"tanda\" required>");
                 out.println("        <option selected>Seleccione...</option>");
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {
@@ -140,24 +149,24 @@
                 }
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <input type=\"submit\" id=\"boton\" value=\"Crear paquete\">");
+                out.println("    <input class=\"btn btn-primary\" type=\"submit\" id=\"boton\" value=\"Crear paquete\">");
                 out.println("</form>");
             } else {
                 SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
                 
                 out.println("<h1>Modificar paquete</h1>");
                 out.println("<form name=\"modificarPaquete\" class=\"formulario\" onsubmit=\"event.preventDefault(); modificar();\">");
-                out.println("    <label for=\"fecha\">Fecha</label>");
-                out.println("    <input value='"+ft.format(paquete.getFecha())+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <label class=\"form-label\" for=\"fecha\">Fecha</label>");
+                out.println("    <input class=\"form-control\" value='"+ft.format(paquete.getFecha())+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"llevadas\">Unidades llevadas</label>");
-                out.println("    <input value='"+paquete.getUnidadesLlevadas()+"' id=\"llevadas\" name=\"llevadas\" type=\"number\" min=\"1\" required>");
+                out.println("    <label class=\"form-label\" for=\"llevadas\">Unidades llevadas</label>");
+                out.println("    <input class=\"form-control\" value='"+paquete.getUnidadesLlevadas()+"' id=\"llevadas\" name=\"llevadas\" type=\"number\" min=\"1\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"vendidas\">Unidades vendidas</label>");
-                out.println("    <input value='"+paquete.getUnidadesVendidas()+"' id=\"vendidas\" name=\"vendidas\" type=\"number\" min=\"1\" required>");
+                out.println("    <label class=\"form-label\" for=\"vendidas\">Unidades vendidas</label>");
+                out.println("    <input class=\"form-control\" value='"+paquete.getUnidadesVendidas()+"' id=\"vendidas\" name=\"vendidas\" type=\"number\" min=\"1\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"lugar\">Lugar</label>");
-                out.println("    <select id=\"lugar\" name=\"lugar\" required>");
+                out.println("    <label class=\"form-label\" for=\"lugar\">Lugar</label>");
+                out.println("    <select class=\"form-select\" id=\"lugar\" name=\"lugar\" required>");
                 List<Lugar> lugares = PersistenciaMateriales.getInstance().listaLugares();
                 for(Lugar lugar :lugares) {
                     if(paquete.getLugar().getId() != lugar.getId()) {
@@ -168,8 +177,8 @@
                 }
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <label for=\"tanda\">Tanda</label>");
-                out.println("    <select id=\"tanda\" name=\"tanda\" required>");
+                out.println("    <label class=\"form-label\" for=\"tanda\">Tanda</label>");
+                out.println("    <select class=\"form-select\" id=\"tanda\" name=\"tanda\" required>");
                 List<Tanda> tandas = PersistenciaMateriales.getInstance().listaTandas();
                 for(Tanda tanda :tandas) {
                     if(paquete.getTanda().getId() != tanda.getId()) {
@@ -182,7 +191,7 @@
                 out.println("    </select>");
                 out.println("    <br>");
                 out.println("<input id='id' type='hidden' value='"+paquete.getId()+"'>");
-                out.println("    <input type=\"submit\" id=\"boton\" value=\"Modificar paquete\">");
+                out.println("    <input class=\"btn btn-primary\" type=\"submit\" id=\"boton\" value=\"Modificar paquete\">");
                 out.println("</form>");
                 
                 session.removeAttribute("paquete");
