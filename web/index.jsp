@@ -3,6 +3,13 @@
     Created on : Nov 21, 2022, 2:09:55 PM
     Author     : Manuel
 --%>
+<%@page import="Entidades.Pedido"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.SortedMap"%>
+<%@page import="java.util.TreeMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Entidades.Paquete"%>
 <%@page import="Entidades.Comprador"%>
 <%@page import="Entidades.Lugar"%>
 <%@page import="Entidades.Producto"%>
@@ -17,14 +24,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" media="" href="css/estilosCelular.css">
     </head>
     <jsp:include page="Input/barraNavegacion.jsp" />
+    <style>
+        body {
+            text-align: center;
+        }
+        hr {
+            width: 80%;
+            text-align: center;
+            margin: 20px auto;
+        }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <body>
         <%
             
-            out.println("<div class='index'><h2>Componentes que quedan poco</h2>");
+            out.println("<div><h2>Componentes que quedan poco</h2>");
+            out.println("<hr>");
             List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
             for(int i=0; i<componentes.size(); i++){
                 
@@ -36,94 +53,77 @@
                 
                 if(cantidad < componentes.get(i).getCantidadDeAlerta())
                 {
-                    out.println("<p>- Hay "+cantidad+" de "+componentes.get(i).getNombre()+" y la cantidad recomendada es "+componentes.get(i).getCantidadDeAlerta()+"</p>");
-                    out.println("<hr class='division'/>");
+                    String unMedida = "";
+                    if(componentes.get(i).getUnidadDeMedida().equals("cmÂ³")) {
+                        unMedida = "cm³";
+                    } else if(componentes.get(i).getUnidadDeMedida().equals("dmÂ³")) {
+                        unMedida = "dm³";
+                    } else {
+                        unMedida = componentes.get(i).getUnidadDeMedida();
+                    }
+                    out.println("<p>- Hay "+cantidad+unMedida+" de "+componentes.get(i).getNombre()+" y la cantidad recomendada es "+componentes.get(i).getCantidadDeAlerta()+unMedida+"</p>");
+                    out.println("<hr>");
                 }
             }
             out.println("<br/>");
             
             List<Lugar> lugares = PersistenciaMateriales.getInstance().listaLugares();
            out.println("<h2>Los lugares que mas compraron</h2>");
-            
-            Lugar aux= null;
-            for (int i = 0; i < lugares.size(); i++) {
-                out.println("<p>1</p>");
-                for (int j = 0; j < lugares.size() - i - 1; j++) {                                                              
-                    int CantidadTotalDeLugares1 = 0;
-                    for(int u=0; u<lugares.get(j).getPaquetes().size(); u++)
-                    {
-                        CantidadTotalDeLugares1 = CantidadTotalDeLugares1+ lugares.get(i).getPaquetes().get(u).getUnidadesVendidas();
-                    }
-                    int CantidadTotalDeLugares2 = 0;
-                    for(int u=0; u<lugares.get( j+1 ).getPaquetes().size(); u++)
-                    {
-                        CantidadTotalDeLugares2 = CantidadTotalDeLugares2+ lugares.get(i).getPaquetes().get(u).getUnidadesVendidas();
-                    }
-                    if (CantidadTotalDeLugares2 < CantidadTotalDeLugares1) {
-                        aux = lugares.get( j+1 );
-                        lugares.set(j+1, lugares.get( j ));
-                        lugares.set(j, aux);
-                    }
+            SortedMap<Integer,Lugar> lugaresConMasCompras = new TreeMap<Integer,Lugar>(Collections.reverseOrder());
+            for(Lugar l :lugares) {
+                int totalUnidadesVendidas = 0;
+                for(Paquete p :l.getPaquetes()) {
+                    totalUnidadesVendidas = totalUnidadesVendidas + p.getUnidadesVendidas();
                 }
+                lugaresConMasCompras.put(totalUnidadesVendidas, l);
             }
-            
-            Boolean paso1vesporCantotal = false;
-            for (int i = 0; i < lugares.size() && i<3; i++) {
-                int CantidadTotalDeLugares1 = 0;
-                for(int u=0; u<lugares.get(i).getPaquetes().size(); u++)
-                {
-                    CantidadTotalDeLugares1 = CantidadTotalDeLugares1+ lugares.get(i).getPaquetes().get(u).getUnidadesVendidas();
+            int counter = 0;
+            for (Map.Entry<Integer, Lugar> entry : lugaresConMasCompras.entrySet()) {
+                if(counter == 3) {
+                    break;
                 }
-                out.println("<p>- "+ (i+1) +" "+lugares.get(i).getNombre()+" con: "+CantidadTotalDeLugares1+"</p>");
-                paso1vesporCantotal = true;
+                out.println("<hr>");
+                out.println("<p>- "+entry.getValue()+" con "+entry.getKey()+" unidades compradas</p>");
+                
+                counter++;
             }
-            if(paso1vesporCantotal == false){
-                out.println("<p>No hay Lugares</p>");
+            out.println("<hr>");
+            
+            if(lugares.isEmpty()) {
+                out.println("<p>No hay lugares en el sistema</p>");
             }
             
-            
-            out.println("<br/>");
+            out.println("<br>");
             List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
            out.println("<h2>Los compradores que mas compraron</h2>");
-            
-            Comprador compradorAux= null;
-            for (int i = 0; i < compradores.size(); i++) {
-                out.println("<p>1</p>");
-                for (int j = 0; j < compradores.size() - i - 1; j++) {                                                              
-                    int unidades1 = 0;
-                    for(int u=0; u<compradores.get(j).getPedidos().size(); u++)
-                    {
-                        unidades1 = unidades1+ compradores.get(i).getPedidos().get(u).getUnidades();
-                    }
-                    int unidades2 = 0;
-                    for(int u=0; u<compradores.get( j+1 ).getPedidos().size(); u++)
-                    {
-                        unidades2 = unidades2+ compradores.get(i).getPedidos().get(u).getUnidades();
-                    }
-                    if (unidades2 < unidades1) {
-                        compradorAux = compradores.get( j+1 );
-                        compradores.set(j+1, compradores.get( j ));
-                        compradores.set(j, compradorAux);
-                    }
+           
+           SortedMap<Integer,Comprador> mejoresCompradores = new TreeMap<Integer,Comprador>(Collections.reverseOrder());
+           for(Comprador c :compradores) {
+               int totalUnidades = 0;
+               for(Pedido p :c.getPedidos()) {
+                    
+                    totalUnidades = totalUnidades + p.getUnidades();
+               }
+               mejoresCompradores.put(totalUnidades, c);
+           }
+           counter = 0;
+           for (Map.Entry<Integer, Comprador> entry : mejoresCompradores.entrySet()) {
+                if(counter == 3) {
+                    break;
                 }
+                out.println("<hr>");
+                out.println("<p>- "+entry.getValue()+" con "+entry.getKey()+" unidades compradas</p>");
+                
+                counter++;
             }
-            
-            Boolean paso1vesporUnidadesTotal = false;
-            for (int i = 0; i < lugares.size() && i<3; i++) {
-                int unidades = 0;
-                for(int u=0; u<compradores.get(i).getPedidos().size(); u++)
-                {
-                    unidades = unidades+ compradores.get(i).getPedidos().get(u).getUnidades();
-                }
-                out.println("<p>- "+ (i+1) +" "+compradores.get(i).getNombre()+" con: "+unidades+"</p>");
-                paso1vesporUnidadesTotal = true;
+           out.println("<hr>");
+           
+           if(compradores.isEmpty()) {
+                out.println("<p>No hay compradores en el sistema</p>");
             }
-            if(paso1vesporCantotal == false){
-                out.println("<p>No hay Compradores</p>");
-            }
-            
-            
-            out.println("</div>");
+           out.println("</div>");
+           
+
             
 
 
