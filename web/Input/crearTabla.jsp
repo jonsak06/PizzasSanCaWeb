@@ -28,12 +28,17 @@
                 out.print("<tr>");
                 out.print("<td>"+cant.get(i).getComponente().getNombre() +"</td>");
                 out.print("<td><input type='number' id='"+cant.get(i).getId()+"' value='"+cant.get(i).getPorReceta() +"'</td>");
-                out.print("<td><a id='\"tanda " + cant.get(i).getId() + "\"' onclick='editarUso(\""+cant.get(i).getId()+"\", \""+ rec +"\");'>Editar</a></td></td>");
-              out.print("<td><a id='\"tanda " + cant.get(i).getId() + "\"' onclick='eliminarUso(\""+cant.get(i).getId()+"\", \""+ rec +"\");'>Eliminar</a></td></td>");
+                out.print("<td><a id='comp-"+cant.get(i).getId()+"' onclick='editarUso(\""+cant.get(i).getId()+"\", \""+ rec +"\");'>Editar</a></td></td>");
+              out.print("<td><a id='comp-"+cant.get(i).getId()+"' onclick='eliminarUso(\""+cant.get(i).getId()+"\", \""+ rec +"\");'>Eliminar</a></td></td>");
                out.print("</tr>");
             }
             out.println("</table>");
     %>
+    <style>
+        a {
+            cursor: pointer;
+        }
+    </style>
 </html>
 
 

@@ -78,7 +78,11 @@ function editarUso(idUso, idReceta){
     
     
 function eliminarUso(idUso, idReceta){
-      
+      const idElem = "comp-"+idUso;
+      const elem = document.getElementById(idElem).parentElement.parentElement;
+       console.log(idElem);
+       console.log(elem);
+       
        
         let http = new XMLHttpRequest();
         
@@ -94,7 +98,9 @@ function eliminarUso(idUso, idReceta){
          $(document).ready(function(){
                 $('#resp2').load('http://localhost:8080/PizzasSanCaWeb/Input/crearTabla.jsp?long='+rec);
             });
-        alert("Componente eliminado de la receta");        
+        alert("Componente eliminado de la receta"); 
+        
+        elem.remove();
     }
             
     </script>
