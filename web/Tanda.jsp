@@ -58,11 +58,15 @@
                     let params = "fecha=" + fecha + "&valoracion=" + valoracion + "&precioUnitario=" + precioUnitario + "&cantUnidades=" 
                                 + cantUnidades + "&cantConsumida=" + cantConsumida + "&imagen=" + imagen + "&receta=" + receta;
                     http.send(params); 
-
                     http.onload = function() {
                         boton.disabled = false;
-                        form.reset();
+                        
+                        if(http.responseText.trim() === "creado"){
+                            form.reset();
                         alert("Tanda creada");
+                        } else{
+                        alert("No hay suficientes componentes para esa receta");
+                        }
                     };
                 }
             }
@@ -105,7 +109,6 @@
                                 + cantUnidades + "&cantConsumida=" + cantConsumida + "&imagen=" + imagen + "&receta=" + receta
                                 + "&id=" + id;
                     http.send(params); 
-
                     http.onload = function() {
                         boton.disabled = false;
                         alert("Tanda modificada");
