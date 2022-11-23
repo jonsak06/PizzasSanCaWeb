@@ -14,7 +14,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <title>Tanda</title>
         <script>
             function procesar(){
@@ -118,17 +117,27 @@
         </script>
     </head>
     <body>
+        <jsp:include page="Input/barraNavegacion.jsp" />
+        <style>
+            body {
+                text-align: center;
+            }
+            form {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+        </style>
         <%
             Tanda tanda = (Tanda) session.getAttribute("tanda");
             
             if(tanda == null) {
                 out.println("<h1>Crear tanda</h1>");
                 out.println("<form name=\"crearTanda\" class=\"formulario\" onsubmit=\"event.preventDefault(); procesar();\">");
-                out.println("    <label for=\"fecha\">Fecha de elaboración</label>");
-                out.println("    <input id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <label class=\"form-label\" for=\"fecha\">Fecha de elaboración</label>");
+                out.println("    <input class=\"form-control\" id=\"fecha\" name=\"fecha\" type=\"date\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"valoracion\">Valoración</label>");
-                out.println("    <select id=\"valoracion\" name=\"valoracion\" required>");
+                out.println("    <label class=\"form-label\" for=\"valoracion\">Valoración</label>");
+                out.println("    <select class=\"form-select\" id=\"valoracion\" name=\"valoracion\" required>");
                 out.println("        <option selected>Seleccione...</option>");
                 out.println("        <option value=\"1\">1</option>");
                 out.println("        <option value=\"2\">2</option>");
@@ -137,20 +146,20 @@
                 out.println("        <option value=\"5\">5</option>");
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <label for=\"precioUnitario\">Precio unitario</label>");
-                out.println("    <input id=\"precioUnitario\" name=\"precioUnitario\" type=\"number\" min=\"0\" required>");
+                out.println("    <label class=\"form-label\" for=\"precioUnitario\">Precio unitario</label>");
+                out.println("    <input class=\"form-control\" id=\"precioUnitario\" name=\"precioUnitario\" type=\"number\" min=\"0\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"cantUnidades\">Cantidad de unidades</label>");
-                out.println("    <input id=\"cantUnidades\" name=\"cantUnidades\" type=\"number\" min=\"0\" required>");
+                out.println("    <label class=\"form-label\" for=\"cantUnidades\">Cantidad de unidades</label>");
+                out.println("    <input class=\"form-control\" id=\"cantUnidades\" name=\"cantUnidades\" type=\"number\" min=\"0\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"cantConsumida\">Cantidad consumida</label>");
-                out.println("    <input id=\"cantConsumida\" name=\"cantConsumida\" type=\"number\" min=\"0\" required>");
+                out.println("    <label class=\"form-label\" for=\"cantConsumida\">Cantidad consumida</label>");
+                out.println("    <input class=\"form-control\" id=\"cantConsumida\" name=\"cantConsumida\" type=\"number\" min=\"0\" required>");
                 out.println("    <br>");
-                out.println("<label for=\"imagen\">URL de imagen</label>");
-                out.println("<input type=\"text\" name=\"imagen\" id=\"imagen\">");
+                out.println("<label class=\"form-label\" for=\"imagen\">URL de imagen</label>");
+                out.println("<input class=\"form-control\" type=\"text\" name=\"imagen\" id=\"imagen\">");
                 out.println("    <br>");
-                out.println("    <label for=\"receta\">Receta</label>");
-                out.println("    <select id=\"receta\" name=\"receta\" required>");
+                out.println("    <label class=\"form-label\" for=\"receta\">Receta</label>");
+                out.println("    <select class=\"form-select\" id=\"receta\" name=\"receta\" required>");
                 out.println("        <option>Seleccione...</option>");
                 List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
                 for(Receta receta :recetas) {
@@ -158,18 +167,18 @@
                 }
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <input type=\"submit\" id=\"boton\" value=\"Crear tanda\">");
+                out.println("    <input class=\"btn btn-primary\" type=\"submit\" id=\"boton\" value=\"Crear tanda\">");
                 out.println("</form>");
             } else {
                 SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
                 
                 out.println("<h1>Modificar tanda</h1>");
                 out.println("<form name=\"modificarTanda\" class=\"formulario\" onsubmit=\"event.preventDefault(); modificar();\">");
-                out.println("    <label for=\"fecha\">Fecha de elaboración</label>");
-                out.println("    <input value='"+ft.format(tanda.getFechaElaboracion())+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
+                out.println("    <label class=\"form-label\" for=\"fecha\">Fecha de elaboración</label>");
+                out.println("    <input class=\"form-control\" value='"+ft.format(tanda.getFechaElaboracion())+"' id=\"fecha\" name=\"fecha\" type=\"date\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"valoracion\">Valoración</label>");
-                out.println("    <select value=4 id=\"valoracion\" name=\"valoracion\" required>");
+                out.println("    <label class=\"form-label\" for=\"valoracion\">Valoración</label>");
+                out.println("    <select class=\"form-select\" id=\"valoracion\" name=\"valoracion\" required>");
                 if(tanda.getValoracion() == 1) {
                     out.println("        <option value=\"1\" selected>1</option>");
                 } else {
@@ -197,24 +206,24 @@
                 }
                 out.println("    </select>");
                 out.println("    <br>");
-                out.println("    <label for=\"precioUnitario\">Precio unitario</label>");
-                out.println("    <input value='"+tanda.getPrecioUnitario()+"' id=\"precioUnitario\" name=\"precioUnitario\" type=\"number\" min=\"0\" required>");
+                out.println("    <label class=\"form-label\" for=\"precioUnitario\">Precio unitario</label>");
+                out.println("    <input class=\"form-control\" value='"+tanda.getPrecioUnitario()+"' id=\"precioUnitario\" name=\"precioUnitario\" type=\"number\" min=\"0\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"cantUnidades\">Cantidad de unidades</label>");
-                out.println("    <input value='"+tanda.getCantidadUnidades()+"' id=\"cantUnidades\" name=\"cantUnidades\" type=\"number\" min=\"0\" required>");
+                out.println("    <label class=\"form-label\" for=\"cantUnidades\">Cantidad de unidades</label>");
+                out.println("    <input class=\"form-control\" value='"+tanda.getCantidadUnidades()+"' id=\"cantUnidades\" name=\"cantUnidades\" type=\"number\" min=\"0\" required>");
                 out.println("    <br>");
-                out.println("    <label for=\"cantConsumida\">Cantidad consumida</label>");
-                out.println("    <input value='"+tanda.getCantidadConsumida()+"' id=\"cantConsumida\" name=\"cantConsumida\" type=\"number\" min=\"0\" required>");
+                out.println("    <label class=\"form-label\" for=\"cantConsumida\">Cantidad consumida</label>");
+                out.println("    <input class=\"form-control\" value='"+tanda.getCantidadConsumida()+"' id=\"cantConsumida\" name=\"cantConsumida\" type=\"number\" min=\"0\" required>");
                 out.println("    <br>");
-                out.println("<label for=\"imagen\">URL de imagen</label>");
+                out.println("<label class=\"form-label\"  for=\"imagen\">URL de imagen</label>");
                 if(tanda.getImagen() != null) {
-                    out.println("<input value='"+tanda.getImagen()+"' type=\"text\" name=\"imagen\" id=\"imagen\">");
+                    out.println("<input class=\"form-control\" value='"+tanda.getImagen()+"' type=\"text\" name=\"imagen\" id=\"imagen\">");
                 } else {
-                    out.println("<input type=\"text\" name=\"imagen\" id=\"imagen\">");
+                    out.println("<input class=\"form-control\" type=\"text\" name=\"imagen\" id=\"imagen\">");
                 }
                 out.println("    <br>");
-                out.println("    <label for=\"receta\">Receta</label>");
-                out.println("    <select id=\"receta\" name=\"receta\" required>");
+                out.println("    <label class=\"form-label\" for=\"receta\">Receta</label>");
+                out.println("    <select class=\"form-select\" id=\"receta\" name=\"receta\" required>");
                 List<Receta> recetas = PersistenciaMateriales.getInstance().listaRecetas();
                 for(Receta receta :recetas) {
                     if(tanda.getReceta().getId() != receta.getId()) {
@@ -226,8 +235,10 @@
                 out.println("    </select>");
                 out.println("    <br>");
                 out.println("<input id='id' type='hidden' value='"+tanda.getId()+"'>");
-                out.println("    <input type=\"submit\" id=\"boton\" value=\"Modificar tanda\">");
+                out.println("    <input class=\"btn btn-primary\" type=\"submit\" id=\"boton\" value=\"Modificar tanda\">");
                 out.println("</form>");
+                
+                session.removeAttribute("tanda");
             }
             
         %>
