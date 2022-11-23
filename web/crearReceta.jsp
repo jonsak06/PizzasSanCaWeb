@@ -120,7 +120,7 @@
             out.println("            <p><label class=\"form-label\" for=\"cname\">Nombre de la Receta</label></p>");
             out.println("         <p><input class=\"form-control\" type=\"text\" id=\"cname\" value=\""+rec.getNombre()+"\" name=\"cname\"></p>");
             out.println("<input id='id' name='id' type='hidden' value='"+rec.getId()+"'>");
-            out.println("            <input class=\"btn btn-primary\" type=\"submit\" value=\"Crear Receta\" required>");
+            out.println("            <input class=\"btn btn-primary\" type=\"submit\" value=\"Modificar Receta\" required>");
             
             out.println("        </form>");
             }
