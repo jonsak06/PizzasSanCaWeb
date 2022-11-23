@@ -82,10 +82,9 @@
                 if(counter == 3) {
                     break;
                 }
-                out.println("<hr>");
-                out.println("<p>- "+entry.getValue()+" con "+entry.getKey()+" unidades compradas</p>");
-                
                 counter++;
+                out.println("<hr>");
+                out.println("<p>"+counter+"- "+entry.getValue()+" con "+entry.getKey()+" unidades compradas</p>");
             }
             out.println("<hr>");
             
@@ -111,10 +110,9 @@
                 if(counter == 3) {
                     break;
                 }
-                out.println("<hr>");
-                out.println("<p>- "+entry.getValue()+" con "+entry.getKey()+" unidades compradas</p>");
-                
                 counter++;
+                out.println("<hr>");
+                out.println("<p>"+counter+"- "+entry.getValue()+" con "+entry.getKey()+" unidades compradas</p>");
             }
            out.println("<hr>");
            
