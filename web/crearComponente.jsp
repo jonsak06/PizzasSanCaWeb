@@ -12,7 +12,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Componente</title>
-        <link rel="stylesheet" media="" href="css/estilosCelular.css">
           <script>
             function procesar(){
               
@@ -72,6 +71,15 @@
     
     <body>
         <jsp:include page="Input/barraNavegacion.jsp" />
+        <style>
+            body {
+                text-align: center;
+            }
+            form {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+        </style>
       <%
           
           
@@ -80,10 +88,10 @@
           if(comp == null){
           out.println("<h1 class='crear'>Crear componente</h1>");
           out.println("<form class='formulario' name='crearComponente' onsubmit='event.preventDefault(); procesar();'>");
-          out.println("<p><label for='cname'>Nombre del Componente</label></p>");
-          out.println("<p><input type='text' id='cname' name='cname' required></p>");
-          out.println("<p><label for='umed'>Unidad de Medida</label></p>");
-          out.println("<select name='umed'>");
+          out.println("<p><label class=\"form-label\" for='cname'>Nombre del Componente</label></p>");
+          out.println("<p><input class=\"form-control\" type='text' id='cname' name='cname' required></p>");
+          out.println("<p><label class=\"form-label\" for='umed'>Unidad de Medida</label></p>");
+          out.println("<select class=\"form-select\" name='umed'>");
           out.println("<option selected>Seleccione...</option>");
           out.println("<option value='Kg'>Kg</option>");
           out.println("<option value='mL' >mL</option>");
@@ -93,19 +101,19 @@
           out.println("<option value='cm³'>cm³</option>");
           out.println("<option value='dm³'>dm³</option>");
           out.println("</select>");
-          out.println("<p><label for='cantalert'>Cantidad de Alerta</label></p>");
-          out.println("<p><input type='number' id='cantalert' name='cantalert' required></p>");
-          out.println("<input type='submit' value='Crear Componente' >");
+          out.println("<p><label class=\"form-label\" for='cantalert'>Cantidad de Alerta</label></p>");
+          out.println("<p><input class=\"form-control\" type='number' id='cantalert' name='cantalert' required></p>");
+          out.println("<input class=\"btn btn-primary\" type='submit' value='Crear Componente' >");
           out.println("</form>");
           }else{
               
              
               out.println("<h1>Modificar componente</h1>");
           out.println("<form class='formulario' name='crearComponente' onsubmit='event.preventDefault(); modificar();'>");
-          out.println("<p><label for='cname' >Nombre del Componente</label></p>");
-          out.println("<p><input type='text' id='cname' name='cname' value='"+comp.getNombre()+"' required></p>");
-          out.println("<p><label for='umed'>Unidad de Medida</label></p>");
-          out.println("<select name='umed'>");
+          out.println("<p><label class=\"form-label\" for='cname' >Nombre del Componente</label></p>");
+          out.println("<p><input class=\"form-control\" type='text' id='cname' name='cname' value='"+comp.getNombre()+"' required></p>");
+          out.println("<p><label class=\"form-label\" for='umed'>Unidad de Medida</label></p>");
+          out.println("<select class=\"form-select\" name='umed'>");
           
           if(comp.getUnidadDeMedida().equals("Kg")){
           out.println("<option value='Kg' selected>Kg</option>");
@@ -139,9 +147,9 @@
           out.println("</select>");
           
           out.println("<input id='id' name='id' type='hidden' value='"+comp.getId()+"'>");
-          out.println("<p><label for='cantalert' >Cantidad de Alerta</label></p>");
-          out.println("<p><input type='number' id='cantalert' name='cantalert' value='"+comp.getCantidadDeAlerta()+"' required></p>");
-          out.println("<input type='submit' value='Modificar Componente' >");
+          out.println("<p><label class=\"form-label\" for='cantalert' >Cantidad de Alerta</label></p>");
+          out.println("<p><input class=\"form-control\" type='number' id='cantalert' name='cantalert' value='"+comp.getCantidadDeAlerta()+"' required></p>");
+          out.println("<input class=\"btn btn-primary\" type='submit' value='Modificar Componente' >");
           out.println("</form>");
           
           session.removeAttribute("componente");

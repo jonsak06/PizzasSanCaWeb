@@ -13,7 +13,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <script>
             function procesar(){
               
@@ -69,33 +68,42 @@
     </head>
     <body>
         <jsp:include page="Input/barraNavegacion.jsp" />
+        <style>
+            body {
+                text-align: center;
+            }
+            form {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+        </style>
         <%
             Proveedor pro = (Proveedor) session.getAttribute("proveedor");
             if(pro == null){
                 out.println("<h1>Crear proveedor</h1>");
                 out.println("<form class=\"formulario\" name=\"crearProveedor\" onsubmit=\"event.preventDefault(); procesar();\">");
-                out.println("<p><label for=\"nameprov\">Nombre del Proveedor</label></p>");
-                out.println("<p><input type=\"text\" id=\"nameprov\" name=\"nameprov\" required></p>");
-                out.println("<p><label for=\"dirprov\">Direccion del Proveedor</label></p>");
-                out.println("<p><input type=\"text\" id=\"dirprov\" name=\"dirprov\" required></p>");
-                out.println("<p><label for=\"telprov\">Telefono del Proveedor</label></p>");
-                out.println("<p><input type=\"text\" id=\"telprov\" name=\"telprov\" required></p>");
-                out.println("<input type=\"submit\" value=\"Crear Proveedor\">");
+                out.println("<p><label class=\"form-label\" for=\"nameprov\">Nombre del Proveedor</label></p>");
+                out.println("<p><input class=\"form-control\" type=\"text\" id=\"nameprov\" name=\"nameprov\" required></p>");
+                out.println("<p><label class=\"form-label\" for=\"dirprov\">Direccion del Proveedor</label></p>");
+                out.println("<p><input class=\"form-control\" type=\"text\" id=\"dirprov\" name=\"dirprov\" required></p>");
+                out.println("<p><label class=\"form-label\" for=\"telprov\">Telefono del Proveedor</label></p>");
+                out.println("<p><input class=\"form-control\" type=\"text\" id=\"telprov\" name=\"telprov\" required></p>");
+                out.println("<input class=\"btn btn-primary\" type=\"submit\" value=\"Crear Proveedor\">");
                 out.println("</form>");
             }
             else{
                
                 out.println("<h1>Modificar proveedor</h1>");
                 out.println("<form class=\"formulario\" name=\"crearProveedor\" onsubmit=\"event.preventDefault(); modificar();\">");
-                out.println("<p><label for=\"nameprov\">Nombre del Proveedor</label></p>");
-                out.println("<p><input type=\"text\" id=\"nameprov\" value=\""+pro.getNombre()+"\" name=\"nameprov\" required></p>");
-                out.println("<p><label for=\"dirprov\">Direccion del Proveedor</label></p>");
-                out.println("<p><input type=\"text\" id=\"dirprov\" value=\""+pro.getDireccion()+"\" name=\"dirprov\" required></p>");
-                out.println("<p><label for=\"telprov\">Telefono del Proveedor</label></p>");
-                out.println("<p><input type=\"text\" id=\"telprov\" value=\""+pro.getTelefono()+"\" name=\"telprov\" required></p>");
+                out.println("<p><label class=\"form-label\" for=\"nameprov\">Nombre del Proveedor</label></p>");
+                out.println("<p><input class=\"form-control\" type=\"text\" id=\"nameprov\" value=\""+pro.getNombre()+"\" name=\"nameprov\" required></p>");
+                out.println("<p><label class=\"form-label\" for=\"dirprov\">Direccion del Proveedor</label></p>");
+                out.println("<p><input class=\"form-control\" type=\"text\" id=\"dirprov\" value=\""+pro.getDireccion()+"\" name=\"dirprov\" required></p>");
+                out.println("<p><label class=\"form-label\" for=\"telprov\">Telefono del Proveedor</label></p>");
+                out.println("<p><input class=\"form-control\" type=\"text\" id=\"telprov\" value=\""+pro.getTelefono()+"\" name=\"telprov\" required></p>");
                 out.println("<input id='id' name='id' type='hidden' value='"+pro.getId()+"'>");
                 
-                out.println("<input type=\"submit\" value=\"Modificar Proveedor\">");
+                out.println("<input class=\"btn btn-primary\" type=\"submit\" value=\"Modificar Proveedor\">");
                 out.println("</form>");
                 
                 session.removeAttribute("proveedor");

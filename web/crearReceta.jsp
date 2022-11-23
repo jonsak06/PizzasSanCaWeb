@@ -16,7 +16,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" media="" href="css/estilosCelular.css">
         <script
   src="https://code.jquery.com/jquery-3.6.1.js"
   integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
@@ -91,6 +90,15 @@
     
     <body>
         <jsp:include page="Input/barraNavegacion.jsp" />
+        <style>
+            body {
+                text-align: center;
+            }
+            form {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+        </style>
      
       
         <%
@@ -98,9 +106,9 @@
             if(rec == null){
                 out.println("<h1>Crear Receta</h1>");
             out.println("<form class=\"formulario\" name=\"crearReceta\" onsubmit=\"event.preventDefault(); modificar();\">");
-            out.println("            <p><label for=\"cname\">Nombre de la Receta</label></p>");
-            out.println("         <p><input type=\"text\" id=\"cname\" name=\"cname\"></p>");
-            out.println("            <input type=\"submit\" value=\"Crear Receta\" required>");
+            out.println("            <p><label class=\"form-label\" for=\"cname\">Nombre de la Receta</label></p>");
+            out.println("         <p><input class=\"form-control\" type=\"text\" id=\"cname\" name=\"cname\"></p>");
+            out.println("            <input class=\"btn btn-primary\" type=\"submit\" value=\"Crear Receta\" required>");
             out.println("        </form>");
             out.println("        ");
             out.println("        ");
@@ -109,10 +117,10 @@
             }else{
                 out.println("<h1>Modificar Receta</h1>");
                 out.println("<form class=\"formulario\" name=\"crearReceta\" onsubmit=\"event.preventDefault(); procesar();\">");
-            out.println("            <p><label for=\"cname\">Nombre de la Receta</label></p>");
-            out.println("         <p><input type=\"text\" id=\"cname\" value=\""+rec.getNombre()+"\" name=\"cname\"></p>");
+            out.println("            <p><label class=\"form-label\" for=\"cname\">Nombre de la Receta</label></p>");
+            out.println("         <p><input class=\"form-control\" type=\"text\" id=\"cname\" value=\""+rec.getNombre()+"\" name=\"cname\"></p>");
             out.println("<input id='id' name='id' type='hidden' value='"+rec.getId()+"'>");
-            out.println("            <input type=\"submit\" value=\"Crear Receta\" required>");
+            out.println("            <input class=\"btn btn-primary\" type=\"submit\" value=\"Crear Receta\" required>");
             
             out.println("        </form>");
             }

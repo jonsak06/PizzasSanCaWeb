@@ -15,7 +15,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <link rel="stylesheet" media="" href="../css/estilosCelular.css">
         <script>
             function aniadir(){
                 
@@ -94,11 +93,12 @@ function eliminarUso(idUso, idReceta){
     </script>
     </head>
     <body>
+        <br>
         <h2>Añadir componente a receta</h2>
         <form class="formulario" name="aniadirProducto" onsubmit="event.preventDefault(); aniadir();">
             
-             <p><label for="rec" >Receta</label></p>
-            <select class="rec" name="rec" >
+             <p><label class="form-label" for="rec" >Receta</label></p>
+            <select class="rec form-select" name="rec" >
                 <option selected>Seleccione...</option>
             <%
 
@@ -109,8 +109,8 @@ function eliminarUso(idUso, idReceta){
             %>
              </select>  
             
-            <p><label for="comp" >Componente</label></p>
-            <select name="comp">
+            <p><label class="form-label" for="comp" >Componente</label></p>
+            <select class="form-select" name="comp">
                 <option selected>Seleccione...</option>
             <% 
                 List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
@@ -122,11 +122,11 @@ function eliminarUso(idUso, idReceta){
         
             
             
-            <p><label for="cant">Cantidad</label></p>
-            <p><input type="number" id="cant" name="cant" required></p>
+             <p><label class="form-label" for="cant">Cantidad</label></p>
+            <p><input class="form-control" type="number" id="cant" name="cant" required></p>
             
           
-            <input type="submit" value="Añadir componente">
+            <input class="btn btn-primary" type="submit" value="Añadir componente">
         </form>
              
              <div id="resp2"></div>
