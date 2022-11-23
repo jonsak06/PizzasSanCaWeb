@@ -76,17 +76,21 @@
                     if(cantidades.get(i).getComponente().getProductos().get(u).getCantidad()>=cantidad){
                         float aux = cantidades.get(i).getComponente().getProductos().get(u).getCantidad();
                         aux= aux-cantidad;
+                        cantidades.get(i).getComponente().getProductos().get(u).setCantidad(aux);
                         Consume consume = new Consume(); 
                         consume.setCantidad((int) cantidad);
                         consume.setTanda(tanda);
                         consume.setProducto(cantidades.get(i).getComponente().getProductos().get(u));
+                        PersistenciaMateriales.getInstance().merge(cantidades.get(i).getComponente().getProductos().get(u));
                         PersistenciaMateriales.getInstance().persist(consume);
                     }else{
                         float aux = cantidad-cantidades.get(i).getComponente().getProductos().get(u).getCantidad();
                         Consume consume = new Consume(); 
                         consume.setCantidad((int) cantidades.get(i).getComponente().getProductos().get(u).getCantidad());
                         consume.setTanda(tanda);
+                        cantidades.get(i).getComponente().getProductos().get(u).setCantidad(0);
                         consume.setProducto(cantidades.get(i).getComponente().getProductos().get(u));
+                        PersistenciaMateriales.getInstance().merge(cantidades.get(i).getComponente().getProductos().get(u));
                         PersistenciaMateriales.getInstance().persist(consume);
                     }
                 }
