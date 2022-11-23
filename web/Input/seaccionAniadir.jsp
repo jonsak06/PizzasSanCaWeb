@@ -58,14 +58,27 @@ selectElement.addEventListener('change', (event) => {
 
 });
 
-function editarUso(id){
+function editarUso(idUso, idReceta){
+         let http = new XMLHttpRequest();
+        let valor = document.getElementById(idUso).value;
+        http.open("POST", "http://localhost:8080/PizzasSanCaWeb/Input/modificarUsoPorReceta.jsp", true);
         
+        http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        
+        let params = "idUso=" + idUso + "&idReceta=" + idReceta+ "&valor=" + valor;
+        
+        http.send(params);
+          let rec = document.forms["aniadirProducto"]["rec"].value;
+         
+         $(document).ready(function(){
+                $('#resp2').load('http://localhost:8080/PizzasSanCaWeb/Input/crearTabla.jsp?long='+rec);
+            });
+        alert("Componente editado de la receta");   
     }
     
     
 function eliminarUso(idUso, idReceta){
       
-       alert("aqui llego");  
        
         let http = new XMLHttpRequest();
         
