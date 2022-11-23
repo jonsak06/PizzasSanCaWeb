@@ -16,6 +16,9 @@
             nav {
                 margin-bottom: 20px;
             }
+            body {
+                margin-bottom: 35px;
+            }
             @media (max-width: 768px) {
                 html {
                     font-size: 18px;
