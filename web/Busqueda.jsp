@@ -243,6 +243,9 @@
                 out.println("Valoración: " + p.getValoracion());
                 out.println("        </p>");
                 out.println("        <p>");
+                out.println("Cantidad: " + p.getCantidad());
+                out.println("        </p>");
+                out.println("        <p>");
                 out.println("Proveedor: <a id='"+p.getProveedor().getId()+"' onclick='closeModal(); openModalProveedor(this.id);'>"+p.getProveedor().getNombre()+"</a>");
                 out.println("        </p>");
                 out.println("        <p>");
