@@ -173,7 +173,7 @@
                 out.println("Fecha: " + formato.format(p.getFecha()));
                 out.println("        </p>");
                 out.println("        <p>");
-                out.println("Descuento: " + p.getDescuento());
+                out.println("Descuento: " + p.getDescuento()+"%");
                 out.println("        </p>");
                 out.println("        <p>");
                 out.println("Unidades: " + p.getUnidades());

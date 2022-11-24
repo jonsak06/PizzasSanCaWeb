@@ -46,7 +46,7 @@
                     alert("Debe seleccionar una tanda");
                     return false;
                 }
-                else if(llevadas < vendidas) {
+                else if(parseInt(llevadas) < parseInt(vendidas)) {
                     boton.disabled = false;
                     alert("Las unidades vendidas no pueden superar a las llevadas");
                     return false;
