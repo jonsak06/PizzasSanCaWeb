@@ -43,25 +43,24 @@
             out.println("<div><h2>Componentes que quedan poco</h2>");
             out.println("<hr>");
             List<Componente> componentes = PersistenciaMateriales.getInstance().listaComponentes();
-            for(int i=0; i<componentes.size(); i++){
-                
+            List<Producto> productos = PersistenciaMateriales.getInstance().listaProductos();
+            for(Componente c :componentes) {
                 float cantidad = 0;
-                
-                for(int u=0; u<componentes.get(i).getProductos().size(); u++){
-                    cantidad = cantidad + componentes.get(i).getProductos().get(u).getCantidad();
+                for(Producto p :productos) {
+                    if(p.getComponente().getId() == c.getId()) {
+                        cantidad += p.getCantidad();
+                    }
                 }
-                
-                if(cantidad < componentes.get(i).getCantidadDeAlerta())
-                {
+                if(c.getCantidadDeAlerta()>cantidad) {
                     String unMedida = "";
-                    if(componentes.get(i).getUnidadDeMedida().equals("cmÂ³")) {
+                    if(c.getUnidadDeMedida().equals("cmÂ³")) {
                         unMedida = "cm³";
-                    } else if(componentes.get(i).getUnidadDeMedida().equals("dmÂ³")) {
+                    } else if(c.getUnidadDeMedida().equals("dmÂ³")) {
                         unMedida = "dm³";
                     } else {
-                        unMedida = componentes.get(i).getUnidadDeMedida();
+                        unMedida = c.getUnidadDeMedida();
                     }
-                    out.println("<p>- Hay "+cantidad+unMedida+" de "+componentes.get(i).getNombre()+" y la cantidad recomendada es "+componentes.get(i).getCantidadDeAlerta()+unMedida+"</p>");
+                    out.println("<p>- Hay "+cantidad+unMedida+" de "+c.getNombre()+" y la cantidad recomendada es "+c.getCantidadDeAlerta()+unMedida+"</p>");
                     out.println("<hr>");
                 }
             }
@@ -93,15 +92,18 @@
             }
             
             out.println("<br>");
+            
             List<Comprador> compradores = PersistenciaMateriales.getInstance().listaCompradores();
+            List<Pedido> pedidos = PersistenciaMateriales.getInstance().listaPedidos();
            out.println("<h2>Los compradores que mas compraron</h2>");
-           
            SortedMap<Integer,Comprador> mejoresCompradores = new TreeMap<Integer,Comprador>(Collections.reverseOrder());
+           
            for(Comprador c :compradores) {
                int totalUnidades = 0;
-               for(Pedido p :c.getPedidos()) {
-                    
-                    totalUnidades = totalUnidades + p.getUnidades();
+               for(Pedido p :pedidos) {
+                    if(p.getComprador().getId() == c.getId()) {
+                        totalUnidades += p.getUnidades();
+                    }
                }
                mejoresCompradores.put(totalUnidades, c);
            }

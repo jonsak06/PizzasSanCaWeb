@@ -97,7 +97,7 @@
           out.println("<option value='mL' >mL</option>");
           out.println("<option value='g'>g</option>");
           out.println("<option value='L' >L</option>");
-          out.println("<option value='Undividual'>Undividual</option>");
+          out.println("<option value='Individual'>Individual</option>");
           out.println("<option value='cm³'>cm³</option>");
           out.println("<option value='dm³'>dm³</option>");
           out.println("</select></p>");
@@ -131,9 +131,9 @@
           out.println("<option value='L'selected >L</option>");
           }else{out.println("<option value='L' >L</option>");}
           
-          if(comp.getUnidadDeMedida().equals("Undividual")){
-          out.println("<option value='Undividual' selected>Undividual</option>");
-          }else{out.println("<option value='Undividual'>Undividual</option>");}
+          if(comp.getUnidadDeMedida().equals("Individual")){
+          out.println("<option value='Individual' selected>Individual</option>");
+          }else{out.println("<option value='Individual'>Individual</option>");}
           
           if(comp.getUnidadDeMedida().equals("cmÂ³")){
           out.println("<option value='cm³' selected>cm³</option>");
