@@ -105,7 +105,7 @@
             Receta rec = (Receta) session.getAttribute("receta");
             if(rec == null){
                 out.println("<h1>Crear Receta</h1>");
-            out.println("<form class=\"formulario\" name=\"crearReceta\" onsubmit=\"event.preventDefault(); modificar();\">");
+            out.println("<form class=\"formulario\" name=\"crearReceta\" onsubmit=\"event.preventDefault(); procesar();\">");
             out.println("            <p><label class=\"form-label\" for=\"cname\">Nombre de la Receta</label></p>");
             out.println("         <p><input class=\"form-control\" type=\"text\" id=\"cname\" name=\"cname\"></p>");
             out.println("            <input class=\"btn btn-primary\" type=\"submit\" value=\"Crear Receta\" required>");
@@ -116,7 +116,7 @@
             out.println("        <div id=\"seccionAniadir\"></div>");
             }else{
                 out.println("<h1>Modificar Receta</h1>");
-                out.println("<form class=\"formulario\" name=\"crearReceta\" onsubmit=\"event.preventDefault(); procesar();\">");
+                out.println("<form class=\"formulario\" name=\"crearReceta\" onsubmit=\"event.preventDefault(); modificar();\">");
             out.println("            <p><label class=\"form-label\" for=\"cname\">Nombre de la Receta</label></p>");
             out.println("         <p><input class=\"form-control\" type=\"text\" id=\"cname\" value=\""+rec.getNombre()+"\" name=\"cname\"></p>");
             out.println("<input id='id' name='id' type='hidden' value='"+rec.getId()+"'>");
